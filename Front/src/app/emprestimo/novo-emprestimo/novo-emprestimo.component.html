@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-md-10">
+        <form novalidate="novalidate" [formGroup]="form">
+
+            <div class="form-group">
+                <label class="control-label">Valor do Emprestimo</label>
+                <input class="form-control" id="valorEmprestimo" type="text" formControlName="valorTotal" />
+
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label">Quantidade de Parcelas</label>
+                <div>
+                    <input class="form-control" id="quantidadeparcelas" type="text" formControlName="quantidadeParcelas" />
+                </div>
+            </div>
+
+            <div class="form-group margin-top">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button type="button" class="btn btn-success goBack" [routerLink]="['/cliente/list']">Voltar</button>
+            </div>
+        </form>
+    </div>
+</div>

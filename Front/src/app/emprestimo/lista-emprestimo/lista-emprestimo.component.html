@@ -1,0 +1,23 @@
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Quantidade Parcelas</th>
+                <th scope="col">Total a Pagar</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let emprestimos of emprestimos">
+                <td> {{ emprestimos.quantidadeParcelas }} </td>
+                <td> {{ emprestimos.valorTotal }} </td>
+                <td>
+                    <button type="button" class="btn btn-primary details"
+                        [routerLink]="['/emprestimo/detalhes', emprestimos.id]">Detalhes</button>
+                    <button type="button" class="btn btn-danger remove"
+                        [routerLink]="['/emprestimo/remover', emprestimos.id]">Remover</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,39 @@
+
+<div class="row">
+    <div class="col-md-10">
+        <form novalidate="novalidate" (ngSubmit)="novoCliente()" [formGroup]="clienteForm">
+
+            <div class="form-group">
+                <label class="control-label">Nome</label>
+                <input class="form-control" id="nome" type="text" formControlName="nome" />
+
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Idade</label>
+                <div>
+                    <input class="form-control" id="idade" type="text" formControlName="idade" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Saldo Atual</label>
+                <div>
+                    <input class="form-control" id="saldoAtual" type="text" formControlName="saldoAtual" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Score</label>
+                <div>
+                    <input class="form-control" id="score" type="text" formControlName="score" />
+                </div>
+            </div>
+
+            <div class="form-group margin-top">
+                <button type="submit" class="btn btn-primary save">Salvar</button>
+                <button type="button" class="btn btn-success" [routerLink]="['/cliente/list']">Voltar</button>
+            </div>
+        </form>
+    </div>
+</div>
