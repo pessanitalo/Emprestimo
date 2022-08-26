@@ -19,6 +19,8 @@ export class ListaClienteComponent implements OnInit {
   errorMessage!: string;
   information!: informationModel;
 
+  nome: string = "";
+
   modalRef?: BsModalRef;
 
   constructor(
@@ -27,14 +29,23 @@ export class ListaClienteComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getList();
+    this.filtro();
+
   }
 
   getModal(){
     return this.modal
   }
-  getList() {
-    this.clienteService.list().subscribe(
+
+  // getList() {
+  //   this.clienteService.list(this.nome).subscribe(
+  //     clientes => this.clientes = clientes,
+  //     error => this.errorMessage
+  //   );
+  // }
+
+  filtro() {
+    this.clienteService.filtro(this.nome).subscribe(
       clientes => this.clientes = clientes,
       error => this.errorMessage
     );

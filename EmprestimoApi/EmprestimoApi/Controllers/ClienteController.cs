@@ -15,20 +15,23 @@ namespace EmprestimoApi.Controllers
         {
             _context = context;
         }
-        //teste 123123
-         [HttpGet]
-        public IActionResult get(string nomeFiltro)
+
+        [HttpGet]
+        [Route("filtro/{nome?}")]
+        public Cliente[] filtro(string? nome)
         {
             var query = _context.Clientes.ToList();
 
-            if (!string.IsNullOrEmpty(nomeFiltro))
+            if (!string.IsNullOrEmpty(nome))
             {
-                query = _context.Clientes.Where(c => c.Nome.Contains("italo")).ToList();
+                query = _context.Clientes.Where(c => c.Nome.Contains(nome)).ToList();
             }
-            return Ok(query);
+
+            return query.ToArray();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("getId/{id}")]
         public Cliente get(int id)
         {
             //var cliente = _context.Clientes.FirstOrDefault(X => X.Id == id);

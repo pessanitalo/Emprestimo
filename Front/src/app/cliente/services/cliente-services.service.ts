@@ -15,12 +15,16 @@ export class ClienteServicesService {
 
   constructor(private http: HttpClient) { }
 
-  list(): Observable<Cliente[]> {
+  list(nome: string): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(this.baseUrl);
   }
 
+
+ filtro(nome: string): Observable<Cliente[]> {
+  return this.http.get<Cliente[]>(`${this.baseUrl}/filtro/${nome}`);
+}
   obterPorId(id: number): Observable<Cliente> {
-    return this.http.get<Cliente>(`${this.baseUrl}/${id}`);
+    return this.http.get<Cliente>(`${this.baseUrl}/getId/${id}`);
   }
 
   addCliente(cliente: Cliente) {

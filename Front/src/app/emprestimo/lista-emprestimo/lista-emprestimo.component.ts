@@ -18,7 +18,7 @@ export class ListaEmprestimoComponent implements OnInit {
     this.getList();
   }
 
-//teste123
+
   getList() {
     this.emprestimoService.list().subscribe(
       emprestimos => this.emprestimos = emprestimos,
