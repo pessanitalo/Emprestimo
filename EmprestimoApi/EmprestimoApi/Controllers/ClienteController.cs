@@ -47,9 +47,18 @@ namespace EmprestimoApi.Controllers
         public IActionResult create(Cliente cliente)
         {
             if (cliente == null) return BadRequest();
+            List<Cliente> clientes = _context.Clientes.Where(c => c.Nome == cliente.Nome).ToList();
 
-            _context.Clientes.Add(cliente);
-            _context.SaveChanges();
+            if (clientes.Count > 0)
+            {
+                return BadRequest("Cliente já cadastrado");
+            }
+
+            else
+            {
+                _context.Clientes.Add(cliente);
+                _context.SaveChanges();
+            }           
             return Ok(cliente);
         }
     }
