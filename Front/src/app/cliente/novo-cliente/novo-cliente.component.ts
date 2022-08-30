@@ -28,6 +28,7 @@ export class NovoClienteComponent implements OnInit {
       nome: ['', [Validators.required]],
       idade: ['', [Validators.required]],
       score: ['', [Validators.required]],
+      cpf: ['', [Validators.required]],
       saldoAtual: ['', [Validators.required]],
     });
   }
