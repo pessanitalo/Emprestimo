@@ -47,7 +47,7 @@ namespace EmprestimoApi.Controllers
         public IActionResult create(Cliente cliente)
         {
             if (cliente == null) return BadRequest();
-            List<Cliente> clientes = _context.Clientes.Where(c => c.Nome == cliente.Nome).ToList();
+            List<Cliente> clientes = _context.Clientes.Where(c => c.Cpf == cliente.Cpf).ToList();
 
             if (clientes.Count > 0)
             {

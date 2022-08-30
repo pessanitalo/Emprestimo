@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmprestimoApi.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220821233948_inicio")]
-    partial class inicio
+    [Migration("20220830001751_novo_campo_Cpf")]
+    partial class novo_campo_Cpf
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,11 +31,13 @@ namespace EmprestimoApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("Cpf")
+                        .HasColumnType("int");
+
                     b.Property<int>("Idade")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("SaldoAtual")

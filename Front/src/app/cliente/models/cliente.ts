@@ -4,6 +4,7 @@ export interface Cliente{
     nome:string;
     idade:number;
     score:number;
+    cpf: string;
     saldoAtual:number;
     emprestimo:Emprestimo
 }

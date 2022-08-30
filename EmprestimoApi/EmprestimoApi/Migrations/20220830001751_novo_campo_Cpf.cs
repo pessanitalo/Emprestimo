@@ -4,7 +4,7 @@
 
 namespace EmprestimoApi.Migrations
 {
-    public partial class inicio : Migration
+    public partial class novo_campo_Cpf : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,8 +14,9 @@ namespace EmprestimoApi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Idade = table.Column<int>(type: "int", nullable: false),
+                    Cpf = table.Column<int>(type: "int", nullable: false),
                     Score = table.Column<double>(type: "float", nullable: false),
                     SaldoAtual = table.Column<double>(type: "float", nullable: false)
                 },
