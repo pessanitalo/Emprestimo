@@ -52,3 +52,5 @@ msbuild.wrn
 *.suo
 EmprestimoApi/.vs/EmprestimoApi/v17/.suo
 *.sentinel
+EmprestimoApi/EmprestimoApi/obj/staticwebassets.pack.sentinel
+EmprestimoApi/.vs/EmprestimoApi/v17/.suo
