@@ -28,7 +28,7 @@
     },
     "WSL": {
       "commandName": "WSL2",
-      "launchBrowser": false,
+      "launchBrowser": true,
       "launchUrl": "http://localhost:5110/swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
