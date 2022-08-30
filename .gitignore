@@ -50,5 +50,8 @@ msbuild.wrn
 
 *.dll
 *.pdb
+bin/
 
-EmprestimoApi.dll
+emprestimoApi/bin
+*.dll
+*.cache
