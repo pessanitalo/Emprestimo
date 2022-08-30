@@ -47,11 +47,8 @@ msbuild.wrn
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-
-*.dll
-*.pdb
-bin/
-
-emprestimoApi/bin
 *.dll
 *.cache
+*.suo
+EmprestimoApi/.vs/EmprestimoApi/v17/.suo
+*.sentinel
