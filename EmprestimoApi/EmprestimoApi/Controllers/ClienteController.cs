@@ -15,7 +15,7 @@ namespace EmprestimoApi.Controllers
         {
             _context = context;
         }
-
+  
         [HttpGet]
         [Route("filtro/{nome?}")]
         public Cliente[] filtro(string? nome)
@@ -58,7 +58,7 @@ namespace EmprestimoApi.Controllers
             {
                 _context.Clientes.Add(cliente);
                 _context.SaveChanges();
-            }           
+            }
             return Ok(cliente);
         }
     }
