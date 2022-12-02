@@ -1,5 +1,4 @@
 import { EmprestimoModule } from './emprestimo/emprestimo.module';
-import { NavegacaoModule } from './navegacao/navegacao.module';
 import { ClienteModule } from './cliente/cliente.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -29,7 +28,6 @@ import { MenuComponent } from './navegacao/menu/menu.component';
     FormsModule,
     ModalModule.forRoot(),
     ClienteModule,
-    NavegacaoModule,
     EmprestimoModule
   ],
   providers: [],
