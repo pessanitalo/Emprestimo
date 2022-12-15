@@ -1,65 +1,57 @@
-﻿using EmprestimoApi.DataContext;
-using EmprestimoApi.Models;
+﻿using CredEmprestimo.Business.Interface;
+using CredEmprestimo.Business.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
-namespace EmprestimoApi.Controllers
+
+namespace CredEmprestimo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ClienteController : ControllerBase
     {
-        private readonly Context _context;
 
-        public ClienteController(Context context)
+        private readonly IRepository _repository;
+
+        public ClienteController(IRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
-  
-        [HttpGet]
-        [Route("filtro/{nome?}")]
-        public Cliente[] filtro(string? nome)
+
+        [HttpGet("list")]
+        public async Task<IEnumerable<Cliente>> get()
         {
-            var query = _context.Clientes.ToList();
-
-            if (!string.IsNullOrEmpty(nome))
-            {
-                query = _context.Clientes.Where(c => c.Nome.Contains(nome)).ToList();
-            }
-
-            return query.ToArray();
+            return await _repository.ListaClientes();
         }
+
+        //[HttpGet]
+        //[Route("filtro/{nome?}")]
+        //public Cliente[] filtro(string? nome)
+        //{
+        //    var query = _context.Clientes.ToList();
+
+        //    if (!string.IsNullOrEmpty(nome))
+        //    {
+        //        query = _context.Clientes.Where(c => c.Nome.Contains(nome)).ToList();
+        //    }
+
+        //    return query.ToArray();
+        //}
 
         [HttpGet]
         [Route("getId/{id}")]
         public Cliente get(int id)
         {
-            //var cliente = _context.Clientes.FirstOrDefault(X => X.Id == id);
-            //if (cliente == null) return BadRequest("Cliente não encontrado");
+            var consulta = _repository.BuscarPorId(id);
 
-            var cliente = _context.Clientes
-              .Include(p => p.Emprestimo)
-                   .Where(p => p.Id == id);
-            return cliente.FirstOrDefault();
+            return consulta;
         }
 
         [HttpPost]
         public IActionResult create(Cliente cliente)
         {
-            if (cliente == null) return BadRequest();
-            List<Cliente> clientes = _context.Clientes.Where(c => c.Cpf == cliente.Cpf).ToList();
+            var result = _repository.Create(cliente);
 
-            if (clientes.Count > 0)
-            {
-                return BadRequest("Cliente já cadastrado");
-            }
-
-            else
-            {
-                _context.Clientes.Add(cliente);
-                _context.SaveChanges();
-            }
-            return Ok(cliente);
+            return Ok(result);
         }
     }
 }

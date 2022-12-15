@@ -1,11 +1,11 @@
-﻿using EmprestimoApi.Models;
+﻿using CredEmprestimo.Business.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace EmprestimoApi.DataContext
+namespace CredEmprestimo.Data.Context
 {
-    public class Context : DbContext
+    public class DataContext : DbContext
     {
-        public Context(DbContextOptions<Context> options) : base(options) { }
+        public DataContext(DbContextOptions<DataContext> options) : base(options) { }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Emprestimo> Emprestimos { get; set; }
 
@@ -15,6 +15,5 @@ namespace EmprestimoApi.DataContext
                 .HasOne(x => x.Cliente)
                 .WithOne(x => x.Emprestimo);
         }
-
     }
 }

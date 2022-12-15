@@ -29,8 +29,8 @@ export class ListaClienteComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.filtro();
-
+    //this.filtro();
+    this.list();
   }
 
   getModal(){
@@ -46,6 +46,13 @@ export class ListaClienteComponent implements OnInit {
 
   filtro() {
     this.clienteService.filtro(this.nome).subscribe(
+      clientes => this.clientes = clientes,
+      error => this.errorMessage
+    );
+  }
+
+  list() {
+    this.clienteService.list(this.nome).subscribe(
       clientes => this.clientes = clientes,
       error => this.errorMessage
     );

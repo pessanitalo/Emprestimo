@@ -2,9 +2,9 @@
 
 #nullable disable
 
-namespace EmprestimoApi.Migrations
+namespace CredEmprestimo.Data.Migrations
 {
-    public partial class novo_campo_Cpf : Migration
+    public partial class inicioarq : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,9 +14,9 @@ namespace EmprestimoApi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Idade = table.Column<int>(type: "int", nullable: false),
-                    Cpf = table.Column<int>(type: "int", nullable: false),
+                    Cpf = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Score = table.Column<double>(type: "float", nullable: false),
                     SaldoAtual = table.Column<double>(type: "float", nullable: false)
                 },

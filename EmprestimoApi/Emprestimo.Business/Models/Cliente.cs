@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EmprestimoApi.Models
+
+namespace CredEmprestimo.Business.Models
 {
     public class Cliente
     {

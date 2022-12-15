@@ -1,4 +1,6 @@
-using EmprestimoApi.DataContext;
+using CredEmprestimo.Business.Interface;
+using CredEmprestimo.Data.Context;
+using CredEmprestimo.Data.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,14 +12,10 @@ builder.Services.AddControllers().AddNewtonsoftJson(opt => opt.SerializerSetting
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//string mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
-
-//builder.Services.AddDbContext<Context>(options =>
-//                    options.UseMySql(mySqlConnection,
-//                    ServerVersion.AutoDetect(mySqlConnection)));
-
-builder.Services.AddDbContext<Context>(options =>
+builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IRepository, EmprestimoRepository>();
 
 
 var app = builder.Build();

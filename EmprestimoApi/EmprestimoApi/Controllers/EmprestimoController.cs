@@ -1,7 +1,5 @@
-﻿using EmprestimoApi.DataContext;
-using EmprestimoApi.Models;
+﻿using CredEmprestimo.Business.Interface;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace EmprestimoApi.Controllers
 {
@@ -9,57 +7,58 @@ namespace EmprestimoApi.Controllers
     [ApiController]
     public class EmprestimoController : ControllerBase
     {
-        private readonly Context _context;
+        
+        private readonly IRepository _repository;
 
-        public EmprestimoController(Context context)
+        public EmprestimoController(IRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        [HttpGet]
+        [HttpGet("list")]
         public IActionResult get()
         {
-            var ret = _context.Emprestimos.ToList();
+            var ret = _repository.ListarEmprestimos();
             return Ok(ret);
         }
 
-        [HttpGet("{id}")]
-        public Emprestimo get(int id)
-        {
-            //var emprestimo = _context.Emprestimos.Where( p => p.Id == id);
-            //if (emprestimo == null) return BadRequest("Emprestimo não encontrado");
+        //[HttpGet("{id}")]
+        //public Emprestimo get(int id)
+        //{
+        //    //var emprestimo = _context.Emprestimos.Where( p => p.Id == id);
+        //    //if (emprestimo == null) return BadRequest("Emprestimo não encontrado");
 
-            //return Ok(emprestimo);
+        //    //return Ok(emprestimo);
 
-            IQueryable<Emprestimo> query = _context.Emprestimos;
-            query = query.Include(p => p.Cliente)
-                .Where(p => p.Id == id);
-            return query.FirstOrDefault();
-        }
+        //    IQueryable<Emprestimo> query = _context.Emprestimos;
+        //    query = query.Include(p => p.Cliente)
+        //        .Where(p => p.Id == id);
+        //    return query.FirstOrDefault();
+        //}
 
-        [HttpPost]
-        public IActionResult Create(Emprestimo emprestimo, int id)
-        {
+        //[HttpPost]
+        //public IActionResult Create(Emprestimo emprestimo, int id)
+        //{
 
-            if (!ModelState.IsValid) return BadRequest();
+        //    if (!ModelState.IsValid) return BadRequest();
 
-            var cliente = _context.Clientes.FirstOrDefault(x => x.Id == id);
+        //    var cliente = _context.Clientes.FirstOrDefault(x => x.Id == id);
 
-            var calc = emprestimo.ValorTotal(emprestimo.ValorEmprestimo);
-            emprestimo.valorTotal = calc;
+        //    var calc = emprestimo.ValorTotal(emprestimo.ValorEmprestimo);
+        //    emprestimo.valorTotal = calc;
 
-            var parcelas = emprestimo.ValorParcela(calc, emprestimo.QuantidadeParcelas);
-            emprestimo.ValorDaParcela = parcelas;
+        //    var parcelas = emprestimo.ValorParcela(calc, emprestimo.QuantidadeParcelas);
+        //    emprestimo.ValorDaParcela = parcelas;
 
 
-            emprestimo.Cliente = cliente;
+        //    emprestimo.Cliente = cliente;
 
-            emprestimo.Cliente.SaldoAtual += emprestimo.ValorEmprestimo;
+        //    emprestimo.Cliente.SaldoAtual += emprestimo.ValorEmprestimo;
 
-            _context.Emprestimos.Add(emprestimo);
-            _context.SaveChanges();
+        //    _context.Emprestimos.Add(emprestimo);
+        //    _context.SaveChanges();
 
-            return Ok("Ok");
-        }
+        //    return Ok("Ok");
+        //}
     }
 }

@@ -1,21 +1,21 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EmprestimoApi.Models
+namespace CredEmprestimo.Business.Models
 {
     public class Emprestimo
     {
         [Key]
         public int Id { get; set; }
         public int ClienteId { get; set; }
-        
+
         public double ValorEmprestimo { get; set; }
-        
+
         public int QuantidadeParcelas { get; set; }
-        
+
         public double ValorDaParcela { get; set; }
-       
+
         public double valorTotal { get; set; }
-        
+
         public Cliente Cliente { get; set; }
 
         public double ValorTotal(double valorEmprestimo)
