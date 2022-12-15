@@ -10,14 +10,14 @@ import { Emprestimo } from '../models/emprestimo';
 export class EmprestimoService {
 
   baseUrl = `${environment.mainUrlAPI}emprestimo`;
-  
+
   constructor(private http: HttpClient) { }
 
   list(): Observable<Emprestimo[]> {
-    return this.http.get<Emprestimo[]>(this.baseUrl);
+    return this.http.get<Emprestimo[]>(`${this.baseUrl}/list`);
   }
 
   obterPorId(id: number): Observable<Emprestimo> {
     return this.http.get<Emprestimo>(`${this.baseUrl}/${id}`);
-}
+  }
 }
