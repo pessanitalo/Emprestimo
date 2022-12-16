@@ -5,9 +5,14 @@ namespace CredEmprestimo.Business.Interface
     public interface IRepository
     {
         Cliente Create(Cliente cliente);
-        Task<IEnumerable<Emprestimo>> ListarEmprestimos();
         Task<IEnumerable<Cliente>> ListaClientes();
-        Task<bool> BuscaCpf(Cliente cliente);
+        Task<IEnumerable<Cliente>> BuscaCpf(Cliente cliente);
         Cliente BuscarPorId(int id);
+
+        //Emprestimos
+
+        Task<IEnumerable<Emprestimo>> ListarEmprestimos();
+        Emprestimo ObterPorId(int id);
+        Emprestimo CreateEmprestimo(Emprestimo emprestimo, int id);
     }
 }
