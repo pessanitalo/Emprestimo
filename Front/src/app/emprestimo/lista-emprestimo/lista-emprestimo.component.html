@@ -3,6 +3,7 @@
         <thead>
             <tr>
                 <th scope="col">Quantidade Parcelas</th>
+                <th scope="col">Valor da Parcela</th>
                 <th scope="col">Total a Pagar</th>
                 <th scope="col">Ações</th>
             </tr>
@@ -10,6 +11,7 @@
         <tbody>
             <tr *ngFor="let emprestimos of emprestimos">
                 <td> {{ emprestimos.quantidadeParcelas }} </td>
+                <td> {{ emprestimos.valorDaParcela }} </td>
                 <td> {{ emprestimos.valorTotal }} </td>
                 <td>
                     <button type="button" class="btn btn-primary details"

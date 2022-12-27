@@ -1,7 +1,7 @@
+import { EmprestimoService } from 'src/app/emprestimo/services/emprestimo.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Emprestimo } from '../models/emprestimo';
 
 @Component({
   selector: 'app-novo-emprestimo',
@@ -10,15 +10,21 @@ import { Emprestimo } from '../models/emprestimo';
 })
 export class NovoEmprestimoComponent implements OnInit {
 
-  form!: FormGroup;
-  emprestimo!: Emprestimo;
- 
-  constructor(private route: ActivatedRoute,  private fb: FormBuilder) { this.emprestimo = this.route.snapshot.data['emprestimo']}
+  public valorEmprestimo!: number;
+  public quantidadeParcela!: number;
+
+  id: number = 3;
+
+  constructor(private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private emprestimoService: EmprestimoService
+  ) { }
 
   ngOnInit(): void {
-    this.form = this.fb.group({
-      valorTotal: ['', [Validators.required]],
-      quantidadeParcelas: ['', [Validators.required]]
-    });
   }
+
+  novoEmprestimo() {
+    this.emprestimoService.update(this.valorEmprestimo, this.quantidadeParcela, this.id)
+    .subscribe(sucesso => { alert('Emprestimo contratado com sucesso') },
+          falha => { console.log(falha) })}
 }

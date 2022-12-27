@@ -30,11 +30,12 @@ namespace EmprestimoApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Emprestimo emprestimo, int id)
+        public IActionResult Create(Emprestimo emprestimo)
         {
-            var result = _repository.CreateEmprestimo(emprestimo, id);
+            var result = _repository.NovoEmprestimo(emprestimo.ValorEmprestimo,emprestimo.QuantidadeParcelas, emprestimo.Id);
 
             return Ok(result);
         }
+
     }
 }

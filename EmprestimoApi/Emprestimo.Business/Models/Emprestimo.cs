@@ -16,7 +16,7 @@ namespace CredEmprestimo.Business.Models
 
         public double valorTotal { get; set; }
 
-        public Cliente Cliente { get; set; }
+        public Cliente? Cliente { get; set; }
 
         public double ValorTotal(double valorEmprestimo)
         {

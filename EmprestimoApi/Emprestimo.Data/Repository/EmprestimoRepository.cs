@@ -36,17 +36,19 @@ namespace CredEmprestimo.Data.Repository
             return cliente;
         }
 
-        public Emprestimo CreateEmprestimo(Emprestimo emprestimo, int id)
+        public Emprestimo NovoEmprestimo(double ValorEmprestimo,int QuantidadeParcelas, int id)
         {
-
+            var emprestimo = new Emprestimo();
             var cliente = _context.Clientes.FirstOrDefault(x => x.Id == id);
 
-            var calc = emprestimo.ValorTotal(emprestimo.ValorEmprestimo);
+            emprestimo.ValorEmprestimo = ValorEmprestimo;
+            emprestimo.QuantidadeParcelas = QuantidadeParcelas;
+
+            var calc = emprestimo.ValorTotal(ValorEmprestimo);
             emprestimo.valorTotal = calc;
 
-            var parcelas = emprestimo.ValorParcela(calc, emprestimo.QuantidadeParcelas);
+            var parcelas = emprestimo.ValorParcela(calc, QuantidadeParcelas);
             emprestimo.ValorDaParcela = parcelas;
-
 
             emprestimo.Cliente = cliente;
 
