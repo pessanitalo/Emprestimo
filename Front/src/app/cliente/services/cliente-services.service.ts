@@ -18,9 +18,7 @@ export class ClienteServicesService {
   return this.http.get<Cliente[]>(`${this.baseUrl}/filtro/${nome}`);
 }
 
-list(nome: string): Observable<Cliente[]> {
-  return this.http.get<Cliente[]>(`${this.baseUrl}/list`);
-}
+
   obterPorId(id: number): Observable<Cliente> {
     return this.http.get<Cliente>(`${this.baseUrl}/getId/${id}`);
   }

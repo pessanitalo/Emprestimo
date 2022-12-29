@@ -2,7 +2,6 @@
 using CredEmprestimo.Business.Models;
 using Microsoft.AspNetCore.Mvc;
 
-
 namespace CredEmprestimo.Controllers
 {
     [Route("api/[controller]")]
@@ -17,25 +16,19 @@ namespace CredEmprestimo.Controllers
             _repository = repository;
         }
 
-        [HttpGet("list")]
-        public async Task<IEnumerable<Cliente>> get()
+        [HttpGet]
+        [Route("filtro/{nome?}")]
+        public async Task<IEnumerable<Cliente>> filtro(string? nome)
         {
+
+            if (!string.IsNullOrEmpty(nome))
+            {
+                return await _repository.filtroPorNome(nome);
+            }
+
             return await _repository.ListaClientes();
+
         }
-
-        //[HttpGet]
-        //[Route("filtro/{nome?}")]
-        //public Cliente[] filtro(string? nome)
-        //{
-        //    var query = _context.Clientes.ToList();
-
-        //    if (!string.IsNullOrEmpty(nome))
-        //    {
-        //        query = _context.Clientes.Where(c => c.Nome.Contains(nome)).ToList();
-        //    }
-
-        //    return query.ToArray();
-        //}
 
         [HttpGet]
         [Route("getId/{id}")]

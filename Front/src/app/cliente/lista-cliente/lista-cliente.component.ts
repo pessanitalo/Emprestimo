@@ -29,20 +29,13 @@ export class ListaClienteComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    //this.filtro();
-    this.list();
+    this.filtro();
   }
 
   getModal(){
     return this.modal
   }
 
-  // getList() {
-  //   this.clienteService.list(this.nome).subscribe(
-  //     clientes => this.clientes = clientes,
-  //     error => this.errorMessage
-  //   );
-  // }
 
   filtro() {
     this.clienteService.filtro(this.nome).subscribe(
@@ -50,14 +43,6 @@ export class ListaClienteComponent implements OnInit {
       error => this.errorMessage
     );
   }
-
-  list() {
-    this.clienteService.list(this.nome).subscribe(
-      clientes => this.clientes = clientes,
-      error => this.errorMessage
-    );
-  }
-
 
   openModal(template: TemplateRef<any>, cliente: Cliente) {
     this.clienteService.obterPorId(cliente.id).subscribe((res) => {

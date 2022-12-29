@@ -36,7 +36,7 @@ namespace CredEmprestimo.Data.Repository
             return cliente;
         }
 
-        public Emprestimo NovoEmprestimo(double ValorEmprestimo,int QuantidadeParcelas, int id)
+        public Emprestimo NovoEmprestimo(double ValorEmprestimo, int QuantidadeParcelas, int id)
         {
             var emprestimo = new Emprestimo();
             var cliente = _context.Clientes.FirstOrDefault(x => x.Id == id);
@@ -80,6 +80,14 @@ namespace CredEmprestimo.Data.Repository
             query = query.Include(p => p.Cliente)
                 .Where(p => p.Id == id);
             return query.FirstOrDefault();
+        }
+
+        public async Task<IEnumerable<Cliente>>  filtroPorNome(string cliente)
+        {
+            //var query = await _context.Clientes.ToListAsync();
+            var query = await _context.Clientes.Where(c => c.Nome.Contains(cliente)).ToListAsync();
+
+            return query;
         }
     }
 }
