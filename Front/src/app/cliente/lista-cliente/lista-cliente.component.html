@@ -1,7 +1,11 @@
 <div class="container">
-    <button type="button" class="btn btn-primary novo-cliente" [routerLink]="['/cliente/new']">Novo Cliente</button><br>
-    <input type="text" class="col-3" id="pesquisa" [(ngModel)]="nome" placeholder="Pesquisar por nome....">
-    <button type="button" class="btn btn-primary" (click)="filtro()">Pesquisar</button><br>
+    <button type="button" class="btn btn-secondary novo-cliente" [routerLink]="['/cliente/new']">Novo Cliente</button>
+
+    <div class="d-flex col-8">
+        <input type="text" class="form-control" id="pesquisa" [(ngModel)]="nome" placeholder="Pesquisar por nome....">
+        <button type="button" class="btn btn-primary spacing" (click)="filtro()">Pesquisar</button>
+    </div>
+
     <table class="table table-striped">
         <thead>
             <tr>
