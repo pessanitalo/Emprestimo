@@ -2,7 +2,6 @@
 {
     public class EmprestimoViewModel
     {
-        public int Id { get; set; }
         public int ClienteId { get; set; }
         public double ValorEmprestimo { get; set; }
 

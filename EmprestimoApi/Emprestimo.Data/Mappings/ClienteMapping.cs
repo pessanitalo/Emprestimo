@@ -8,11 +8,26 @@ namespace CredEmprestimo.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<Cliente> builder)
         {
-            //// 1 : 1 => Cliente : Emprestimo
+
             builder.HasKey("Id");
 
-            builder.HasOne(f => f.Emprestimo) // endereço esta em fornecedor
-                .WithOne(e => e.Cliente);
+            builder.Property(c => c.Nome)
+               .IsRequired()
+               .HasColumnType("varchar(50)");
+
+            builder.Property(c => c.Idade)
+              .IsRequired()
+              .HasColumnType("int");
+
+            builder.Property(c => c.Cpf)
+              .IsRequired()
+              .HasColumnType("varchar(11)");
+
+            builder.HasOne(f => f.Emprestimo)
+           .WithOne(e => e.Cliente)
+           .OnDelete(DeleteBehavior.Cascade);
+
+            builder.ToTable("Clientes");
 
         }
     }
