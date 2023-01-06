@@ -1,22 +1,12 @@
-﻿namespace CredEmprestimo.Business.Models
+﻿namespace CredEmprestimoApi.ViewlModews
 {
-    public class Emprestimo
+    public class EmprestimoViewModel
     {
-        //entidade dependente
         public int Id { get; set; }
-
+        public int ClienteId { get; set; }
         public double ValorEmprestimo { get; set; }
 
         public int QuantidadeParcelas { get; set; }
-
-        public double ValorDaParcela { get; set; }
-
-        public double valorTotal { get; set; }
-
-        //Relacionamento
-        public int ClienteId { get; set; }
-        public Cliente Cliente { get; set; }
-
 
         public double ValorTotal(double valorEmprestimo)
         {

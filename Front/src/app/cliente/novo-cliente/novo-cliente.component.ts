@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Cliente } from '../models/cliente';
 import { ClienteServicesService } from '../services/cliente-services.service';
@@ -13,12 +13,12 @@ import { ClienteServicesService } from '../services/cliente-services.service';
 export class NovoClienteComponent implements OnInit {
 
   cliente!: Cliente;
-  clienteForm!: FormGroup;
+  clienteForm!: UntypedFormGroup;
 
 
   constructor(
     private clienteService: ClienteServicesService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
 
     private route: ActivatedRoute
   ) {  }

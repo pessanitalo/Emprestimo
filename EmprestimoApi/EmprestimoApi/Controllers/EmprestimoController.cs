@@ -1,5 +1,7 @@
-﻿using CredEmprestimo.Business.Interface;
+﻿using AutoMapper;
+using CredEmprestimo.Business.Interface;
 using CredEmprestimo.Business.Models;
+using CredEmprestimoApi.ViewlModews;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmprestimoApi.Controllers
@@ -10,10 +12,12 @@ namespace EmprestimoApi.Controllers
     {
 
         private readonly IRepository _repository;
+        private readonly IMapper _mapper;
 
-        public EmprestimoController(IRepository repository)
+        public EmprestimoController(IRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         [HttpGet("list")]
@@ -29,10 +33,19 @@ namespace EmprestimoApi.Controllers
             return consulta;
         }
 
+        //[HttpPost]
+        //public IActionResult Create(Emprestimo emprestimo)
+        //{
+        //    var result = _repository.NovoEmprestimo(emprestimo.ValorEmprestimo,emprestimo.QuantidadeParcelas, emprestimo.ClienteId);
+
+        //    return Ok(result);
+        //}
+
         [HttpPost]
-        public IActionResult Create(Emprestimo emprestimo)
+        public IActionResult emprestimoDto(EmprestimoViewModel emprestimodto)
         {
-            var result = _repository.NovoEmprestimo(emprestimo.ValorEmprestimo,emprestimo.QuantidadeParcelas, emprestimo.Id);
+            var emprestimo = _mapper.Map<Emprestimo>(emprestimodto);
+            var result = _repository.NovoEmprestimo(emprestimo.ValorEmprestimo, emprestimo.QuantidadeParcelas, emprestimo.ClienteId);
 
             return Ok(result);
         }

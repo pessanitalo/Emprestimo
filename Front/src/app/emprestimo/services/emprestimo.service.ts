@@ -21,15 +21,11 @@ export class EmprestimoService {
     return this.http.get<Emprestimo>(`${this.baseUrl}/${id}`);
   }
 
-  create(id: number, emprestimo: Emprestimo) {
-    return this.http.get<Emprestimo>(`${this.baseUrl}/${id}`);
-  }
-
-  update(valor: number, quantidade: number, id: number) {
+  create(valor: number, quantidade: number, id: number) {
     const ValorEmprestimo = {
       ValorEmprestimo: valor,
       QuantidadeParcelas: quantidade,
-      id: id
+      ClienteId: id
     }
     return this.http.post(`${this.baseUrl}`, ValorEmprestimo);
   }

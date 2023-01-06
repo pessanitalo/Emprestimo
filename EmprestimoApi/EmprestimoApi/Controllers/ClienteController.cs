@@ -1,5 +1,7 @@
-﻿using CredEmprestimo.Business.Interface;
+﻿using AutoMapper;
+using CredEmprestimo.Business.Interface;
 using CredEmprestimo.Business.Models;
+using CredEmprestimoApi.ViewlModews;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CredEmprestimo.Controllers
@@ -10,10 +12,12 @@ namespace CredEmprestimo.Controllers
     {
 
         private readonly IRepository _repository;
+        private readonly IMapper _mapper;
 
-        public ClienteController(IRepository repository)
+        public ClienteController(IRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -40,8 +44,9 @@ namespace CredEmprestimo.Controllers
         }
 
         [HttpPost]
-        public IActionResult create(Cliente cliente)
+        public IActionResult create(ClienteViewModel clienteDto)
         {
+            var cliente = _mapper.Map<Cliente>(clienteDto);
             var result = _repository.Create(cliente);
 
             return Ok(result);

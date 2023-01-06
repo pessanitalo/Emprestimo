@@ -1,4 +1,5 @@
 ﻿using CredEmprestimo.Business.Models;
+using CredEmprestimo.Data.Mappings;
 using Microsoft.EntityFrameworkCore;
 
 namespace CredEmprestimo.Data.Context
@@ -11,9 +12,12 @@ namespace CredEmprestimo.Data.Context
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Emprestimo>()
-                .HasOne(x => x.Cliente)
-                .WithOne(x => x.Emprestimo);
+            //builder.Entity<Emprestimo>()
+            //    .HasOne(x => x.Cliente)
+            //    .WithOne(x => x.Emprestimo);
+
+            builder.ApplyConfiguration(new ClienteMapping());
+            builder.ApplyConfiguration(new EmprestimoMapping());
         }
     }
 }

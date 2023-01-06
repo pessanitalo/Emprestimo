@@ -1,6 +1,9 @@
+using AutoMapper;
 using CredEmprestimo.Business.Interface;
 using CredEmprestimo.Data.Context;
 using CredEmprestimo.Data.Repository;
+using CredEmprestimoApi.Configurations;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +20,13 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 builder.Services.AddScoped<IRepository, EmprestimoRepository>();
 
+var mappingConfig = new MapperConfiguration(c =>
+{
+    c.AddProfile(new AutomapperConfig());
+});
+
+IMapper mapper = mappingConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
 

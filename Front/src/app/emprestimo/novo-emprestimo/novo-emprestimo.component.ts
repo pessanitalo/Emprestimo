@@ -24,7 +24,7 @@ export class NovoEmprestimoComponent implements OnInit {
   }
 
   novoEmprestimo() {
-    this.emprestimoService.update(this.valorEmprestimo, this.quantidadeParcela, this.id)
+    this.emprestimoService.create(this.valorEmprestimo, this.quantidadeParcela, this.id)
       .subscribe(sucesso => { alert('Emprestimo contratado com sucesso') },
         falha => { console.log(falha) })
   }
