@@ -8,12 +8,14 @@ namespace CredEmprestimo.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<Cliente> builder)
         {
+            builder.ToTable("Cliente");
 
             builder.HasKey("Id");
 
             builder.Property(c => c.Nome)
                .IsRequired()
-               .HasColumnType("varchar(50)");
+               .HasColumnType("varchar")
+               .HasMaxLength(50);
 
             builder.Property(c => c.Idade)
               .IsRequired()
@@ -23,12 +25,8 @@ namespace CredEmprestimo.Data.Mappings
               .IsRequired()
               .HasColumnType("varchar(11)");
 
-            builder.HasOne(f => f.Emprestimo)
-           .WithOne(e => e.Cliente)
-           .OnDelete(DeleteBehavior.Cascade);
-
-            builder.ToTable("Clientes");
-
+            builder.HasOne(f => f.Emprestimo);
+                  
         }
     }
 }

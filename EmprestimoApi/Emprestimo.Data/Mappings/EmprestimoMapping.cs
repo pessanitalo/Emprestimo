@@ -8,7 +8,17 @@ namespace CredEmprestimo.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<Emprestimo> builder)
         {
-            
+            builder.ToTable("Emprestimo");
+
+            builder.HasKey("Id");
+
+            builder.Property(c => c.ValorEmprestimo);
+
+            builder.Property(c => c.QuantidadeParcelas);
+
+            builder.Property(c => c.ValorDaParcela);
+
+            builder.Property(c => c.valorTotal);
         }
     }
 }
