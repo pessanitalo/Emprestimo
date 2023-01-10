@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClienteResolve } from './services/cliente.resolve';
 import { ClienteServicesService } from './services/cliente-services.service';
 import { NovoEmprestimoComponent } from './novo-emprestimo/novo-emprestimo.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { NovoEmprestimoComponent } from './novo-emprestimo/novo-emprestimo.compo
     ClienteRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [
     ClienteResolve,

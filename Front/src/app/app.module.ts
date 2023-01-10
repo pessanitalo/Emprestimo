@@ -28,7 +28,7 @@ import { MenuComponent } from './navegacao/menu/menu.component';
     FormsModule,
     ModalModule.forRoot(),
     ClienteModule,
-    EmprestimoModule
+    EmprestimoModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -10,6 +10,7 @@
         <thead>
             <tr>
                 <th scope="col">Nome</th>
+                <th scope="col">Cpf</th>
                 <th scope="col">Saldo Atual</th>
                 <th scope="col">Ações</th>
             </tr>
@@ -17,6 +18,7 @@
         <tbody>
             <tr *ngFor="let cliente of clientes">
                 <td> {{ cliente.nome }} </td>
+                <td> {{ cliente.cpf | mask:"000.000.000-00" }} </td>
                 <td> {{ cliente.saldoAtual}} </td>
                 <td>
                     <button type="button" class="btn btn-success novo-emprestimo"

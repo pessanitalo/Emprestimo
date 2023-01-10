@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { EmprestimoService } from 'src/app/emprestimo/services/emprestimo.service';
 import { Cliente } from '../models/cliente';
@@ -11,11 +10,11 @@ import { Cliente } from '../models/cliente';
 })
 export class NovoEmprestimoComponent implements OnInit {
 
-  form!: UntypedFormGroup;
+
   cliente!: Cliente;
   constructor(
     private emprestimoServi: EmprestimoService,
-    private fb: UntypedFormBuilder,
+  
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
