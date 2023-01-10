@@ -36,7 +36,6 @@ export class ListaClienteComponent implements OnInit {
     return this.modal
   }
 
-
   filtro() {
     this.clienteService.filtro(this.nome).subscribe(
       clientes => this.clientes = clientes,

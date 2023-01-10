@@ -15,11 +15,29 @@
                 <td> {{ emprestimos.valorTotal }} </td>
                 <td>
                     <button type="button" class="btn btn-primary details"
-                        [routerLink]="['/emprestimo/detalhes', emprestimos.id]">Detalhes</button>
-                    <button type="button" class="btn btn-danger remove"
-                        [routerLink]="['/emprestimo/remover', emprestimos.id]">Remover</button>
+                    (click)="openModal(template, emprestimos)">Detalhes</button>
+                    <!-- <button type="button" class="btn btn-danger remove"
+                        [routerLink]="['/emprestimo/remover', emprestimos.id]">Remover</button> -->
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
+
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Nome do Cliente: {{emprestimo.cliente.nome}}</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        Id: {{ emprestimo.id }}<br>
+        Saldo Atual: {{ emprestimo.cliente.saldoAtual }}<br>
+        Quantidade de parcelas: {{ emprestimo.quantidadeParcelas }}<br>
+        Valor Parcelas: {{ emprestimo.valorDaParcela }}<br>
+        Valor do Emprestimo: {{ emprestimo.valorEmprestimo }}<br>
+        <!-- Valor total: {{ emprestimo.valorTotal }}<br> -->
+    </div>
+</ng-template>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Emprestimo } from '../models/emprestimo';
 import { EmprestimoService } from '../services/emprestimo.service';
 
@@ -11,8 +12,13 @@ export class ListaEmprestimoComponent implements OnInit {
 
   public emprestimos!: Emprestimo[];
   errorMessage!: string;
+  modalRef?: BsModalRef;
 
-  constructor(private emprestimoService: EmprestimoService) { }
+  public emprestimo!: Emprestimo;
+
+  constructor(
+    private emprestimoService: EmprestimoService,
+    private modalService: BsModalService) { }
 
   ngOnInit(): void {
     this.getList();
@@ -26,4 +32,10 @@ export class ListaEmprestimoComponent implements OnInit {
     );
   }
 
+  openModal(template: TemplateRef<any>, emprestimo: Emprestimo) {
+    this.emprestimoService.obterPorId(emprestimo.id).subscribe((res) => {
+      this.emprestimo = res;
+      this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
+    })
+  }
 }
