@@ -1,6 +1,7 @@
 import { EmprestimoService } from 'src/app/emprestimo/services/emprestimo.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-novo-emprestimo',
@@ -16,7 +17,9 @@ export class NovoEmprestimoComponent implements OnInit {
 
   constructor(
     private emprestimoService: EmprestimoService,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private toastr: ToastrService,
+    private route: Router,
   ) { }
 
   ngOnInit(): void {
@@ -25,7 +28,20 @@ export class NovoEmprestimoComponent implements OnInit {
 
   novoEmprestimo() {
     this.emprestimoService.create(this.valorEmprestimo, this.quantidadeParcela, this.id)
-      .subscribe(sucesso => { alert('Emprestimo contratado com sucesso') },
+      .subscribe(sucesso => { this.processarSucesso(sucesso) },
         falha => { console.log(falha) })
+  }
+
+  processarSucesso(response: any) {
+    let toast = this.toastr.success('Emprestimo solicitado com sucesso!', 'Sucesso!');
+    if (toast) {
+      toast.onHidden.subscribe(() => {
+        this.route.navigate(['/cliente/list'])
+      });
+    }
+  }
+
+  processarFalha(fail: any) {
+    this.toastr.error('Houve algum erro', 'Error!');
   }
 }

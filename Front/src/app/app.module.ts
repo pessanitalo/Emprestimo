@@ -11,6 +11,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './navegacao/footer/footer.component';
 import { HomeComponent } from './navegacao/home/home.component';
 import { MenuComponent } from './navegacao/menu/menu.component';
+import { NgxMaskModule } from 'ngx-mask';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -29,6 +32,15 @@ import { MenuComponent } from './navegacao/menu/menu.component';
     ModalModule.forRoot(),
     ClienteModule,
     EmprestimoModule,
+    NgxMaskModule.forRoot(),
+    NoopAnimationsModule,
+   BrowserAnimationsModule,
+   ToastrModule.forRoot({
+    timeOut: 5000,
+    positionClass: 'toast-top-right',
+    preventDuplicates: true,
+    progressBar: true
+})
   ],
   providers: [],
   bootstrap: [AppComponent]

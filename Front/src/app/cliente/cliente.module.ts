@@ -7,7 +7,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClienteResolve } from './services/cliente.resolve';
 import { ClienteServicesService } from './services/cliente-services.service';
-import { NovoEmprestimoComponent } from './novo-emprestimo/novo-emprestimo.component';
 import { NgxMaskModule } from 'ngx-mask';
 
 
@@ -16,8 +15,6 @@ import { NgxMaskModule } from 'ngx-mask';
    DetalhesClienteComponent,
    NovoClienteComponent,
    ListaClienteComponent,
-   NovoEmprestimoComponent
-
   ],
   imports: [
     CommonModule,

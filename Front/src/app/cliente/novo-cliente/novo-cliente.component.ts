@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Cliente } from '../models/cliente';
 import { ClienteServicesService } from '../services/cliente-services.service';
 
@@ -20,8 +21,9 @@ export class NovoClienteComponent implements OnInit {
   constructor(
     private clienteService: ClienteServicesService,
     private fb: FormBuilder,
-
-    private route: ActivatedRoute
+    private router: Router,
+    private route: ActivatedRoute,
+    private toastr: ToastrService,
   ) {  }
 
   ngOnInit(): void {
@@ -37,9 +39,22 @@ export class NovoClienteComponent implements OnInit {
   novoCliente() {
     this.cliente = Object.assign({}, this.cliente, this.clienteForm.value);
     this.clienteService.addCliente(this.cliente)
-      .subscribe(sucesso => { alert('Cliente cadastrado') },
+      .subscribe(sucesso => { this.processarSucesso(sucesso) },
         falha => { console.log(falha) }
       )
   }
 
+  processarSucesso(response: any) {
+    this.clienteForm.reset();
+    let toast = this.toastr.success('Cliente cadastrado', 'Sucesso!');
+    if (toast) {
+      toast.onHidden.subscribe(() => {
+        this.router.navigate(['/cliente/list'])
+      });
+    }
+  }
+
+  processarFalha(fail: any) {
+    this.toastr.error('Houve algum erro', 'Error!');
+  }
 }
