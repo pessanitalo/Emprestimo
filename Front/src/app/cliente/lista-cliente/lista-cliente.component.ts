@@ -32,7 +32,7 @@ export class ListaClienteComponent implements OnInit {
     this.filtro();
   }
 
-  getModal(){
+  getModal() {
     return this.modal
   }
 
@@ -46,7 +46,7 @@ export class ListaClienteComponent implements OnInit {
   openModal(template: TemplateRef<any>, cliente: Cliente) {
     this.clienteService.obterPorId(cliente.id).subscribe((res) => {
       this.cliente = res;
-      this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
+      this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     })
   }
 }

@@ -1,18 +1,22 @@
-
 <div class="row">
     <div class="col-md-10">
-        <form novalidate="novalidate" (ngSubmit)="novoCliente()" [formGroup]="clienteForm">
+        <form novalidate (ngSubmit)="novoCliente()" [formGroup]="Form">
 
             <div class="form-group">
                 <label class="control-label">Nome</label>
                 <input class="form-control" id="nome" type="text" formControlName="nome" />
-
+                <span class="text-danger" *ngIf="Form.get('nome')?.invalid">
+                    {{getErrorMessage("nome")}}
+                </span>
             </div>
 
             <div class="form-group">
                 <label class="control-label">Idade</label>
                 <div>
                     <input class="form-control" id="idade" type="text" formControlName="idade" />
+                    <span class="text-danger" *ngIf="Form.get('idade')?.invalid">
+                        {{getErrorMessage("idade")}}
+                    </span>
                 </div>
             </div>
 
@@ -20,6 +24,9 @@
                 <label class="control-label">CPF</label>
                 <div>
                     <input class="form-control" id="cpf" type="text" formControlName="cpf" mask="000.000.000-00" />
+                    <span class="text-danger" *ngIf="Form.get('cpf')?.invalid">
+                        {{getErrorMessage("cpf")}}
+                    </span>
                 </div>
             </div>
 
@@ -27,6 +34,9 @@
                 <label class="control-label">Saldo Atual</label>
                 <div>
                     <input class="form-control" id="saldoAtual" type="text" formControlName="saldoAtual" />
+                    <span class="text-danger" *ngIf="Form.get('saldoAtual')?.invalid">
+                        {{getErrorMessage("saldoAtual")}}
+                    </span>
                 </div>
             </div>
 
@@ -34,11 +44,14 @@
                 <label class="control-label">Score</label>
                 <div>
                     <input class="form-control" id="score" type="text" formControlName="score" />
+                    <span class="text-danger" *ngIf="Form.get('score')?.invalid">
+                        {{getErrorMessage("score")}}
+                    </span>
                 </div>
             </div>
 
             <div class="form-group margin-top">
-                <button type="submit" class="btn btn-primary save">Salvar</button>
+                <button type="submit" class="btn btn-primary save" [disabled]="!Form.valid">Salvar</button>
                 <button type="button" class="btn btn-success" [routerLink]="['/cliente/list']">Voltar</button>
             </div>
         </form>

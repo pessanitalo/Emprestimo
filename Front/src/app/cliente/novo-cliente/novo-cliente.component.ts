@@ -15,8 +15,9 @@ import { ClienteServicesService } from '../services/cliente-services.service';
 export class NovoClienteComponent implements OnInit {
 
   cliente!: Cliente;
-  clienteForm!: FormGroup;
+  Form!: FormGroup;
 
+  validate!: string;
 
   constructor(
     private clienteService: ClienteServicesService,
@@ -24,20 +25,20 @@ export class NovoClienteComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private toastr: ToastrService,
-  ) {  }
+  ) { }
 
   ngOnInit(): void {
-    this.clienteForm = this.fb.group({
-      nome: ['', [Validators.required]],
+    this.Form = this.fb.group({
+      nome: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
       idade: ['', [Validators.required]],
       score: ['', [Validators.required]],
-      cpf: ['', [Validators.required]],
+      cpf: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
       saldoAtual: ['', [Validators.required]],
     });
   }
 
   novoCliente() {
-    this.cliente = Object.assign({}, this.cliente, this.clienteForm.value);
+    this.cliente = Object.assign({}, this.cliente, this.Form.value);
     this.clienteService.addCliente(this.cliente)
       .subscribe(sucesso => { this.processarSucesso(sucesso) },
         falha => { console.log(falha) }
@@ -45,13 +46,32 @@ export class NovoClienteComponent implements OnInit {
   }
 
   processarSucesso(response: any) {
-    this.clienteForm.reset();
+    this.Form.reset();
     let toast = this.toastr.success('Cliente cadastrado', 'Sucesso!');
     if (toast) {
       toast.onHidden.subscribe(() => {
         this.router.navigate(['/cliente/list'])
       });
     }
+  }
+
+  getErrorMessage(fieldName: string) {
+    const field = this.Form.get(fieldName);
+
+    if (field?.hasError('minlength')) {
+      const requiredlength = field.errors ? field.errors['minlength']['requiredLength'] : null ;
+      return `Tamanho mínimo precisa ser de ${requiredlength} caracteres.`;
+    }
+
+    if (field?.hasError('maxlength')) {
+      const requiredlength = field.errors ? field.errors['maxlength']['requiredLength'] : null ;
+      return `Tamanho máximo precisa ser de ${requiredlength} caracteres.`;
+    }
+
+       if (field?.touched || field?.dirty) {
+      return 'campo obrigatório';
+    }
+    return ''
   }
 
   processarFalha(fail: any) {
