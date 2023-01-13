@@ -2,7 +2,6 @@
 using CredEmprestimo.Business.Models;
 using CredEmprestimo.Data.Context;
 using Microsoft.EntityFrameworkCore;
-using System.Net;
 
 namespace CredEmprestimo.Data.Repository
 {
@@ -25,8 +24,8 @@ namespace CredEmprestimo.Data.Repository
         {
             try
             {
-              var consulta = _context.Clientes.Include(c => c.Emprestimo)
-                .Where(x => x.Id == id).FirstOrDefault(X => X.Id == id);
+                var consulta = _context.Clientes.Include(c => c.Emprestimo)
+                  .Where(x => x.Id == id).FirstOrDefault(X => X.Id == id);
 
                 if (consulta == null) throw new Exception("Não foi possível encontrar o cliente.");
 
@@ -37,7 +36,6 @@ namespace CredEmprestimo.Data.Repository
 
                 throw new Exception(ex.Message);
             }
-
         }
 
         public Cliente Create(Cliente cliente)
@@ -56,8 +54,6 @@ namespace CredEmprestimo.Data.Repository
             {
                 throw new Exception(ex.Message);
             }
-
-
         }
 
         public Emprestimo NovoEmprestimo(double ValorEmprestimo, int QuantidadeParcelas, int id)
@@ -98,17 +94,25 @@ namespace CredEmprestimo.Data.Repository
 
         public Emprestimo ObterPorId(int id)
         {
-            var emprestimo = _context.Emprestimos.Where(p => p.Id == id);
+            try
+            {
+                var emprestimo = _context.Emprestimos.Include(c => c.Cliente)
+              .Where(x => x.Id == id).FirstOrDefault(X => X.Id == id);
 
-            IQueryable<Emprestimo> query = _context.Emprestimos;
-            query = query.Include(p => p.Cliente)
-                .Where(p => p.Id == id);
-            return query.FirstOrDefault();
+                if (emprestimo == null) throw new Exception("Não foi possível localizar o empréstimo.");
+
+                return emprestimo;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+
         }
 
         public async Task<IEnumerable<Cliente>> filtroPorNome(string cliente)
         {
-            //var query = await _context.Clientes.ToListAsync();
             var query = await _context.Clientes.Where(c => c.Nome.Contains(cliente)).ToListAsync();
 
             return query;

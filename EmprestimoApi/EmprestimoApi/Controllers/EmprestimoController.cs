@@ -27,19 +27,19 @@ namespace EmprestimoApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public Emprestimo get(int id)
+        public IActionResult get(int id)
         {
-            var consulta = _repository.ObterPorId(id);
-            return consulta;
+            try
+            {
+                var consulta = _repository.ObterPorId(id);
+                return Ok(consulta);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, ex.Message);
+            }
+         
         }
-
-        //[HttpPost]
-        //public IActionResult Create(Emprestimo emprestimo)
-        //{
-        //    var result = _repository.NovoEmprestimo(emprestimo.ValorEmprestimo,emprestimo.QuantidadeParcelas, emprestimo.ClienteId);
-
-        //    return Ok(result);
-        //}
 
         [HttpPost]
         public IActionResult emprestimoDto(EmprestimoViewModel emprestimodto)
