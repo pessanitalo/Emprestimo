@@ -41,7 +41,7 @@ export class NovoClienteComponent implements OnInit {
     this.cliente = Object.assign({}, this.cliente, this.Form.value);
     this.clienteService.addCliente(this.cliente)
       .subscribe(sucesso => { this.processarSucesso(sucesso) },
-        falha => { console.log(falha) }
+        falha => { this.processarFalha(falha) }
       )
   }
 
@@ -75,6 +75,6 @@ export class NovoClienteComponent implements OnInit {
   }
 
   processarFalha(fail: any) {
-    this.toastr.error('Houve algum erro', 'Error!');
-  }
+    this.toastr.error( fail.error, 'Error!' );
+   }
 }

@@ -2,6 +2,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
+                <th scope="col">ID</th>
                 <th scope="col">Quantidade Parcelas</th>
                 <th scope="col">Valor da Parcela</th>
                 <th scope="col">Total a Pagar</th>
@@ -10,12 +11,13 @@
         </thead>
         <tbody>
             <tr *ngFor="let emprestimos of emprestimos">
+                <td> {{ emprestimos.id }} </td>
                 <td> {{ emprestimos.quantidadeParcelas }} </td>
                 <td> {{ emprestimos.valorDaParcela }} </td>
                 <td> {{ emprestimos.valorTotal }} </td>
                 <td>
                     <button type="button" class="btn btn-primary details"
-                    (click)="openModal(template, emprestimos)">Detalhes</button>
+                        (click)="openModal(template, emprestimos)">Detalhes</button>
                     <!-- <button type="button" class="btn btn-danger remove"
                         [routerLink]="['/emprestimo/remover', emprestimos.id]">Remover</button> -->
                 </td>
@@ -27,13 +29,12 @@
 
 <ng-template #template>
     <div class="modal-header">
-        <h4 class="modal-title pull-left">Nome do Cliente: {{emprestimo.cliente.nome}}</h4>
+        <h4 class="modal-title pull-left">Cliente: {{emprestimo.cliente.nome}}</h4>
         <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
             <span aria-hidden="true" class="visually-hidden">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        Id: {{ emprestimo.id }}<br>
         Saldo Atual: {{ emprestimo.cliente.saldoAtual }}<br>
         Quantidade de parcelas: {{ emprestimo.quantidadeParcelas }}<br>
         Valor Parcelas: {{ emprestimo.valorDaParcela }}<br>

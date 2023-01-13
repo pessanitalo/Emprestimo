@@ -36,7 +36,7 @@ import { ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
     NoopAnimationsModule,
    BrowserAnimationsModule,
    ToastrModule.forRoot({
-    timeOut: 5000,
+    timeOut: 3000,
     positionClass: 'toast-top-right',
     preventDuplicates: true,
     progressBar: true

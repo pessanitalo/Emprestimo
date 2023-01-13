@@ -24,7 +24,6 @@ namespace CredEmprestimo.Controllers
         [Route("filtro/{nome?}")]
         public async Task<IEnumerable<Cliente>> filtro(string? nome)
         {
-
             if (!string.IsNullOrEmpty(nome))
             {
                 return await _repository.filtroPorNome(nome);
@@ -36,20 +35,37 @@ namespace CredEmprestimo.Controllers
 
         [HttpGet]
         [Route("getId/{id}")]
-        public Cliente get(int id)
+        public IActionResult get(int id)
         {
-            var consulta = _repository.BuscarPorId(id);
+            try
+            {
+                var consulta = _repository.BuscarPorId(id);
 
-            return consulta;
+                return Ok(consulta);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, ex.Message);
+            }
+
         }
 
         [HttpPost]
         public IActionResult create(ClienteViewModel clienteDto)
         {
-            var cliente = _mapper.Map<Cliente>(clienteDto);
-            var result = _repository.Create(cliente);
+            try
+            {
+                var cliente = _mapper.Map<Cliente>(clienteDto);
+                var result = _repository.Create(cliente);
 
-            return Ok(result);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, ex.Message);
+            }
+
+
         }
     }
 }

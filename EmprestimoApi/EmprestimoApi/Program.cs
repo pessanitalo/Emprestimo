@@ -3,7 +3,6 @@ using CredEmprestimo.Business.Interface;
 using CredEmprestimo.Data.Context;
 using CredEmprestimo.Data.Repository;
 using CredEmprestimoApi.Configurations;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

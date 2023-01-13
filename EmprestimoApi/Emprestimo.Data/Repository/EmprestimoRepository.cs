@@ -2,6 +2,7 @@
 using CredEmprestimo.Business.Models;
 using CredEmprestimo.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace CredEmprestimo.Data.Repository
 {
@@ -22,18 +23,41 @@ namespace CredEmprestimo.Data.Repository
 
         public Cliente BuscarPorId(int id)
         {
-            var consulta = _context.Clientes.Include(c => c.Emprestimo)
+            try
+            {
+              var consulta = _context.Clientes.Include(c => c.Emprestimo)
                 .Where(x => x.Id == id).FirstOrDefault(X => X.Id == id);
 
-            return consulta;
+                if (consulta == null) throw new Exception("Não foi possível encontrar o cliente.");
+
+                return consulta;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+
         }
 
         public Cliente Create(Cliente cliente)
         {
-            _context.Clientes.Add(cliente);
-            _context.SaveChanges();
+            List<Cliente> clientes = _context.Clientes.Where(c => c.Cpf == cliente.Cpf).ToList();
+            try
+            {
+                if (clientes.Count > 0) throw new Exception("Já existe um cliente com esse cpf");
 
-            return cliente;
+                _context.Clientes.Add(cliente);
+                _context.SaveChanges();
+
+                return cliente;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+
         }
 
         public Emprestimo NovoEmprestimo(double ValorEmprestimo, int QuantidadeParcelas, int id)
@@ -82,12 +106,13 @@ namespace CredEmprestimo.Data.Repository
             return query.FirstOrDefault();
         }
 
-        public async Task<IEnumerable<Cliente>>  filtroPorNome(string cliente)
+        public async Task<IEnumerable<Cliente>> filtroPorNome(string cliente)
         {
             //var query = await _context.Clientes.ToListAsync();
             var query = await _context.Clientes.Where(c => c.Nome.Contains(cliente)).ToListAsync();
 
             return query;
         }
+
     }
 }
