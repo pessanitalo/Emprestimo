@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CredEmprestimo.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221214183553_inicio-arq")]
-    partial class inicioarq
+    [Migration("20230113123504_map")]
+    partial class map
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,14 +33,16 @@ namespace CredEmprestimo.Data.Migrations
 
                     b.Property<string>("Cpf")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(11)
+                        .HasColumnType("varchar(11)");
 
                     b.Property<int>("Idade")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<double>("SaldoAtual")
                         .HasColumnType("float");
@@ -50,7 +52,7 @@ namespace CredEmprestimo.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Clientes");
+                    b.ToTable("Cliente", (string)null);
                 });
 
             modelBuilder.Entity("CredEmprestimo.Business.Models.Emprestimo", b =>
@@ -81,7 +83,7 @@ namespace CredEmprestimo.Data.Migrations
                     b.HasIndex("ClienteId")
                         .IsUnique();
 
-                    b.ToTable("Emprestimos");
+                    b.ToTable("Emprestimo", (string)null);
                 });
 
             modelBuilder.Entity("CredEmprestimo.Business.Models.Emprestimo", b =>

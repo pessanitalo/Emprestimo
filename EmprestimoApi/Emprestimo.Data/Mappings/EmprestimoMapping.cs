@@ -15,7 +15,7 @@ namespace CredEmprestimo.Data.Mappings
             builder.Property(c => c.ValorEmprestimo);
 
             builder.Property(c => c.QuantidadeParcelas);
-
+                 
             builder.Property(c => c.ValorDaParcela);
 
             builder.Property(c => c.valorTotal);

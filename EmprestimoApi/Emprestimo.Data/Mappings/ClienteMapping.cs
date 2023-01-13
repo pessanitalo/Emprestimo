@@ -23,10 +23,17 @@ namespace CredEmprestimo.Data.Mappings
 
             builder.Property(c => c.Cpf)
               .IsRequired()
-              .HasColumnType("varchar(11)");
+              .HasColumnType("varchar")
+              .HasMaxLength(11);
+
+            builder.Property(c => c.Score)
+             .IsRequired();
+
+            builder.Property(c => c.SaldoAtual)
+             .IsRequired();
 
             builder.HasOne(f => f.Emprestimo);
-                  
+
         }
     }
 }

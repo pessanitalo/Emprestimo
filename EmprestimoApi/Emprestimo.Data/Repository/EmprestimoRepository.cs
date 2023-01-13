@@ -99,8 +99,6 @@ namespace CredEmprestimo.Data.Repository
                 var emprestimo = _context.Emprestimos.Include(c => c.Cliente)
               .Where(x => x.Id == id).FirstOrDefault(X => X.Id == id);
 
-                if (emprestimo == null) throw new Exception("Não foi possível localizar o empréstimo.");
-
                 return emprestimo;
             }
             catch (Exception ex)

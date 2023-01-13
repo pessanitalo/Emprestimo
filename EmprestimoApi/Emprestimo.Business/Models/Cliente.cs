@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-
-namespace CredEmprestimo.Business.Models
+﻿namespace CredEmprestimo.Business.Models
 {
     public class Cliente
     {

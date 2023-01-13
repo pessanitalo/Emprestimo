@@ -2,6 +2,8 @@
 using CredEmprestimo.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
@@ -29,14 +31,16 @@ namespace CredEmprestimo.Data.Migrations
 
                     b.Property<string>("Cpf")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(11)
+                        .HasColumnType("varchar(11)");
 
                     b.Property<int>("Idade")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<double>("SaldoAtual")
                         .HasColumnType("float");
@@ -46,7 +50,7 @@ namespace CredEmprestimo.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Clientes");
+                    b.ToTable("Cliente", (string)null);
                 });
 
             modelBuilder.Entity("CredEmprestimo.Business.Models.Emprestimo", b =>
@@ -77,7 +81,7 @@ namespace CredEmprestimo.Data.Migrations
                     b.HasIndex("ClienteId")
                         .IsUnique();
 
-                    b.ToTable("Emprestimos");
+                    b.ToTable("Emprestimo", (string)null);
                 });
 
             modelBuilder.Entity("CredEmprestimo.Business.Models.Emprestimo", b =>

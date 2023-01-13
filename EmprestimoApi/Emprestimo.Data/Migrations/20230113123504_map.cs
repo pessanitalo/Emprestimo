@@ -4,53 +4,53 @@
 
 namespace CredEmprestimo.Data.Migrations
 {
-    public partial class inicioarq : Migration
+    public partial class map : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Clientes",
+                name: "Cliente",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nome = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     Idade = table.Column<int>(type: "int", nullable: false),
-                    Cpf = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Cpf = table.Column<string>(type: "varchar(11)", maxLength: 11, nullable: false),
                     Score = table.Column<double>(type: "float", nullable: false),
                     SaldoAtual = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Clientes", x => x.Id);
+                    table.PrimaryKey("PK_Cliente", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Emprestimos",
+                name: "Emprestimo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ClienteId = table.Column<int>(type: "int", nullable: false),
                     ValorEmprestimo = table.Column<double>(type: "float", nullable: false),
                     QuantidadeParcelas = table.Column<int>(type: "int", nullable: false),
                     ValorDaParcela = table.Column<double>(type: "float", nullable: false),
-                    valorTotal = table.Column<double>(type: "float", nullable: false)
+                    valorTotal = table.Column<double>(type: "float", nullable: false),
+                    ClienteId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Emprestimos", x => x.Id);
+                    table.PrimaryKey("PK_Emprestimo", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Emprestimos_Clientes_ClienteId",
+                        name: "FK_Emprestimo_Cliente_ClienteId",
                         column: x => x.ClienteId,
-                        principalTable: "Clientes",
+                        principalTable: "Cliente",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Emprestimos_ClienteId",
-                table: "Emprestimos",
+                name: "IX_Emprestimo_ClienteId",
+                table: "Emprestimo",
                 column: "ClienteId",
                 unique: true);
         }
@@ -58,10 +58,10 @@ namespace CredEmprestimo.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Emprestimos");
+                name: "Emprestimo");
 
             migrationBuilder.DropTable(
-                name: "Clientes");
+                name: "Cliente");
         }
     }
 }
