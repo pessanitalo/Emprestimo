@@ -64,11 +64,11 @@ namespace CredEmprestimo.Data.Repository
             emprestimo.ValorEmprestimo = ValorEmprestimo;
             emprestimo.QuantidadeParcelas = QuantidadeParcelas;
 
-            var calc = emprestimo.ValorTotal(ValorEmprestimo);
-            emprestimo.valorTotal = calc;
+            var valorTotalComJuros = emprestimo.valorTotalComJuros(ValorEmprestimo);
+            emprestimo.valorTotal = valorTotalComJuros;
 
-            var parcelas = emprestimo.ValorParcela(calc, QuantidadeParcelas);
-            emprestimo.ValorDaParcela = parcelas;
+            var valorDaParcela = emprestimo.ValorParcela(valorTotalComJuros, QuantidadeParcelas);
+            emprestimo.ValorDaParcela = valorDaParcela;
 
             emprestimo.Cliente = cliente;
 

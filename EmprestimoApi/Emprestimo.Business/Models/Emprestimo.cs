@@ -18,7 +18,7 @@
         public Cliente Cliente { get; set; }
 
 
-        public double ValorTotal(double valorEmprestimo)
+        public double valorTotalComJuros(double valorEmprestimo)
         {
             return valorEmprestimo += valorEmprestimo * 0.39;
         }
