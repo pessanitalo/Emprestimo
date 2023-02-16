@@ -5,84 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CredEmprestimo.Data.Repository
 {
-    public class EmprestimoRepository : IRepository
+    public class EmprestimoRepository : IEmprestimoRepository
     {
         private readonly DataContext _context;
 
         public EmprestimoRepository(DataContext context)
         {
             _context = context;
-        }
-
-        public async Task<IEnumerable<Cliente>> BuscaCpf(Cliente cliente)
-        {
-            var clientes = await _context.Clientes.Where(c => c.Cpf == cliente.Cpf).ToListAsync();
-            return clientes;
-        }
-
-        public Cliente BuscarPorId(int id)
-        {
-            try
-            {
-                var consulta = _context.Clientes.Include(c => c.Emprestimo)
-                  .Where(x => x.Id == id).FirstOrDefault(X => X.Id == id);
-
-                if (consulta == null) throw new Exception("Não foi possível encontrar o cliente.");
-
-                return consulta;
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception(ex.Message);
-            }
-        }
-
-        public Cliente Create(Cliente cliente)
-        {
-            List<Cliente> clientes = _context.Clientes.Where(c => c.Cpf == cliente.Cpf).ToList();
-            try
-            {
-                if (clientes.Count > 0) throw new Exception("Já existe um cliente com esse cpf");
-
-                _context.Clientes.Add(cliente);
-                _context.SaveChanges();
-
-                return cliente;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        public Emprestimo NovoEmprestimo(double ValorEmprestimo, int QuantidadeParcelas, int id)
-        {
-            var emprestimo = new Emprestimo();
-            var cliente = _context.Clientes.FirstOrDefault(x => x.Id == id);
-
-            emprestimo.ValorEmprestimo = ValorEmprestimo;
-            emprestimo.QuantidadeParcelas = QuantidadeParcelas;
-
-            var valorTotalComJuros = emprestimo.valorTotalComJuros(ValorEmprestimo);
-            emprestimo.valorTotal = valorTotalComJuros;
-            emprestimo.DataAquisicaoEmprestimo = DateTime.Now;
-
-            var valorDaParcela = emprestimo.ValorParcela(valorTotalComJuros, QuantidadeParcelas);
-            emprestimo.ValorDaParcela = valorDaParcela;
-            emprestimo.Cliente = cliente;
-            emprestimo.Cliente.SaldoAtual += emprestimo.ValorEmprestimo;
-
-            _context.Emprestimos.Add(emprestimo);
-            _context.SaveChanges();
-
-            return emprestimo;
-        }
-
-        public async Task<IEnumerable<Cliente>> ListaClientes()
-        {
-            var list = await _context.Clientes.ToListAsync();
-            return list;
         }
 
         public async Task<IEnumerable<Emprestimo>> ListarEmprestimos()
@@ -107,43 +36,27 @@ namespace CredEmprestimo.Data.Repository
             }
 
         }
-
-        public async Task<IEnumerable<Cliente>> filtroPorNome(string cliente)
+        public Emprestimo NovoEmprestimo(double ValorEmprestimo, int QuantidadeParcelas, int id)
         {
-            var query = await _context.Clientes.Where(c => c.Nome.Contains(cliente)).ToListAsync();
+            var emprestimo = new Emprestimo();
+            var cliente = _context.Clientes.FirstOrDefault(x => x.Id == id);
 
-            return query;
-        }
+            emprestimo.ValorEmprestimo = ValorEmprestimo;
+            emprestimo.QuantidadeParcelas = QuantidadeParcelas;
 
-        public BoletoEmprestimo GerarBoleto(int id)
-        {
-            var emprestimo = _context.Emprestimos.FirstOrDefault(x => x.Id == id);
+            var valorTotalComJuros = emprestimo.valorTotalComJuros(ValorEmprestimo);
+            emprestimo.valorTotal = valorTotalComJuros;
+            emprestimo.DataAquisicaoEmprestimo = DateTime.Now;
 
-            var boleto = new BoletoEmprestimo();
+            var valorDaParcela = emprestimo.ValorParcela(valorTotalComJuros, QuantidadeParcelas);
+            emprestimo.ValorDaParcela = valorDaParcela;
+            emprestimo.Cliente = cliente;
+            emprestimo.Cliente.SaldoAtual += emprestimo.ValorEmprestimo;
 
-            var dataVencimentoParcela = emprestimo.DataAquisicaoEmprestimo;
-            var dataParcela = DateTime.Now;
-            var numeroParcela = 1;
-
-            for (int i = 0; i < emprestimo.QuantidadeParcelas; i++)
-            {
-                dataVencimentoParcela = dataParcela;
-
-                boleto = new BoletoEmprestimo
-                {
-                    Id = 0,
-                    NumeroParcela = numeroParcela + i,
-                    EmprestimoId = emprestimo.Id,
-                    ValorDaParcela = emprestimo.ValorDaParcela,
-                    DataDePagamento = dataVencimentoParcela.AddDays(30)
-                };
-
-                dataParcela = boleto.DataDePagamento;
-                _context.BoletoEmprestimo.Add(boleto);
-            }
-
+            _context.Emprestimos.Add(emprestimo);
             _context.SaveChanges();
-            return boleto;
+
+            return emprestimo;
         }
     }
 }

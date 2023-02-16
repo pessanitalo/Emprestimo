@@ -11,19 +11,19 @@ namespace EmprestimoApi.Controllers
     public class EmprestimoController : ControllerBase
     {
 
-        private readonly IRepository _repository;
+        private readonly IEmprestimoRepository _emprestimoRepository;
         private readonly IMapper _mapper;
 
-        public EmprestimoController(IRepository repository, IMapper mapper)
+        public EmprestimoController(IEmprestimoRepository repository, IMapper mapper)
         {
-            _repository = repository;
+            _emprestimoRepository = repository;
             _mapper = mapper;
         }
 
         [HttpGet("list")]
         public async Task<IEnumerable<Emprestimo>> get()
         {
-            return await _repository.ListarEmprestimos();
+            return await _emprestimoRepository.ListarEmprestimos();
         }
 
         [HttpGet("{id}")]
@@ -31,7 +31,7 @@ namespace EmprestimoApi.Controllers
         {
             try
             {
-                var consulta = _repository.ObterPorId(id);
+                var consulta = _emprestimoRepository.ObterPorId(id);
                 return Ok(consulta);
             }
             catch (Exception ex)
@@ -45,18 +45,9 @@ namespace EmprestimoApi.Controllers
         public IActionResult emprestimoDto(EmprestimoViewModel emprestimodto)
         {
             var emprestimo = _mapper.Map<Emprestimo>(emprestimodto);
-            var result = _repository.NovoEmprestimo(emprestimo.ValorEmprestimo, emprestimo.QuantidadeParcelas, emprestimo.ClienteId);
+            var result = _emprestimoRepository.NovoEmprestimo(emprestimo.ValorEmprestimo, emprestimo.QuantidadeParcelas, emprestimo.ClienteId);
 
             return Ok(result);
         }
-
-        [HttpPost("gerarnoleto/{id}")]
-        public IActionResult GerarBoleto(int id)
-        {
-            var boleto = _repository.GerarBoleto(id);
-
-            return Ok(boleto);
-        }
-
     }
 }

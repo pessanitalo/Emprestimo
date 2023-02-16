@@ -11,12 +11,12 @@ namespace CredEmprestimo.Controllers
     public class ClienteController : ControllerBase
     {
 
-        private readonly IRepository _repository;
+        private readonly IClienteRepository _ClienteRepository;
         private readonly IMapper _mapper;
 
-        public ClienteController(IRepository repository, IMapper mapper)
+        public ClienteController(IClienteRepository repository, IMapper mapper)
         {
-            _repository = repository;
+            _ClienteRepository = repository;
             _mapper = mapper;
         }
 
@@ -26,10 +26,10 @@ namespace CredEmprestimo.Controllers
         {
             if (!string.IsNullOrEmpty(nome))
             {
-                return await _repository.filtroPorNome(nome);
+                return await _ClienteRepository.filtroPorNome(nome);
             }
 
-            return await _repository.ListaClientes();
+            return await _ClienteRepository.ListaClientes();
 
         }
 
@@ -39,7 +39,7 @@ namespace CredEmprestimo.Controllers
         {
             try
             {
-                var consulta = _repository.BuscarPorId(id);
+                var consulta = _ClienteRepository.BuscarPorId(id);
 
                 return Ok(consulta);
             }
@@ -56,7 +56,7 @@ namespace CredEmprestimo.Controllers
             try
             {
                 var cliente = _mapper.Map<Cliente>(clienteDto);
-                var result = _repository.Create(cliente);
+                var result = _ClienteRepository.Create(cliente);
 
                 return Ok(result);
             }
@@ -64,8 +64,6 @@ namespace CredEmprestimo.Controllers
             {
                 return StatusCode(400, ex.Message);
             }
-
-
         }
     }
 }
