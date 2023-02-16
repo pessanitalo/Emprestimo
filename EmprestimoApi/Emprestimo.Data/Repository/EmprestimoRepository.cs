@@ -2,6 +2,7 @@
 using CredEmprestimo.Business.Models;
 using CredEmprestimo.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace CredEmprestimo.Data.Repository
 {
@@ -69,10 +70,10 @@ namespace CredEmprestimo.Data.Repository
 
             var valorDaParcela = emprestimo.ValorParcela(valorTotalComJuros, QuantidadeParcelas);
             emprestimo.ValorDaParcela = valorDaParcela;
-
             emprestimo.Cliente = cliente;
-
             emprestimo.Cliente.SaldoAtual += emprestimo.ValorEmprestimo;
+
+
 
             _context.Emprestimos.Add(emprestimo);
             _context.SaveChanges();
@@ -116,5 +117,33 @@ namespace CredEmprestimo.Data.Repository
             return query;
         }
 
+        public BoletoEmprestimo GerarBoleto(int id)
+        {
+            var emprestimo = _context.Emprestimos.FirstOrDefault(x => x.Id == id);
+
+            var boleto = new BoletoEmprestimo();
+
+            var dataBoleto = DateTime.Now;
+            var novaData = DateTime.Now;
+
+            for (int i = 0; i < emprestimo.QuantidadeParcelas; i++)
+            {
+                dataBoleto = novaData;
+
+                boleto = new BoletoEmprestimo
+                {
+                    Id = 0,
+                    EmprestimoId = emprestimo.Id,
+                    ValorDaParcela = emprestimo.ValorDaParcela,
+                    DataDePagamento = dataBoleto.AddDays(30)
+                };
+
+                novaData = boleto.DataDePagamento;
+                _context.BoletoEmprestimo.Add(boleto);
+            }
+
+            _context.SaveChanges();
+            return boleto;
+        }
     }
 }

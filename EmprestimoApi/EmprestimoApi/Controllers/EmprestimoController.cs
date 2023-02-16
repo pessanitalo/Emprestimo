@@ -50,5 +50,13 @@ namespace EmprestimoApi.Controllers
             return Ok(result);
         }
 
+        [HttpPost("gerarnoleto/{id}")]
+        public IActionResult GerarBoleto(int id)
+        {
+            var boleto = _repository.GerarBoleto(id);
+
+            return Ok(boleto);
+        }
+
     }
 }
