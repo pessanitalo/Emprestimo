@@ -31,7 +31,7 @@ namespace EmprestimoApi.Controllers
         {
             try
             {
-                var consulta = _emprestimoRepository.ObterPorId(id);
+                var consulta = _emprestimoRepository.DetalhesEmprestimo(id);
                 return Ok(consulta);
             }
             catch (Exception ex)

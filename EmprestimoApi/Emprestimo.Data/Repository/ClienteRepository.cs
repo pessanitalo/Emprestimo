@@ -32,7 +32,7 @@ namespace CredEmprestimo.Data.Repository
             return query;
         }
 
-        public Cliente BuscarPorId(int id)
+        public Cliente DetalhesCliente(int id)
         {
             try
             {
@@ -68,5 +68,22 @@ namespace CredEmprestimo.Data.Repository
             }
         }
 
+        public Cliente PesquisarCliente(int id)
+        {
+            try
+            {
+                var cliente = _context.Clientes
+                 .FirstOrDefault(X => X.Id == id);
+
+                if (cliente == null) throw new Exception("Não foi possível encontrar o cliente.");
+
+                return cliente;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

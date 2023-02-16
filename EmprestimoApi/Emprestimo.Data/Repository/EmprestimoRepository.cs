@@ -8,10 +8,12 @@ namespace CredEmprestimo.Data.Repository
     public class EmprestimoRepository : IEmprestimoRepository
     {
         private readonly DataContext _context;
+        private readonly IClienteRepository _clienteRepository;
 
-        public EmprestimoRepository(DataContext context)
+        public EmprestimoRepository(DataContext context, IClienteRepository clienteRepository)
         {
             _context = context;
+            _clienteRepository = clienteRepository;
         }
 
         public async Task<IEnumerable<Emprestimo>> ListarEmprestimos()
@@ -20,7 +22,7 @@ namespace CredEmprestimo.Data.Repository
             return list;
         }
 
-        public Emprestimo ObterPorId(int id)
+        public Emprestimo DetalhesEmprestimo(int id)
         {
             try
             {
@@ -31,7 +33,6 @@ namespace CredEmprestimo.Data.Repository
             }
             catch (Exception ex)
             {
-
                 throw new Exception(ex.Message);
             }
 
@@ -39,7 +40,7 @@ namespace CredEmprestimo.Data.Repository
         public Emprestimo NovoEmprestimo(double ValorEmprestimo, int QuantidadeParcelas, int id)
         {
             var emprestimo = new Emprestimo();
-            var cliente = _context.Clientes.FirstOrDefault(x => x.Id == id);
+            var cliente = _clienteRepository.PesquisarCliente(id);
 
             emprestimo.ValorEmprestimo = ValorEmprestimo;
             emprestimo.QuantidadeParcelas = QuantidadeParcelas;
@@ -57,6 +58,19 @@ namespace CredEmprestimo.Data.Repository
             _context.SaveChanges();
 
             return emprestimo;
+        }
+
+        public Emprestimo PesquisarEmprestimo(int id)
+        {
+            try
+            {
+                var emprestimo = _context.Emprestimos.FirstOrDefault(X => X.Id == id);
+                return emprestimo;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

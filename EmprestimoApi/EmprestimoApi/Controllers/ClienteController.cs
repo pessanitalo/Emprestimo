@@ -39,7 +39,7 @@ namespace CredEmprestimo.Controllers
         {
             try
             {
-                var consulta = _ClienteRepository.BuscarPorId(id);
+                var consulta = _ClienteRepository.DetalhesCliente(id);
 
                 return Ok(consulta);
             }

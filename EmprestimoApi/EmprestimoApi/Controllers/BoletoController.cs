@@ -1,5 +1,4 @@
 ﻿using CredEmprestimo.Business.Interface;
-using CredEmprestimo.Data.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CredEmprestimoApi.Controllers
@@ -21,6 +20,15 @@ namespace CredEmprestimoApi.Controllers
             var boleto = _boletoRepository.GerarBoleto(id);
 
             return Ok(boleto);
+        }
+
+
+        [HttpPost("pagarparcela/{id}")]
+        public IActionResult PagarParcela(int id, int numeroParcela)
+        {
+             _boletoRepository.PagarUmaParcela(id, numeroParcela);
+
+            return Ok("Parcela paga com sucesso");
         }
     }
 }
