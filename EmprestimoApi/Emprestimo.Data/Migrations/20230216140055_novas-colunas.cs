@@ -1,11 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace CredEmprestimo.Data.Migrations
 {
-    public partial class map : Migration
+    /// <inheritdoc />
+    public partial class novascolunas : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -35,6 +38,7 @@ namespace CredEmprestimo.Data.Migrations
                     QuantidadeParcelas = table.Column<int>(type: "int", nullable: false),
                     ValorDaParcela = table.Column<double>(type: "float", nullable: false),
                     valorTotal = table.Column<double>(type: "float", nullable: false),
+                    DataAquisicaoEmprestimo = table.Column<DateTime>(type: "date", nullable: false),
                     ClienteId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -48,6 +52,33 @@ namespace CredEmprestimo.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Boleto",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NumeroParcela = table.Column<int>(type: "int", nullable: false),
+                    ValorDaParcela = table.Column<double>(type: "float", nullable: false),
+                    DataDePagamento = table.Column<DateTime>(type: "date", nullable: false),
+                    EmprestimoId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Boleto", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Boleto_Emprestimo_EmprestimoId",
+                        column: x => x.EmprestimoId,
+                        principalTable: "Emprestimo",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Boleto_EmprestimoId",
+                table: "Boleto",
+                column: "EmprestimoId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Emprestimo_ClienteId",
                 table: "Emprestimo",
@@ -55,8 +86,12 @@ namespace CredEmprestimo.Data.Migrations
                 unique: true);
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Boleto");
+
             migrationBuilder.DropTable(
                 name: "Emprestimo");
 

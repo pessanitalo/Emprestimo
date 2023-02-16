@@ -18,8 +18,7 @@ namespace CredEmprestimo.Data.Mappings
                .HasMaxLength(50);
 
             builder.Property(c => c.Idade)
-              .IsRequired()
-              .HasColumnType("int");
+              .IsRequired();
 
             builder.Property(c => c.Cpf)
               .IsRequired()

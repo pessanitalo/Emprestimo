@@ -12,13 +12,27 @@ namespace CredEmprestimo.Data.Mappings
 
             builder.HasKey("Id");
 
-            builder.Property(c => c.ValorEmprestimo);
+            builder.Property(c => c.ValorEmprestimo)
+            .IsRequired();
 
-            builder.Property(c => c.QuantidadeParcelas);
-                 
-            builder.Property(c => c.ValorDaParcela);
+            builder.Property(c => c.QuantidadeParcelas)
+            .IsRequired();
 
-            builder.Property(c => c.valorTotal);
+            builder.Property(c => c.ValorDaParcela)
+            .IsRequired();
+
+            builder.Property(c => c.valorTotal)
+            .IsRequired();
+
+            builder.Property(c => c.DataAquisicaoEmprestimo)
+            .IsRequired()
+            .HasColumnType("date");
+
+            builder.HasOne(f => f.Cliente);
+
+            builder.HasMany(f => f.BoletoEmprestimo)
+           .WithOne(p => p.Emprestimo)
+           .HasForeignKey(p => p.EmprestimoId);
         }
     }
 }
