@@ -2,7 +2,7 @@
 {
     public class Emprestimo
     {
-        //entidade dependente
+
         public int Id { get; set; }
 
         public double ValorEmprestimo { get; set; }
@@ -13,9 +13,13 @@
 
         public double valorTotal { get; set; }
 
-        //Relacionamento
+        public DateTime DataAquisicaoEmprestimo { get; set; }
+
+
         public int ClienteId { get; set; }
         public Cliente Cliente { get; set; }
+
+        public IList<BoletoEmprestimo> BoletoEmprestimo { get; set; }
 
 
         public double valorTotalComJuros(double valorEmprestimo)

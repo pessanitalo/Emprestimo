@@ -15,5 +15,9 @@ namespace CredEmprestimo.Business.Interface
         Task<IEnumerable<Emprestimo>> ListarEmprestimos();
         Emprestimo ObterPorId(int id);
         Emprestimo NovoEmprestimo(double ValorEmprestimo, int QuantidadeParcelas, int id);
+
+        //Boletos
+
+        BoletoEmprestimo GerarBoleto(int id);
     }
 }
