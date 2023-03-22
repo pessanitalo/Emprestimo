@@ -16,18 +16,18 @@ namespace CredEmprestimo.Data.Repository
 
         public async Task<IEnumerable<Cliente>> ListaClientes()
         {
-            var list = await _context.Clientes.ToListAsync();
+            var list = await _context.Cliente.ToListAsync();
             return list;
         }
         public async Task<IEnumerable<Cliente>> BuscaCpf(Cliente cliente)
         {
-            var clientes = await _context.Clientes.Where(c => c.Cpf == cliente.Cpf).ToListAsync();
+            var clientes = await _context.Cliente.Where(c => c.Cpf == cliente.Cpf).ToListAsync();
             return clientes;
         }
 
         public async Task<IEnumerable<Cliente>> filtroPorNome(string cliente)
         {
-            var query = await _context.Clientes.Where(c => c.Nome.Contains(cliente)).ToListAsync();
+            var query = await _context.Cliente.Where(c => c.Nome.Contains(cliente)).ToListAsync();
 
             return query;
         }
@@ -36,7 +36,7 @@ namespace CredEmprestimo.Data.Repository
         {
             try
             {
-                var consulta = _context.Clientes.Include(c => c.Emprestimo)
+                var consulta = _context.Cliente.Include(c => c.Emprestimo)
                   .Where(x => x.Id == id).FirstOrDefault(X => X.Id == id);
 
                 if (consulta == null) throw new Exception("Não foi possível encontrar o cliente.");
@@ -52,12 +52,12 @@ namespace CredEmprestimo.Data.Repository
 
         public Cliente Create(Cliente cliente)
         {
-            List<Cliente> clientes = _context.Clientes.Where(c => c.Cpf == cliente.Cpf).ToList();
+            List<Cliente> clientes = _context.Cliente.Where(c => c.Cpf == cliente.Cpf).ToList();
             try
             {
                 if (clientes.Count > 0) throw new Exception("Já existe um cliente com esse cpf");
 
-                _context.Clientes.Add(cliente);
+                _context.Cliente.Add(cliente);
                 _context.SaveChanges();
 
                 return cliente;
@@ -72,7 +72,7 @@ namespace CredEmprestimo.Data.Repository
         {
             try
             {
-                var cliente = _context.Clientes
+                var cliente = _context.Cliente
                  .FirstOrDefault(X => X.Id == id);
 
                 if (cliente == null) throw new Exception("Não foi possível encontrar o cliente.");

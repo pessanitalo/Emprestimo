@@ -18,7 +18,7 @@ namespace CredEmprestimo.Data.Repository
 
         public async Task<IEnumerable<Emprestimo>> ListarEmprestimos()
         {
-            var list = await _context.Emprestimos.ToListAsync();
+            var list = await _context.Emprestimo.ToListAsync();
             return list;
         }
 
@@ -26,7 +26,7 @@ namespace CredEmprestimo.Data.Repository
         {
             try
             {
-                var emprestimo = _context.Emprestimos.Include(c => c.Cliente)
+                var emprestimo = _context.Emprestimo.Include(c => c.Cliente)
               .Where(x => x.Id == id).FirstOrDefault(X => X.Id == id);
 
                 return emprestimo;
@@ -54,7 +54,7 @@ namespace CredEmprestimo.Data.Repository
             emprestimo.Cliente = cliente;
             emprestimo.Cliente.SaldoAtual += emprestimo.ValorEmprestimo;
 
-            _context.Emprestimos.Add(emprestimo);
+            _context.Emprestimo.Add(emprestimo);
             _context.SaveChanges();
 
             return emprestimo;
@@ -64,7 +64,7 @@ namespace CredEmprestimo.Data.Repository
         {
             try
             {
-                var emprestimo = _context.Emprestimos.FirstOrDefault(X => X.Id == id);
+                var emprestimo = _context.Emprestimo.FirstOrDefault(X => X.Id == id);
                 return emprestimo;
             }
             catch (Exception ex)

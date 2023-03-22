@@ -1,6 +1,7 @@
 ﻿using CredEmprestimo.Business.Interface;
 using CredEmprestimo.Business.Models;
 using CredEmprestimo.Data.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace CredEmprestimo.Data.Repository
 {
@@ -13,11 +14,6 @@ namespace CredEmprestimo.Data.Repository
         {
             _context = context;
             _emprestimoRepository = emprestimoRepository;
-        }
-
-        public BoletoEmprestimo DetalhesDoBoleto(int id)
-        {
-            throw new NotImplementedException();
         }
 
         public BoletoEmprestimo GerarBoleto(int id)
@@ -51,6 +47,21 @@ namespace CredEmprestimo.Data.Repository
             return boleto;
         }
 
+        public double PagarParcelaVencida(int id)
+        {
+            var data = _context.BoletoEmprestimo.Include(d => d.Emprestimo).FirstOrDefault
+                (x => x.Id == id);
+
+            var vencimentoBoleto = data.DataDePagamento.Day;
+            var dataAtual = DateTime.Now.Day;
+
+            var diasCorridos = dataAtual - vencimentoBoleto;
+            var valorTotal = PagarParcelaVencida(data.ValorDaParcela, diasCorridos);
+
+            return valorTotal;
+
+        }
+
         public BoletoEmprestimo PagarUmaParcela(int id, int numeroDaParcela)
         {
             var parcela = PesquisarBoleto(id, numeroDaParcela);
@@ -60,9 +71,8 @@ namespace CredEmprestimo.Data.Repository
             emprestimo.Cliente.SaldoAtual -= emprestimo.ValorDaParcela;
 
             _context.BoletoEmprestimo.Remove(parcela);
-            _context.Clientes.Update(emprestimo.Cliente);
+            _context.Cliente.Update(emprestimo.Cliente);
             _context.SaveChanges();
-
             return parcela;
         }
 
@@ -70,6 +80,20 @@ namespace CredEmprestimo.Data.Repository
         {
             var parcela = _context.BoletoEmprestimo.FirstOrDefault(x => x.EmprestimoId == id && x.NumeroParcela == numeroParcela);
             return parcela;
+        }
+
+        private double PagarParcelaVencida(double valorParcela, int diasEmAtraso)
+        {
+
+            double jurosAposVencimento = 3.3 / 100.00;
+            double valorComJuros = diasEmAtraso + (jurosAposVencimento * diasEmAtraso);
+
+            double multaAposvencimento = 200 / 100.00;
+            double valorAjustado = valorParcela + multaAposvencimento;
+
+            double totalJuros = valorAjustado + valorComJuros;
+            return totalJuros;
+
         }
     }
 }

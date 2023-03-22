@@ -30,5 +30,13 @@ namespace CredEmprestimoApi.Controllers
 
             return Ok("Parcela paga com sucesso");
         }
+
+        [HttpPost("boletovencido/{id}")]
+        public IActionResult gerarBoletoVencido(int id)
+        {
+         var boleto =   _boletoRepository.PagarParcelaVencida(id);
+
+            return Ok(boleto);
+        }
     }
 }
