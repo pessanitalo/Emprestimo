@@ -71,7 +71,7 @@ namespace CredEmprestimo.Data.Repository
             emprestimo.Cliente.SaldoAtual -= emprestimo.ValorDaParcela;
 
             _context.BoletoEmprestimo.Remove(parcela);
-            _context.Cliente.Update(emprestimo.Cliente);
+            _context.Clientes.Update(emprestimo.Cliente);
             _context.SaveChanges();
             return parcela;
         }
