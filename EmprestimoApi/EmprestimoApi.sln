@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CredEmprestimo.Data", "Empr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CredEmprestimoApi", "EmprestimoApi\CredEmprestimoApi.csproj", "{B0B9DF34-2CEE-477C-80B5-3ADAD61B9939}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{EEDF834E-A7A4-4104-9943-C15CE6B32D5C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B0B9DF34-2CEE-477C-80B5-3ADAD61B9939}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0B9DF34-2CEE-477C-80B5-3ADAD61B9939}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0B9DF34-2CEE-477C-80B5-3ADAD61B9939}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEDF834E-A7A4-4104-9943-C15CE6B32D5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEDF834E-A7A4-4104-9943-C15CE6B32D5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEDF834E-A7A4-4104-9943-C15CE6B32D5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEDF834E-A7A4-4104-9943-C15CE6B32D5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
