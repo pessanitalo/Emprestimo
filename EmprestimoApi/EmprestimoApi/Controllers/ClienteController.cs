@@ -22,7 +22,7 @@ namespace CredEmprestimo.Controllers
 
         [HttpGet]
         [Route("filtro/{nome?}")]
-        public async Task<IEnumerable<Cliente>> filtro(string? nome)
+        public async Task<IEnumerable<Cliente>> filtro(string nome)
         {
             if (!string.IsNullOrEmpty(nome))
             {
@@ -34,7 +34,7 @@ namespace CredEmprestimo.Controllers
         }
 
         [HttpGet]
-        [Route("getId/{id}")]
+        [Route("getId/{id:int}")]
         public IActionResult get(int id)
         {
             try

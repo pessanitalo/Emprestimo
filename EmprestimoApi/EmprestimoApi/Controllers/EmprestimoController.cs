@@ -26,7 +26,7 @@ namespace EmprestimoApi.Controllers
             return await _emprestimoRepository.ListarEmprestimos();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public IActionResult get(int id)
         {
             try

@@ -14,7 +14,7 @@ namespace CredEmprestimoApi.Controllers
             _boletoRepository = boletoRepository;
         }
 
-        [HttpPost("gerarboleto/{id}")]
+        [HttpPost("gerarboleto/{id:int}")]
         public IActionResult GerarBoleto(int id)
         {
             var boleto = _boletoRepository.GerarBoleto(id);
@@ -23,7 +23,7 @@ namespace CredEmprestimoApi.Controllers
         }
 
 
-        [HttpPost("pagarparcela/{id}")]
+        [HttpPost("pagarparcela/{id:int}")]
         public IActionResult PagarParcela(int id, int numeroParcela)
         {
              _boletoRepository.PagarUmaParcela(id, numeroParcela);
@@ -31,7 +31,7 @@ namespace CredEmprestimoApi.Controllers
             return Ok("Parcela paga com sucesso");
         }
 
-        [HttpPost("boletovencido/{id}")]
+        [HttpPost("boletovencido/{id:int}")]
         public IActionResult gerarBoletoVencido(int id)
         {
          var boleto =   _boletoRepository.PagarParcelaVencida(id);
