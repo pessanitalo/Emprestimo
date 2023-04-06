@@ -21,16 +21,10 @@ namespace CredEmprestimo.Controllers
         }
 
         [HttpGet]
-        [Route("filtro/{nome?}")]
-        public async Task<IEnumerable<Cliente>> filtro(string nome)
+        [Route("lista")]
+        public async Task<IEnumerable<Cliente>> listarClientes()
         {
-            if (!string.IsNullOrEmpty(nome))
-            {
-                return await _ClienteRepository.filtroPorNome(nome);
-            }
-
             return await _ClienteRepository.ListaClientes();
-
         }
 
         [HttpGet]

@@ -24,14 +24,6 @@ namespace CredEmprestimo.Data.Repository
             var clientes = await _context.Clientes.Where(c => c.Cpf == cliente.Cpf).ToListAsync();
             return clientes;
         }
-
-        public async Task<IEnumerable<Cliente>> filtroPorNome(string cliente)
-        {
-            var query = await _context.Clientes.Where(c => c.Nome.Contains(cliente)).ToListAsync();
-
-            return query;
-        }
-
         public Cliente DetalhesCliente(int id)
         {
             try
@@ -45,7 +37,6 @@ namespace CredEmprestimo.Data.Repository
             }
             catch (Exception ex)
             {
-
                 throw new Exception(ex.Message);
             }
         }
