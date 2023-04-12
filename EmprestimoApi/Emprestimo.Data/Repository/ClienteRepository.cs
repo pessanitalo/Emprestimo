@@ -2,6 +2,7 @@
 using CredEmprestimo.Business.Models;
 using CredEmprestimo.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using System.Collections;
 
 namespace CredEmprestimo.Data.Repository
 {
@@ -14,67 +15,39 @@ namespace CredEmprestimo.Data.Repository
             _context = context;
         }
 
-        public async Task<IEnumerable<Cliente>> ListaClientes()
+        public async Task<IEnumerable> ListaClientes()
         {
             var list = await _context.Clientes.ToListAsync();
             return list;
         }
-        public async Task<IEnumerable<Cliente>> BuscaCpf(Cliente cliente)
+        public async Task<Cliente> BuscaCpf(string cpf)
         {
-            var clientes = await _context.Clientes.Where(c => c.Cpf == cliente.Cpf).ToListAsync();
-            return clientes;
+            var cliente = await _context.Clientes.FirstOrDefaultAsync(c => c.Cpf == cpf);
+            return cliente;
         }
         public Cliente DetalhesCliente(int id)
         {
-            try
-            {
-                var consulta = _context.Clientes.Include(c => c.Emprestimo)
-                  .Where(x => x.Id == id).FirstOrDefault(X => X.Id == id);
+            var consulta = _context.Clientes.Include(c => c.Emprestimo)
+               .Where(x => x.Id == id).FirstOrDefault(X => X.Id == id);
 
-                if (consulta == null) throw new Exception("Não foi possível encontrar o cliente.");
-
-                return consulta;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return consulta;
         }
 
         public Cliente Create(Cliente cliente)
         {
             List<Cliente> clientes = _context.Clientes.Where(c => c.Cpf == cliente.Cpf).ToList();
-            try
-            {
-                if (clientes.Count > 0) throw new Exception("Já existe um cliente com esse cpf");
 
-                _context.Clientes.Add(cliente);
-                _context.SaveChanges();
+            _context.Clientes.Add(cliente);
+            _context.SaveChanges();
 
-                return cliente;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return cliente;
         }
 
         public Cliente PesquisarCliente(int id)
         {
-            try
-            {
-                var cliente = _context.Clientes
-                 .FirstOrDefault(X => X.Id == id);
-
-                if (cliente == null) throw new Exception("Não foi possível encontrar o cliente.");
-
-                return cliente;
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception(ex.Message);
-            }
+            var cliente = _context.Clientes
+             .FirstOrDefault(X => X.Id == id);
+            return cliente;
         }
     }
 }

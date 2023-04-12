@@ -1,4 +1,5 @@
 ﻿using CredEmprestimo.Business.Interface;
+using CredEmprestimo.Business.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CredEmprestimoApi.Controllers
@@ -17,26 +18,43 @@ namespace CredEmprestimoApi.Controllers
         [HttpPost("gerarboleto/{id:int}")]
         public IActionResult GerarBoleto(int id)
         {
-            var boleto = _boletoRepository.GerarBoleto(id);
 
-            return Ok(boleto);
+            try
+            {
+                var boleto = _boletoRepository.GerarBoleto(id);
+                if (boleto == null) return NotFound(new ResultViewModel<BoletoEmprestimo>("Boleto não encontrado"));
+
+                return Ok(boleto);
+            }
+            catch { return StatusCode(500, "Falha interna no servidor."); }
         }
 
 
         [HttpPost("pagarparcela/{id:int}")]
         public IActionResult PagarParcela(int id, int numeroParcela)
         {
-             _boletoRepository.PagarUmaParcela(id, numeroParcela);
+            try
+            {
+                var parcela = _boletoRepository.PagarUmaParcela(id, numeroParcela);
+                if (parcela == null) return NotFound(new ResultViewModel<BoletoEmprestimo>("Parcela não encontrada"));
 
-            return Ok("Parcela paga com sucesso");
+                return Ok(parcela);
+            }
+            catch { return StatusCode(500, "Falha interna no servidor."); }
         }
 
         [HttpPost("boletovencido/{id:int}")]
         public IActionResult gerarBoletoVencido(int id)
         {
-         var boleto =   _boletoRepository.PagarParcelaVencida(id);
+            try
+            {
+                var boleto = _boletoRepository.PagarParcelaVencida(id);
+                if (boleto <= 0) return NotFound(new ResultViewModel<BoletoEmprestimo>("Parcela não encontrada"));
 
-            return Ok(boleto);
+                return Ok(boleto);
+            }
+            catch { return StatusCode(500, "Falha interna no servidor."); }
+
         }
     }
 }

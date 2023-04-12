@@ -22,9 +22,31 @@ namespace CredEmprestimo.Controllers
 
         [HttpGet]
         [Route("lista")]
-        public async Task<IEnumerable<Cliente>> listarClientes()
+        public async Task<IActionResult> listarClientes()
         {
-            return await _ClienteRepository.ListaClientes();
+            try
+            {
+                var clientes = await _ClienteRepository.ListaClientes();
+                return Ok(clientes);
+            }
+            catch { return StatusCode(500, "Falha interna no servidor."); }
+
+        }
+
+        [HttpGet]
+        [Route("buscaCpf/{cpf}")]
+        public async Task<IActionResult> pesquisarPorCpf(string cpf)
+        {
+            try
+            {
+                var cliente = await _ClienteRepository.BuscaCpf(cpf);
+
+                if (cliente == null) return NotFound(new ResultViewModel<Cliente>("Cliente não encontrado"));
+
+                return Ok(cliente);
+
+            }
+            catch { return StatusCode(500, "Falha interna no servidor."); }
         }
 
         [HttpGet]
@@ -35,13 +57,11 @@ namespace CredEmprestimo.Controllers
             {
                 var consulta = _ClienteRepository.DetalhesCliente(id);
 
+                if (consulta == null) return NotFound(new ResultViewModel<Cliente>("Cliente não encontrado"));
+
                 return Ok(consulta);
             }
-            catch (Exception ex)
-            {
-                return StatusCode(400, ex.Message);
-            }
-
+            catch { return StatusCode(500, "Falha interna no servidor."); }
         }
 
         [HttpPost]
@@ -54,10 +74,7 @@ namespace CredEmprestimo.Controllers
 
                 return Ok(result);
             }
-            catch (Exception ex)
-            {
-                return StatusCode(400, ex.Message);
-            }
+            catch { return StatusCode(500, "Falha interna no servidor."); }
         }
     }
 }

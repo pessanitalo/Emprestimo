@@ -24,18 +24,10 @@ namespace CredEmprestimo.Data.Repository
 
         public Emprestimo DetalhesEmprestimo(int id)
         {
-            try
-            {
-                var emprestimo = _context.Emprestimos.Include(c => c.Cliente)
-              .Where(x => x.Id == id).FirstOrDefault(X => X.Id == id);
+            var emprestimo = _context.Emprestimos.Include(c => c.Cliente)
+            .Where(x => x.Id == id).FirstOrDefault(X => X.Id == id);
 
-                return emprestimo;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-
+            return emprestimo;
         }
         public Emprestimo NovoEmprestimo(double ValorEmprestimo, int QuantidadeParcelas, int id)
         {
@@ -62,15 +54,8 @@ namespace CredEmprestimo.Data.Repository
 
         public Emprestimo PesquisarEmprestimo(int id)
         {
-            try
-            {
-                var emprestimo = _context.Emprestimos.FirstOrDefault(X => X.Id == id);
-                return emprestimo;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            var emprestimo = _context.Emprestimos.FirstOrDefault(X => X.Id == id);
+            return emprestimo;
         }
     }
 }

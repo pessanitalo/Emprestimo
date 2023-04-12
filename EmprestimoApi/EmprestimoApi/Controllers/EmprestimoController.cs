@@ -21,33 +21,44 @@ namespace EmprestimoApi.Controllers
         }
 
         [HttpGet("list")]
-        public async Task<IEnumerable<Emprestimo>> get()
+        public async Task<IEnumerable<Emprestimo>> list()
         {
-            return await _emprestimoRepository.ListarEmprestimos();
+
+            try
+            {
+                return await _emprestimoRepository.ListarEmprestimos();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        [HttpGet("{id:int}")]
-        public IActionResult get(int id)
+        [HttpGet("detalhes/{id:int}")]
+        public IActionResult Detalhes(int id)
         {
             try
             {
                 var consulta = _emprestimoRepository.DetalhesEmprestimo(id);
+                if (consulta == null) return NotFound(new ResultViewModel<Emprestimo>("Emprestimo não encontrada"));
                 return Ok(consulta);
             }
-            catch (Exception ex)
-            {
-                return StatusCode(400, ex.Message);
-            }
-         
+            catch { return StatusCode(500, "Falha interna no servidor."); }
+
         }
 
         [HttpPost]
         public IActionResult emprestimoDto(EmprestimoViewModel emprestimodto)
         {
-            var emprestimo = _mapper.Map<Emprestimo>(emprestimodto);
-            var result = _emprestimoRepository.NovoEmprestimo(emprestimo.ValorEmprestimo, emprestimo.QuantidadeParcelas, emprestimo.ClienteId);
+            try
+            {
+                var emprestimo = _mapper.Map<Emprestimo>(emprestimodto);
+                var result = _emprestimoRepository.NovoEmprestimo(emprestimo.ValorEmprestimo, emprestimo.QuantidadeParcelas, emprestimo.ClienteId);
 
-            return Ok(result);
+                return Ok(result);
+            }
+            catch { return StatusCode(500, "Falha interna no servidor."); }
         }
     }
 }
