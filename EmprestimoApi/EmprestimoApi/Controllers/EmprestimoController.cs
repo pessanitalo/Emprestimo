@@ -21,18 +21,15 @@ namespace EmprestimoApi.Controllers
         }
 
         [HttpGet("list")]
-        public async Task<IEnumerable<Emprestimo>> list()
+        public async Task<IActionResult> list()
         {
-
             try
             {
-                return await _emprestimoRepository.ListarEmprestimos();
-            }
-            catch (Exception)
-            {
+                var list = await _emprestimoRepository.ListarEmprestimos();
 
-                throw;
+                return Ok(list);
             }
+            catch { return StatusCode(500, "Falha interna no servidor."); }
         }
 
         [HttpGet("detalhes/{id:int}")]
@@ -41,11 +38,10 @@ namespace EmprestimoApi.Controllers
             try
             {
                 var consulta = _emprestimoRepository.DetalhesEmprestimo(id);
-                if (consulta == null) return NotFound(new ResultViewModel<Emprestimo>("Emprestimo não encontrada"));
+                if (consulta == null) return NotFound(new ResultViewModel<Emprestimo>("Emprestimo não encontrado"));
                 return Ok(consulta);
             }
             catch { return StatusCode(500, "Falha interna no servidor."); }
-
         }
 
         [HttpPost]

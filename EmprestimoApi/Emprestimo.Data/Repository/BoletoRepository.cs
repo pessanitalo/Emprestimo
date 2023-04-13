@@ -47,18 +47,21 @@ namespace CredEmprestimo.Data.Repository
             return boleto;
         }
 
-        public double PagarParcelaVencida(int id)
+        public bool geralBoletoVencido(int id)
         {
-            var data = _context.BoletoEmprestimo.Include(d => d.Emprestimo).FirstOrDefault
-                (x => x.Id == id);
-
-            var vencimentoBoleto = data.DataDePagamento.Day;
+            var parcela = _context.BoletoEmprestimo.Include(d => d.Emprestimo).FirstOrDefault(x => x.Id == id);
+            if (parcela == null) return false;
+                  
+            var vencimentoBoleto = parcela.DataDePagamento.Day;
             var dataAtual = DateTime.Now.Day;
 
             var diasCorridos = dataAtual - vencimentoBoleto;
-            var valorTotal = PagarParcelaVencida(data.ValorDaParcela, diasCorridos);
+            var valorTotal = PagarParcelaVencida(parcela.ValorDaParcela, diasCorridos);
 
-            return valorTotal;
+            parcela.ValorDaParcela = valorTotal;
+            _context.Update(parcela);
+            _context.SaveChanges();
+            return true;
 
         }
 

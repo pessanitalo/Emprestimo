@@ -22,7 +22,7 @@ namespace CredEmprestimoApi.Controllers
             try
             {
                 var boleto = _boletoRepository.GerarBoleto(id);
-                if (boleto == null) return NotFound(new ResultViewModel<BoletoEmprestimo>("Boleto não encontrado"));
+                if (boleto == null) return NotFound(new ResultViewModel<BoletoEmprestimo>("Emprestimo não encontrado"));
 
                 return Ok(boleto);
             }
@@ -48,10 +48,10 @@ namespace CredEmprestimoApi.Controllers
         {
             try
             {
-                var boleto = _boletoRepository.PagarParcelaVencida(id);
-                if (boleto <= 0) return NotFound(new ResultViewModel<BoletoEmprestimo>("Parcela não encontrada"));
+                var boleto = _boletoRepository.geralBoletoVencido(id);
+                if (boleto == false) return NotFound(new ResultViewModel<BoletoEmprestimo>("Parcela não encontrada"));
 
-                return Ok(boleto);
+                return Ok("Parcela gerada com sucesso.");
             }
             catch { return StatusCode(500, "Falha interna no servidor."); }
 
