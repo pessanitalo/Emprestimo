@@ -18,7 +18,7 @@ create table [Emprestimo](
 [valorTotal] float not null,
 [DataAquisicaoEmprestimo] date not null,
 [ClienteId] int not null,
-constraint fk_id foreign key (id) references Cliente,
+constraint fk_id foreign key ([ClienteId]) references [Cliente] ([id]),
 );
 
 create table [Boleto](
