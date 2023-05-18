@@ -33,6 +33,13 @@ namespace CredEmprestimo.Data.Repository
             return consulta;
         }
 
+        public async Task<IEnumerable<Cliente>> filtroPorNome(string cpf)
+        {
+            var query = await _context.Clientes.Where(c => c.Cpf.Contains(cpf)).ToListAsync();
+
+            return query;
+        }
+
         public Cliente Create(Cliente cliente)
         {
             List<Cliente> clientes = _context.Clientes.Where(c => c.Cpf == cliente.Cpf).ToList();

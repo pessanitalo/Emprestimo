@@ -14,8 +14,8 @@ export class ClienteServicesService {
   constructor(private http: HttpClient) { }
 
 
- filtro(nome: string): Observable<Cliente[]> {
-  return this.http.get<Cliente[]>(`${this.baseUrl}/filtro/${nome}`);
+ list(cpf: string): Observable<Cliente[]> {
+  return this.http.get<Cliente[]>(`${this.baseUrl}/list/${cpf}`);
 }
 
 

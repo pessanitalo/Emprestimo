@@ -10,5 +10,6 @@ namespace CredEmprestimo.Business.Interface
         Task<Cliente> BuscaCpf(string cpf);
         Cliente DetalhesCliente(int id);
         Cliente PesquisarCliente(int id);
+        Task<IEnumerable<Cliente>> filtroPorNome(string cliente);
     }
 }

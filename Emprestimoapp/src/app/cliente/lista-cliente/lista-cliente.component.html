@@ -2,7 +2,7 @@
     <button type="button" class="btn btn-secondary novo-cliente" [routerLink]="['/cliente/new']">Novo Cliente</button>
 
     <div class="d-flex col-8">
-        <input type="text" class="form-control" id="pesquisa" [(ngModel)]="nome" placeholder="Pesquisar por nome....">
+        <input type="text" class="form-control" id="pesquisa" [(ngModel)]="cpf" placeholder="Pesquisar por cpf...." mask="000.000.000-00">
         <button type="button" class="btn btn-primary spacing" (click)="filtro()">Pesquisar</button>
     </div>
 

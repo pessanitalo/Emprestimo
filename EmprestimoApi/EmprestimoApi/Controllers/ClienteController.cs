@@ -21,13 +21,18 @@ namespace CredEmprestimo.Controllers
         }
 
         [HttpGet]
-        [Route("lista")]
-        public async Task<IActionResult> listarClientes()
+        [Route("list/{cpf?}")]
+        public async Task<IActionResult> filtro(string cpf)
         {
             try
             {
-                var clientes = await _ClienteRepository.ListaClientes();
-                return Ok(clientes);
+                if (!string.IsNullOrEmpty(cpf))
+                {
+                    var clientes = await _ClienteRepository.filtroPorNome(cpf);
+                    return Ok(clientes);
+                }
+                var cliente = await _ClienteRepository.ListaClientes();
+                return Ok(cliente);
             }
             catch { return StatusCode(500, "Falha interna no servidor."); }
 

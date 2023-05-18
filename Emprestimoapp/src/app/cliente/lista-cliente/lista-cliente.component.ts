@@ -19,7 +19,7 @@ export class ListaClienteComponent implements OnInit {
   errorMessage!: string;
   information!: informationModel;
 
-  nome: string = "";
+  cpf: string = "";
 
   modalRef?: BsModalRef;
 
@@ -37,7 +37,7 @@ export class ListaClienteComponent implements OnInit {
   }
 
   filtro() {
-    this.clienteService.filtro(this.nome).subscribe(
+    this.clienteService.list(this.cpf).subscribe(
       clientes => this.clientes = clientes,
       error => this.errorMessage
     );
