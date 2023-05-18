@@ -7,7 +7,7 @@ import { EmprestimoResolve } from './services/emprestimo.resolve';
 
 const routes: Routes = [
   { path: 'list', component: ListaEmprestimoComponent },
-  { path: 'novoEmprestimo/:id', component: NovoEmprestimoComponent, resolve: { cliente: EmprestimoResolve } },
+  { path: 'novoEmprestimo/:id', component: NovoEmprestimoComponent },
 ];
 
 @NgModule({
