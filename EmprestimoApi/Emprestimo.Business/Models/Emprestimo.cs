@@ -2,7 +2,6 @@
 {
     public class Emprestimo
     {
-
         public int Id { get; set; }
 
         public double ValorEmprestimo { get; set; }
@@ -29,24 +28,6 @@
         {
             return valorTotal / qtdParcelas;
         }
-
-        //public Emprestimo gerarEmprestimo(double ValorEmprestimo, int QuantidadeParcelas, Emprestimo emprestimo, Cliente cliente)
-        //{
-        //    emprestimo.ValorEmprestimo = ValorEmprestimo;
-        //    emprestimo.QuantidadeParcelas = QuantidadeParcelas;
-
-        //    var valorTotalComJuros = emprestimo.valorTotalComJuros(ValorEmprestimo);
-        //    emprestimo.valorTotal = valorTotalComJuros;
-        //    emprestimo.DataAquisicaoEmprestimo = DateTime.Now;
-
-        //    var valorDaParcela = emprestimo.ValorParcela(valorTotalComJuros, QuantidadeParcelas);
-        //    emprestimo.ValorDaParcela = valorDaParcela;
-        //    emprestimo.Cliente = cliente;
-        //    emprestimo.Cliente.SaldoAtual += emprestimo.ValorEmprestimo;
-
-        //    return emprestimo;
-        //}
-
         public void emprestimo(double valorEmprestimo, int quantidadeParcelas, Cliente cliente)
         {
             ValorEmprestimo = valorEmprestimo;
@@ -57,7 +38,7 @@
             DataAquisicaoEmprestimo = DateTime.Now;
 
             Cliente = cliente;
-            Cliente.SaldoAtual += valorEmprestimo;            
+            Cliente.SaldoAtual += valorEmprestimo;
         }
 
     }

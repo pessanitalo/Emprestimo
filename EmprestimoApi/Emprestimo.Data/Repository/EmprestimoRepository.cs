@@ -35,28 +35,13 @@ namespace CredEmprestimo.Data.Repository
             var emprestimo = new Emprestimo();
             var cliente = _clienteRepository.PesquisarCliente(id);
 
-            emprestimo.emprestimo(ValorEmprestimo, QuantidadeParcelas,  cliente);
+            emprestimo.emprestimo(ValorEmprestimo, QuantidadeParcelas, cliente);
 
             _context.Emprestimos.Add(emprestimo);
             _context.SaveChanges();
 
             return emprestimo;
         }
-
-        //private static void Emprestimo(double ValorEmprestimo, int QuantidadeParcelas, Emprestimo emprestimo, Cliente cliente)
-        //{
-        //    emprestimo.ValorEmprestimo = ValorEmprestimo;
-        //    emprestimo.QuantidadeParcelas = QuantidadeParcelas;
-
-        //    var valorTotalComJuros = emprestimo.valorTotalComJuros(ValorEmprestimo);
-        //    emprestimo.valorTotal = valorTotalComJuros;
-        //    emprestimo.DataAquisicaoEmprestimo = DateTime.Now;
-
-        //    var valorDaParcela = emprestimo.ValorParcela(valorTotalComJuros, QuantidadeParcelas);
-        //    emprestimo.ValorDaParcela = valorDaParcela;
-        //    emprestimo.Cliente = cliente;
-        //    emprestimo.Cliente.SaldoAtual += emprestimo.ValorEmprestimo;
-        //}
 
         public Emprestimo PesquisarEmprestimo(int id)
         {
