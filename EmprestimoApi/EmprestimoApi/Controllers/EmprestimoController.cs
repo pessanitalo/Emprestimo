@@ -12,11 +12,13 @@ namespace EmprestimoApi.Controllers
     {
 
         private readonly IEmprestimoRepository _emprestimoRepository;
+        private readonly IBoletoRepository _boletoRepository;
         private readonly IMapper _mapper;
 
-        public EmprestimoController(IEmprestimoRepository repository, IMapper mapper)
+        public EmprestimoController(IEmprestimoRepository emprestimoRepository, IBoletoRepository boletoRepository, IMapper mapper)
         {
-            _emprestimoRepository = repository;
+            _emprestimoRepository = emprestimoRepository;
+            _boletoRepository = boletoRepository;
             _mapper = mapper;
         }
 
@@ -51,6 +53,7 @@ namespace EmprestimoApi.Controllers
             {
                 var emprestimo = _mapper.Map<Emprestimo>(emprestimodto);
                 var result = _emprestimoRepository.NovoEmprestimo(emprestimo.ValorEmprestimo, emprestimo.QuantidadeParcelas, emprestimo.ClienteId);
+                var boleto = _boletoRepository.GerarBoleto(result.Id);
 
                 return Ok(result);
             }
