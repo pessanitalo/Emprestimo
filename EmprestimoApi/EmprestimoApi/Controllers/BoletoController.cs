@@ -14,22 +14,6 @@ namespace CredEmprestimoApi.Controllers
         {
             _boletoRepository = boletoRepository;
         }
-
-        [HttpPost("gerarboleto/{id:int}")]
-        //public IActionResult GerarBoleto(int id)
-        //{
-
-        //    try
-        //    {
-        //        var boleto = _boletoRepository.GerarBoleto(id);
-        //        if (boleto == null) return NotFound(new ResultViewModel<BoletoEmprestimo>("Emprestimo não encontrado"));
-
-        //        return Ok(boleto);
-        //    }
-        //    catch { return StatusCode(500, "Falha interna no servidor."); }
-        //}
-
-
         [HttpPost("pagarparcela/{id:int}")]
         public IActionResult PagarParcela(int id, int numeroParcela)
         {
