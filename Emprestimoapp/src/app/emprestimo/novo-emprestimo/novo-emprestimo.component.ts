@@ -37,7 +37,7 @@ export class NovoEmprestimoComponent implements OnInit {
     let toast = this.toastr.success('Emprestimo solicitado com sucesso!', 'Sucesso!');
     if (toast) {
       toast.onHidden.subscribe(() => {
-        this.route.navigate(['/cliente/list'])
+        this.route.navigate(['/emprestimo/list'])
       });
     }
   }
