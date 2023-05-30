@@ -40,5 +40,17 @@ namespace CredEmprestimoApi.Controllers
             catch { return StatusCode(500, "Falha interna no servidor."); }
 
         }
+
+        [HttpGet("detalhesparcela/{id:int}")]
+        public IActionResult detalhesParcela(int id)
+        {
+            try
+            {
+                var parcelas = _boletoRepository.DetalhesParcela(id);
+                return Ok(parcelas);
+            }
+            catch { return StatusCode(500, "Falha interna no servidor."); }
+
+        }
     }
 }

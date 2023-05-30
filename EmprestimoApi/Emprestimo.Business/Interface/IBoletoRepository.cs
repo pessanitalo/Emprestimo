@@ -7,6 +7,7 @@ namespace CredEmprestimo.Business.Interface
         BoletoEmprestimo GerarBoleto(int id);
         BoletoEmprestimo PagarUmaParcela(int id, int numeroDaParcela);
         bool geralBoletoVencido(int id);
+        List<BoletoEmprestimo> DetalhesParcela(int id);
 
     }
 }

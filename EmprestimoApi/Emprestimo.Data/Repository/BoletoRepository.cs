@@ -2,6 +2,7 @@
 using CredEmprestimo.Business.Models;
 using CredEmprestimo.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
 
 namespace CredEmprestimo.Data.Repository
 {
@@ -51,7 +52,7 @@ namespace CredEmprestimo.Data.Repository
         {
             var parcela = _context.BoletoEmprestimo.Include(d => d.Emprestimo).FirstOrDefault(x => x.Id == id);
             if (parcela == null) return false;
-                  
+
             var vencimentoBoleto = parcela.DataDePagamento.Day;
             var dataAtual = DateTime.Now.Day;
 
@@ -67,7 +68,7 @@ namespace CredEmprestimo.Data.Repository
 
         public BoletoEmprestimo PagarUmaParcela(int id, int numeroDaParcela)
         {
-            var parcela = PesquisarBoleto(id, numeroDaParcela);
+            var parcela = PesquisarParcela(id, numeroDaParcela);
 
             var emprestimo = _emprestimoRepository.DetalhesEmprestimo(parcela.EmprestimoId);
 
@@ -79,7 +80,7 @@ namespace CredEmprestimo.Data.Repository
             return parcela;
         }
 
-        public BoletoEmprestimo PesquisarBoleto(int id, int numeroParcela)
+        public BoletoEmprestimo PesquisarParcela(int id, int numeroParcela)
         {
             var parcela = _context.BoletoEmprestimo.FirstOrDefault(x => x.EmprestimoId == id && x.NumeroParcela == numeroParcela);
             return parcela;
@@ -97,6 +98,12 @@ namespace CredEmprestimo.Data.Repository
             double totalJuros = valorAjustado + valorComJuros;
             return totalJuros;
 
+        }
+
+        public List<BoletoEmprestimo> DetalhesParcela(int id)
+        {
+            var parcela = _context.BoletoEmprestimo.ToList().Where(x => x.EmprestimoId == id).ToList();
+            return parcela.ToList();
         }
     }
 }
