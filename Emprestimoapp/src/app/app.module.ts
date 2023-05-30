@@ -15,6 +15,8 @@ import { MenuComponent } from './navegacao/menu/menu.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
+import { EmprestimoResolve } from './emprestimo/services/emprestimo.resolve';
+import { BoletoResolve } from './emprestimo/services/boleto.resolve';
 
 
 @NgModule({
@@ -35,15 +37,15 @@ import { ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
     EmprestimoModule,
     NgxMaskModule.forRoot(),
     NoopAnimationsModule,
-   BrowserAnimationsModule,
-   ToastrModule.forRoot({
-    timeOut: 3000,
-    positionClass: 'toast-top-right',
-    preventDuplicates: true,
-    progressBar: true
-})
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      progressBar: true
+    })
   ],
-  providers: [],
+  providers: [EmprestimoResolve, BoletoResolve],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

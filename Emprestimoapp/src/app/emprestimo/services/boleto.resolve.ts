@@ -2,14 +2,14 @@ import { BoletoService } from './boleto.service';
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve } from "@angular/router";
 import { Emprestimo } from "../models/emprestimo";
-import { EmprestimoService } from "./emprestimo.service";
 
 @Injectable()
-export class EmprestimoResolve implements Resolve<Emprestimo>{
+export class BoletoResolve implements Resolve<Emprestimo[]>{
 
-    constructor(private emprestimoService: EmprestimoService) { }
+    constructor(private boletoService: BoletoService) { }
 
     resolve(route: ActivatedRouteSnapshot) {
-        return this.emprestimoService.obterPorId(route.params['id']);
+        return this.boletoService.obterPorId(route.params['id']);
     }
 }
+

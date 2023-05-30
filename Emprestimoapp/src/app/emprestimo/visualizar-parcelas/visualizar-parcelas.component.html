@@ -1,0 +1,20 @@
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Parcela</th>
+                <th scope="col">Valor da Parcela</th>
+                <th scope="col">Data Vencimento</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let parcela of parcelas">
+                <td>{{parcela.numeroParcela}}</td>
+                <td>{{parcela.valorDaParcela}}</td>
+                <td>{{parcela.dataDePagamento | date: 'dd/MM/yyyy'}}</td>
+                <td> <button type="button" class="btn btn-primary">Pagar</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
