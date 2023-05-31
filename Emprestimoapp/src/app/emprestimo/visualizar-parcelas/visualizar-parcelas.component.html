@@ -13,7 +13,7 @@
                 <td>{{parcela.numeroParcela}}</td>
                 <td>{{parcela.valorDaParcela}}</td>
                 <td>{{parcela.dataDePagamento | date: 'dd/MM/yyyy'}}</td>
-                <td> <button type="button" class="btn btn-primary">Pagar</button></td>
+                <td> <button type="button" class="btn btn-primary" (click)="pagarParcela(parcela.numeroParcela)">Pagar</button></td>
             </tr>
         </tbody>
     </table>

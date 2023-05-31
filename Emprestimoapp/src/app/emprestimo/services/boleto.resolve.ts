@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot, Resolve } from "@angular/router";
 import { Emprestimo } from "../models/emprestimo";
 
 @Injectable()
-export class BoletoResolve implements Resolve<Emprestimo[]>{
+export class BoletoResolve implements Resolve<Emprestimo>{
 
     constructor(private boletoService: BoletoService) { }
 

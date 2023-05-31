@@ -14,12 +14,14 @@ namespace CredEmprestimoApi.Controllers
         {
             _boletoRepository = boletoRepository;
         }
-        [HttpPost("pagarparcela/{id:int}")]
-        public IActionResult PagarParcela(int id, int numeroParcela)
+
+        //assim funciona passando objeto
+        [HttpPost("pagarparcela")]
+        public IActionResult PagarParcela([FromBody] PagarParcela pagarParcela)
         {
             try
             {
-                var parcela = _boletoRepository.PagarUmaParcela(id, numeroParcela);
+                var parcela = _boletoRepository.PagarUmaParcela(pagarParcela.Id, pagarParcela.numeroParcela);
                 if (parcela == null) return NotFound(new ResultViewModel<BoletoEmprestimo>("Parcela não encontrada"));
 
                 return Ok(parcela);

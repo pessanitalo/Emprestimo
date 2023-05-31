@@ -14,12 +14,15 @@ export class BoletoService {
 
   constructor(private http: HttpClient) { }
 
-  obterPorId(id: number): Observable<Emprestimo[]> {
-    return this.http.get<Emprestimo[]>(`${this.baseUrl}/detalhesparcela/${id}`);
+  obterPorId(id: number): Observable<Emprestimo> {
+    return this.http.get<Emprestimo>(`${this.baseUrl}/detalhesparcela/${id}`);
   }
 
-  verparcelas(id: number): Observable<parcelas[]> {
-    return this.http.get<parcelas[]>(`${this.baseUrl}/detalhesparcela/${id}`);
+  pagarParcela(numeroDaParcela: number, id: number) {
+    const pagarParcela = {
+      id: id,
+      numeroParcela: numeroDaParcela
+    }
+    return this.http.post(`${this.baseUrl}/pagarparcela`, pagarParcela);
   }
-
 }
