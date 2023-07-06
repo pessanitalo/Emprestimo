@@ -48,23 +48,23 @@ namespace CredEmprestimo.Data.Repository
             return boleto;
         }
 
-        public bool geralBoletoVencido(int id)
-        {
-            var parcela = _context.BoletoEmprestimo.Include(d => d.Emprestimo).FirstOrDefault(x => x.Id == id);
-            if (parcela == null) return false;
+        //public bool geralBoletoVencido(int id)
+        //{
+        //    var parcela = _context.BoletoEmprestimo.Include(d => d.Emprestimo).FirstOrDefault(x => x.Id == id);
+        //    if (parcela == null) return false;
 
-            var vencimentoBoleto = parcela.DataDePagamento.Day;
-            var dataAtual = DateTime.Now.Day;
+        //    var vencimentoBoleto = parcela.DataDePagamento.Day;
+        //    var dataAtual = DateTime.Now.Day;
 
-            var diasCorridos = dataAtual - vencimentoBoleto;
-            var valorTotal = PagarParcelaVencida(parcela.ValorDaParcela, diasCorridos);
+        //    var diasCorridos = dataAtual - vencimentoBoleto;
+        //    var valorTotal = PagarParcelaVencida(parcela.ValorDaParcela, diasCorridos);
 
-            parcela.ValorDaParcela = valorTotal;
-            _context.Update(parcela);
-            _context.SaveChanges();
-            return true;
+        //    parcela.ValorDaParcela = valorTotal;
+        //    _context.Update(parcela);
+        //    _context.SaveChanges();
+        //    return true;
 
-        }
+        //}
 
         public BoletoEmprestimo PagarUmaParcela(int id, int numeroDaParcela)
         {
@@ -86,19 +86,19 @@ namespace CredEmprestimo.Data.Repository
             return parcela;
         }
 
-        private double PagarParcelaVencida(double valorParcela, int diasEmAtraso)
-        {
+        //private decimal PagarParcelaVencida(decimal valorParcela, int diasEmAtraso)
+        //{
 
-            double jurosAposVencimento = 3.3 / 100.00;
-            double valorComJuros = diasEmAtraso + (jurosAposVencimento * diasEmAtraso);
+        //    double jurosAposVencimento = 3.3 / 100.00;
+        //    decimal valorComJuros = (decimal)(diasEmAtraso + (jurosAposVencimento * diasEmAtraso));
 
-            double multaAposvencimento = 200 / 100.00;
-            double valorAjustado = valorParcela + multaAposvencimento;
+        //    decimal multaAposvencimento = 200 / 100.00;
+        //    decimal valorAjustado = valorParcela + multaAposvencimento;
 
-            double totalJuros = valorAjustado + valorComJuros;
-            return totalJuros;
+        //    decimal totalJuros = valorAjustado + valorComJuros;
+        //    return totalJuros;
 
-        }
+        //}
 
         public List<BoletoEmprestimo> DetalhesParcela(int id)
         {

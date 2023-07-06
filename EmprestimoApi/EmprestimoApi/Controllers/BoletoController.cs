@@ -29,19 +29,19 @@ namespace CredEmprestimoApi.Controllers
             catch { return StatusCode(500, "Falha interna no servidor."); }
         }
 
-        [HttpPost("boletovencido/{id:int}")]
-        public IActionResult gerarBoletoVencido(int id)
-        {
-            try
-            {
-                var boleto = _boletoRepository.geralBoletoVencido(id);
-                if (boleto == false) return NotFound(new ResultViewModel<BoletoEmprestimo>("Parcela não encontrada"));
+        //[HttpPost("boletovencido/{id:int}")]
+        //public IActionResult gerarBoletoVencido(int id)
+        //{
+        //    try
+        //    {
+        //        var boleto = _boletoRepository.geralBoletoVencido(id);
+        //        if (boleto == false) return NotFound(new ResultViewModel<BoletoEmprestimo>("Parcela não encontrada"));
 
-                return Ok("Parcela gerada com sucesso.");
-            }
-            catch { return StatusCode(500, "Falha interna no servidor."); }
+        //        return Ok("Parcela gerada com sucesso.");
+        //    }
+        //    catch { return StatusCode(500, "Falha interna no servidor."); }
 
-        }
+        //}
 
         [HttpGet("detalhesparcela/{id:int}")]
         public IActionResult detalhesParcela(int id)
