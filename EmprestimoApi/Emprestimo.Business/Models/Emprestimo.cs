@@ -4,13 +4,13 @@
     {
         public int Id { get; set; }
 
-        public double ValorEmprestimo { get; set; }
+        public decimal ValorEmprestimo { get; set; }
 
         public int QuantidadeParcelas { get; set; }
 
-        public double ValorDaParcela { get; set; }
+        public decimal ValorDaParcela { get; set; }
 
-        public double valorTotal { get; set; }
+        public decimal valorTotal { get; set; }
 
         public DateTime DataAquisicaoEmprestimo { get; set; }
 
@@ -19,16 +19,19 @@
         public int ClienteId { get; set; }
         public Cliente Cliente { get; set; }
 
-        public double valorTotalComJuros(double valorEmprestimo)
+        public decimal valorTotalComJuros(decimal valorEmprestimo)
         {
-            return valorEmprestimo += valorEmprestimo * 0.39;
+            //testar
+            decimal juros = 0.39m;
+            return valorEmprestimo += valorEmprestimo * juros;
         }
 
-        public double ValorParcela(double valorTotal, double qtdParcelas)
+        //testar
+        public int ValorParcela(decimal valorTotal, int qtdParcelas)
         {
-            return valorTotal / qtdParcelas;
+            return (int)(valorTotal / qtdParcelas);
         }
-        public void emprestimo(double valorEmprestimo, int quantidadeParcelas, Cliente cliente)
+        public void emprestimo(decimal valorEmprestimo, int quantidadeParcelas, Cliente cliente)
         {
             ValorEmprestimo = valorEmprestimo;
             QuantidadeParcelas = quantidadeParcelas;
