@@ -7,15 +7,15 @@ create table [cliente] (
 [Idade] int not null,
 [Cpf] varchar(11) not null,
 [Score] float not null,
-[SaldoAtual] float not null
+[SaldoAtual] decimal(18,2) not null
 );
 
 create table [Emprestimo](
 [Id] int primary key not null identity,
-[ValorEmprestimo] float not null,
+[ValorEmprestimo] decimal(18,2) not null,
 [QuantidadeParcelas] int not null,
-[ValorDaParcela] float not null,
-[valorTotal] float not null,
+[ValorDaParcela] decimal(18,2) not null,
+[valorTotal] decimal(18,2) not null,
 [DataAquisicaoEmprestimo] date not null,
 [ClienteId] int not null,
 constraint fk_id foreign key ([ClienteId]) references [Cliente] ([id]),
@@ -24,7 +24,7 @@ constraint fk_id foreign key ([ClienteId]) references [Cliente] ([id]),
 create table [Boleto](
 [Id] int primary key not null identity,
 [NumeroParcela] int not null,
-[ValorDaParcela] float not null,
+[ValorDaParcela] decimal(18,2) not null,
 [DataDePagamento] date not null,
 [EmprestimoId] int not null,
 constraint [fk_id_boleto] foreign key ([EmprestimoId]) references [Emprestimo]([id])
