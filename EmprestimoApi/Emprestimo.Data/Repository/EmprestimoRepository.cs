@@ -30,7 +30,7 @@ namespace CredEmprestimo.Data.Repository
 
             return emprestimo;
         }
-        public Emprestimo NovoEmprestimo(double ValorEmprestimo, int QuantidadeParcelas, int id)
+        public Emprestimo NovoEmprestimo(decimal ValorEmprestimo, int QuantidadeParcelas, int id)
         {
             var emprestimo = new Emprestimo();
             var cliente = _clienteRepository.PesquisarCliente(id);
