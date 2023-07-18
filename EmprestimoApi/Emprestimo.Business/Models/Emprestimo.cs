@@ -21,15 +21,21 @@
 
         public decimal valorTotalComJuros(decimal valorEmprestimo)
         {
-            //testar
             decimal juros = 0.39m;
             return valorEmprestimo += valorEmprestimo * juros;
         }
 
-        //testar
         public int ValorParcela(decimal valorTotal, int qtdParcelas)
         {
             return (int)(valorTotal / qtdParcelas);
+        }
+
+        public void SimularEmprestimo(decimal valorEmprestimo, int quantidadeParcelas)
+        {
+            ValorEmprestimo = valorEmprestimo;
+            QuantidadeParcelas = quantidadeParcelas;
+            valorTotal = valorTotalComJuros(valorEmprestimo);
+            ValorDaParcela = ValorParcela(valorTotal, quantidadeParcelas);
         }
         public void emprestimo(decimal valorEmprestimo, int quantidadeParcelas, Cliente cliente)
         {

@@ -30,6 +30,15 @@ namespace CredEmprestimo.Data.Repository
 
             return emprestimo;
         }
+
+        public Emprestimo SimularEmprestimo(decimal ValorEmprestimo, int QuantidadeParcelas)
+        {
+            var emprestimo = new Emprestimo();
+            emprestimo.SimularEmprestimo(ValorEmprestimo, QuantidadeParcelas);
+            return emprestimo;
+        }
+
+
         public Emprestimo NovoEmprestimo(decimal ValorEmprestimo, int QuantidadeParcelas, int id)
         {
             var emprestimo = new Emprestimo();
@@ -48,5 +57,7 @@ namespace CredEmprestimo.Data.Repository
             var emprestimo = _context.Emprestimos.FirstOrDefault(X => X.Id == id);
             return emprestimo;
         }
+
+
     }
 }

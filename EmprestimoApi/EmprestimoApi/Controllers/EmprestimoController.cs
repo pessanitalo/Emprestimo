@@ -46,8 +46,21 @@ namespace EmprestimoApi.Controllers
             catch { return StatusCode(500, "Falha interna no servidor."); }
         }
 
+        [HttpPost("simular-emprestimo")]
+        public IActionResult SimularEmprestimoDto(EmprestimoViewModel emprestimodto)
+        {
+            try
+            {
+                var emprestimo = _mapper.Map<Emprestimo>(emprestimodto);
+                var result = _emprestimoRepository.SimularEmprestimo(emprestimo.ValorEmprestimo, emprestimo.QuantidadeParcelas);
+
+                return Ok(result);
+            }
+            catch { return StatusCode(500, "Falha interna no servidor."); }
+        }
+
         [HttpPost]
-        public IActionResult emprestimoDto(EmprestimoViewModel emprestimodto)
+        public IActionResult EmprestimoDto(EmprestimoViewModel emprestimodto)
         {
             try
             {
