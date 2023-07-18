@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   credemprestimoapi:
-    image: credemprestimoapi
+    image: italopessan/credemprestimoapi
     build:
       context: .
       dockerfile: Dockerfile
