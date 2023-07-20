@@ -1,8 +1,11 @@
 import { EmprestimoService } from 'src/app/emprestimo/services/emprestimo.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Cliente } from 'src/app/cliente/models/cliente';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { Emprestimo } from '../models/emprestimo';
+
+
 
 @Component({
   selector: 'app-novo-emprestimo',
@@ -11,16 +14,20 @@ import { Cliente } from 'src/app/cliente/models/cliente';
 })
 export class NovoEmprestimoComponent implements OnInit {
 
+  modalRef?: BsModalRef;
   public valorEmprestimo!: number;
   public quantidadeParcela!: number;
 
   public id!: number;
+
+  public emprestimos!: Emprestimo;
 
   constructor(
     private emprestimoService: EmprestimoService,
     private router: ActivatedRoute,
     private toastr: ToastrService,
     private route: Router,
+    private modalService: BsModalService
   ) { }
 
   ngOnInit(): void {
@@ -31,6 +38,19 @@ export class NovoEmprestimoComponent implements OnInit {
     this.emprestimoService.create(this.valorEmprestimo, this.quantidadeParcela, this.id)
       .subscribe(sucesso => { this.processarSucesso(sucesso) },
         falha => { console.log(falha) })
+  }
+
+  SimularEmprestimo() {
+    this.emprestimoService.SimularEmprestimo(this.valorEmprestimo, this.quantidadeParcela)
+      .subscribe(sucesso => { console.log(sucesso) },
+        falha => { console.log(falha) })
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.emprestimoService.SimularEmprestimo(this.valorEmprestimo, this.quantidadeParcela)
+    .subscribe((res) => { this.emprestimos = res;
+      this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+    })
   }
 
   processarSucesso(response: any) {

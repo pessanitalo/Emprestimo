@@ -37,6 +37,7 @@ import { BoletoResolve } from './emprestimo/services/boleto.resolve';
     EmprestimoModule,
     NgxMaskModule.forRoot(),
     NoopAnimationsModule,
+    ModalModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 3000,

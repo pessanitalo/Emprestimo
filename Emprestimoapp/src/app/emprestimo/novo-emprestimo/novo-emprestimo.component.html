@@ -1,18 +1,34 @@
 <div class="row margin-top">
+    <div class="col-md-4">
+        <label>Valor do Emprestimo</label>
+        <input type="text" class="form-control" id="valorEmprestimo" [(ngModel)]="valorEmprestimo"
+            placeholder="Quanto você quer pegar emprestado?">
+    </div>
 
-        <div class="col-md-4">
-            <input type="text" class="form-control" id="valorEmprestimo" [(ngModel)]="valorEmprestimo"
-                placeholder="Quanto você quer pegar emprestado?">
-        </div>
+    <div class="col-md-4">
+        <label>Quantidade de Parcelas</label>
+        <input type="text" class="form-control" id="quantidadeParcela" [(ngModel)]="quantidadeParcela"
+            placeholder="Quantidade de parcelas">
+    </div>
 
-        <div class="col-md-4">
-            <input type="text" class="form-control" id="quantidadeParcela" [(ngModel)]="quantidadeParcela"
-                placeholder="Quantidade de parcelas">
-        </div>
 
-        <div class="form-group margin-top-btn">
-            <button type="submit" class="btn btn-primary" (click)="novoEmprestimo()">Salvar</button>
-            <button type="button" class="btn btn-success goBack" [routerLink]="['/cliente/list']">Voltar</button>
-        </div>
-
+    <div class="form-group margin-top-btn">
+        <button type="button" class="btn btn-primary" (click)="openModal(template)">Simular Emprestimo</button>
+        <!-- <button type="submit" class="btn btn-primary" (click)="SimularEmprestimo()">Simular</button> -->
+        <button type="button" class="btn btn-success goBack" [routerLink]="['/cliente/list']">Voltar</button>
+    </div>
 </div>
+
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Simular Emprestimo</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Valor da Parcela: R$ {{ emprestimos.valorDaParcela }}</p>
+        <p>Valor Total do Emprestimo: R$ {{ emprestimos.valorTotal }}</p>
+    </div>
+</ng-template>
