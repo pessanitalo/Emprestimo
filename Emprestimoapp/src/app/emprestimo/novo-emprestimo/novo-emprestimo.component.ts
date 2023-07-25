@@ -37,13 +37,14 @@ export class NovoEmprestimoComponent implements OnInit {
   novoEmprestimo() {
     this.emprestimoService.create(this.valorEmprestimo, this.quantidadeParcela, this.id)
       .subscribe(sucesso => { this.processarSucesso(sucesso) },
-        falha => { console.log(falha) })
+        falha => { this.processarFalha(falha) }),
+        this.closeModal();
   }
 
   SimularEmprestimo() {
     this.emprestimoService.SimularEmprestimo(this.valorEmprestimo, this.quantidadeParcela)
       .subscribe(sucesso => { console.log(sucesso) },
-        falha => { console.log(falha) })
+        falha => { this.processarFalha(falha) })
   }
 
   openModal(template: TemplateRef<any>) {
@@ -64,5 +65,8 @@ export class NovoEmprestimoComponent implements OnInit {
 
   processarFalha(fail: any) {
     this.toastr.error('Houve algum erro', 'Error!');
+  }
+  closeModal(){
+    this.modalService.hide();
   }
 }
