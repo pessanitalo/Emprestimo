@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { parcelas } from '../models/parcelas';
 import { BoletoService } from '../services/boleto.service';
 import { ToastrService } from 'ngx-toastr';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-visualizar-parcelas',
@@ -11,13 +12,19 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class VisualizarParcelasComponent implements OnInit {
 
+  modalRef?: BsModalRef;
   id!: number;
   parcelas!: parcelas[];
+
+  parcela!: number;
+  valor!: number;
+
   constructor(
     private route: ActivatedRoute,
     private service: BoletoService,
     private toastr: ToastrService,
     private router: Router,
+    private modalService: BsModalService
 
   ) {
     this.parcelas = this.route.snapshot.data['parcelas'];
@@ -28,9 +35,10 @@ export class VisualizarParcelasComponent implements OnInit {
   }
 
   pagarParcela(numeroparcela: number) {
-    this.service.pagarParcela(numeroparcela,this.id)
+    this.service.pagarParcela(numeroparcela, this.id)
       .subscribe(sucesso => { this.processarSucesso(sucesso) },
-        falha => { console.log(falha) })
+        falha => { console.log(falha) }),
+      this.closeModal();
   }
 
   processarSucesso(response: any) {
@@ -42,4 +50,17 @@ export class VisualizarParcelasComponent implements OnInit {
     }
   }
 
+  openModal(template: TemplateRef<any>, parcela: number, valor: number) {
+    this.parcela = parcela;
+    this.valor = valor;
+    this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+  }
+
+  closeModal() {
+    this.modalService.hide();
+  }
 }
+
+
+
+

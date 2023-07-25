@@ -13,8 +13,24 @@
                 <td>{{parcela.numeroParcela}}</td>
                 <td>{{parcela.valorDaParcela}}</td>
                 <td>{{parcela.dataDePagamento | date: 'dd/MM/yyyy'}}</td>
-                <td> <button type="button" class="btn btn-primary" (click)="pagarParcela(parcela.numeroParcela)">Pagar</button></td>
+                <td> <button type="button" class="btn btn-primary"
+                        (click)="openModal(template,parcela.numeroParcela,parcela.valorDaParcela)">Pagar Parcela</button>
+                </td>
             </tr>
         </tbody>
     </table>
 </div>
+
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Deseja pagar parcela de valor: R$ {{ this.valor }}</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-header">
+        <button type="button" class="btn btn-primary" (click)="pagarParcela(parcela)">Pagar</button>
+        <button type="button" class="btn btn-danger spacing" (click)="closeModal()">Cancelar</button>
+    </div>
+</ng-template>
