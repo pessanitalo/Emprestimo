@@ -1,0 +1,42 @@
+create database emprestimodb;
+go
+use emprestimodb;
+go
+create table [cliente] (
+[Id] int primary key not null identity,
+[Nome] varchar(50) not null,
+[Idade] int not null,
+[Cpf] varchar(11) not null,
+[Score] float not null,
+[SaldoAtual] decimal(18,2) not null
+);
+go
+
+create table [Emprestimo](
+[Id] int primary key not null identity,
+[ValorEmprestimo] decimal(18,2) not null,
+[QuantidadeParcelas] int not null,
+[ValorDaParcela] decimal(18,2) not null,
+[valorTotal] decimal(18,2) not null,
+[DataAquisicaoEmprestimo] date not null,
+[ClienteId] int not null,
+constraint fk_id foreign key ([ClienteId]) references [Cliente] ([id]),
+);
+go
+create table [Boleto](
+[Id] int primary key not null identity,
+[NumeroParcela] int not null,
+[ValorDaParcela] decimal(18,2) not null,
+[DataDePagamento] date not null,
+[EmprestimoId] int not null,
+constraint [fk_id_boleto] foreign key ([EmprestimoId]) references [Emprestimo]([id])
+);
+go
+
+INSERT INTO dbo.cliente VALUES ('italo',35,'36402533025', 10, 1000);
+INSERT INTO dbo.cliente VALUES ('paulo',25,'26056713059', 7, 1000);
+INSERT INTO dbo.cliente VALUES ('eduardo',45,'58436399080', 10, 1000);
+INSERT INTO dbo.cliente VALUES ('patricia',18,'74592745000', 5, 2000);
+INSERT INTO dbo.cliente VALUES ('roberto',32,'33727094036', 4, 4000);
+INSERT INTO dbo.cliente VALUES ('italo',50,'90705013090', 4, 3000);
+INSERT INTO dbo.cliente VALUES ('thigo',35,'88412955030', 6, 2000);
