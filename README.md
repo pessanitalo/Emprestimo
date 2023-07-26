@@ -1,4 +1,4 @@
-# Projeto Clini-Corp
+# Projeto Cred Emprestimos
 Projeto em desenvolvimento, objetivo é criar um sistema de empréstimos. Onde o cliente possa simular um empréstimo e caso ele deseje fazer a contratação do mesmo.
 
 ## Tecnologias Utilizada
