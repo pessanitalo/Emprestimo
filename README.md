@@ -14,6 +14,9 @@ Projeto em desenvolvimento, objetivo é criar um sistema de empréstimos. Onde o
 - Ngx-Bootstrap
 - Ngx-Toastr
 
+## Banco de Dados
+- Sql Server
+
 ## Estrutura do Projeto:
 <p align="center">
     <img alt="read before" src="https://github.com/pessanitalo/Assets/blob/main/Projeto1.png" />
