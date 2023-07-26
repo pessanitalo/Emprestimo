@@ -23,7 +23,7 @@ Projeto em desenvolvimento, objetivo é criar um sistema de empréstimos. Onde o
 </p>
 
 ## Para você rodar na sua máquina local, precisa ter instalado os seguintes recursos:
-- Ter instalado o visual studio 2022 ou versão superior
+- https://visualstudio.microsoft.com/pt-br/vs/community
 - https://dotnet.microsoft.com/pt-br/download/dotnet/7.0
 - https://www.npmjs.com/package/@angular/cli/v/13.3.11
 - https://nodejs.org/en
