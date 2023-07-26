@@ -25,10 +25,14 @@ Projeto em desenvolvimento, objetivo é criar um sistema de empréstimos. Onde o
 - https://www.npmjs.com/package/@angular/cli/v/13.3.11
 - https://nodejs.org/en
 
-## Caso você queira rodar a imagem do docker:
-- Ter instalado o docker na sua máquina local(Windos, linux ou Mac)
-### Rodar o projeto completo
+## Para criar rapidamente o ambiente disponibilizamos as imagens Docker da aplicação:
+- É necessário ter o docker instalado em seu sistema operacional (Linux, Windows ou Mac).
+
+### Executar o projeto completo
 [Fullstack](https://github.com/pessanitalo/Emprestimo/tree/main/Docker%20Fullstack)
 
-### Rodar apenas o backend
+### Executar apenas o backend
 [Backend](https://github.com/pessanitalo/Emprestimo/tree/main/Docker%20BackEnd)
+
+Rode o comando (apontando a pasta local do arquivo): 
+- `docker-compose up -d`
