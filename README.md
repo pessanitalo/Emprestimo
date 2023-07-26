@@ -15,8 +15,9 @@ Projeto em desenvolvimento, objetivo é criar um sistema de empréstimos. Onde o
 - Ngx-Toastr
 
 ## Estrutura do Projeto:
-![Estrutura](https://github.com/pessanitalo/Assets/blob/main/Projeto1.png)
-
+<p align="center">
+    <img alt="read before" src="https://github.com/pessanitalo/Assets/blob/main/Projeto1.png" />
+</p>
 ## Para você rodar na sua maquina local, precisa ter instalado os seguintes recursos:
 - Ter instalado o visual studio 2022 ou versão superior
 - https://dotnet.microsoft.com/pt-br/download/dotnet/7.0
