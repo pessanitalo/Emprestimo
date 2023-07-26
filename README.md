@@ -36,3 +36,6 @@ Projeto em desenvolvimento, objetivo é criar um sistema de empréstimos. Onde o
 
 Rode o comando (apontando a pasta local do arquivo): 
 - `docker-compose up -d`
+
+### Autor
+[Italo Pessan](https://www.linkedin.com/in/italopessan/)
