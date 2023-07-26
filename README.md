@@ -19,7 +19,7 @@ Projeto em desenvolvimento, objetivo é criar um sistema de empréstimos. Onde o
 
 ## Estrutura do Projeto:
 <p align="center">
-    <img src="https://github.com/pessanitalo/Assets/blob/main/Projeto1.png" />
+    <img src="https://github.com/pessanitalo/Assets/blob/main/Projeto.png" />
 </p>
 
 ## Para você rodar na sua máquina local, precisa ter instalado os seguintes recursos:
