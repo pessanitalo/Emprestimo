@@ -6,7 +6,7 @@ Projeto em desenvolvimento, objetivo é criar um sistema de empréstimos. Onde o
 - C#
 - .Net 7
 - ASP.NET WebApi   
-- Padrão Repositório
+- Arquitetura três camadas.
 ## Frontend
 - Html-Css
 - Angular V13
