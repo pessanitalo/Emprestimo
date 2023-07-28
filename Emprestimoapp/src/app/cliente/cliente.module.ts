@@ -6,7 +6,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClienteResolve } from './services/cliente.resolve';
 import { ClienteServicesService } from './services/cliente-services.service';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+
 
 
 @NgModule({
@@ -19,11 +20,13 @@ import { NgxMaskModule } from 'ngx-mask';
     ClienteRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxMaskModule.forRoot(),
+    NgxMaskDirective,
+    NgxMaskPipe,
   ],
   providers: [
     ClienteResolve,
-    ClienteServicesService
+    ClienteServicesService,
+    provideNgxMask()
   ]
 })
 export class ClienteModule { }

@@ -1,11 +1,11 @@
 import { BoletoService } from './boleto.service';
 import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, Resolve } from "@angular/router";
+import { ActivatedRouteSnapshot } from "@angular/router";
 import { Emprestimo } from "../models/emprestimo";
 import { EmprestimoService } from "./emprestimo.service";
 
 @Injectable()
-export class EmprestimoResolve implements Resolve<Emprestimo>{
+export class EmprestimoResolve {
 
     constructor(private emprestimoService: EmprestimoService) { }
 

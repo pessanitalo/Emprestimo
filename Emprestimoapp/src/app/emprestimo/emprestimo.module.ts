@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListaEmprestimoComponent } from './lista-emprestimo/lista-emprestimo.component';
 import { NovoEmprestimoComponent } from './novo-emprestimo/novo-emprestimo.component';
 import { VisualizarParcelasComponent } from './visualizar-parcelas/visualizar-parcelas.component';
-import { NgxMaskModule } from 'ngx-mask';
+
 
 
 @NgModule({
@@ -23,7 +23,7 @@ import { NgxMaskModule } from 'ngx-mask';
     EmprestimoRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxMaskModule.forRoot(),
+
   ],
   providers:[
     EmprestimoService,

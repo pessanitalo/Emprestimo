@@ -18,8 +18,8 @@
         <tbody>
             <tr *ngFor="let cliente of clientes">
                 <td> {{ cliente.nome }} </td>
-                <td> {{ cliente.cpf | mask:"000.000.000-00" }} </td>
-                <td>R$ {{ cliente.saldoAtual}} </td>
+                <td> {{ cliente.cpf | mask:"000.000.000-00"}} </td>
+                <td>R$ {{ cliente.saldoAtual }} </td>
                 <td>
                     <button type="button" class="btn btn-success novo-emprestimo"
                         [routerLink]="['/emprestimo/novoEmprestimo', cliente.id]">Pedir Emprestimo</button>

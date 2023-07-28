@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -15,13 +15,13 @@ import { ClienteServicesService } from '../services/cliente-services.service';
 export class NovoClienteComponent implements OnInit {
 
   cliente!: Cliente;
-  Form!: FormGroup;
+  Form!: UntypedFormGroup;
 
   validate!: string;
 
   constructor(
     private clienteService: ClienteServicesService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     private toastr: ToastrService,
