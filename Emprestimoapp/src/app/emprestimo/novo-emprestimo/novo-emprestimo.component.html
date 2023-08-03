@@ -1,24 +1,33 @@
-<div class="row margin-top">
-    <div class="col-md-4">
-        <label>Valor do Emprestimo</label>
-        <input type="text" class="form-control" id="valorEmprestimo" [(ngModel)]="valorEmprestimo"
-            placeholder="Quanto você quer pegar emprestado?">
-    </div>
+<div class="row">
+    <div class="col-md-10">
+        <form novalidate (ngSubmit)="novoEmprestimo()" [formGroup]="Form">
 
-    <div class="col-md-4">
-        <label>Quantidade de Parcelas</label>
-        <input type="text" class="form-control" id="quantidadeParcela" [(ngModel)]="quantidadeParcela"
-            placeholder="Quantidade de parcelas">
-    </div>
+            <div class="form-group">
+                <label class="control-label">Valor Emprestimo</label>
+                <input class="form-control" id="valorEmprestimo" type="text" formControlName="valorEmprestimo" />
+                <span class="text-danger" *ngIf="Form.get('valorEmprestimo')?.invalid">
+                    {{getErrorMessage("valorEmprestimo")}}
+                </span>
+            </div>
 
+            <div class="form-group">
+                <label class="control-label">Quantidade de Parcelas</label>
+                <div>
+                    <input class="form-control" id="QuantidadeParcelas" type="text"
+                        formControlName="QuantidadeParcelas" />
+                    <span class="text-danger" *ngIf="Form.get('QuantidadeParcelas')?.invalid">
+                        {{getErrorMessage("QuantidadeParcelas")}}
+                    </span>
+                </div>
+            </div>
 
-    <div class="form-group margin-top-btn">
-        <button type="button" class="btn btn-primary" (click)="openModal(template)">Simular</button>
-        <button type="button" class="btn btn-success goBack" [routerLink]="['/cliente/list']">Voltar</button>
+            <div class="form-group margin-top">
+                <button type="button" class="btn btn-primary" (click)="openModal(template)"[disabled]="!Form.valid">Simular</button>
+                <button type="button" class="btn btn-success" [routerLink]="['/cliente/list']">Voltar</button>
+            </div>
+        </form>
     </div>
 </div>
-
-
 <ng-template #template>
     <div class="modal-header">
         <h4 class="modal-title pull-left">Simular</h4>
