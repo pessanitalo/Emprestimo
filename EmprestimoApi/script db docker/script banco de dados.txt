@@ -1,6 +1,7 @@
 create database emprestimodb;
+go
 use emprestimodb;
-
+go
 create table [cliente] (
 [Id] int primary key not null identity,
 [Nome] varchar(50) not null,
@@ -9,6 +10,7 @@ create table [cliente] (
 [Score] float not null,
 [SaldoAtual] decimal(18,2) not null
 );
+go
 
 create table [Emprestimo](
 [Id] int primary key not null identity,
@@ -20,7 +22,7 @@ create table [Emprestimo](
 [ClienteId] int not null,
 constraint fk_id foreign key ([ClienteId]) references [Cliente] ([id]),
 );
-
+go
 create table [Boleto](
 [Id] int primary key not null identity,
 [NumeroParcela] int not null,
@@ -29,6 +31,7 @@ create table [Boleto](
 [EmprestimoId] int not null,
 constraint [fk_id_boleto] foreign key ([EmprestimoId]) references [Emprestimo]([id])
 );
+go
 
 INSERT INTO dbo.cliente VALUES ('italo',35,'36402533025', 10, 1000);
 INSERT INTO dbo.cliente VALUES ('paulo',25,'26056713059', 7, 1000);
