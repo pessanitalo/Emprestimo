@@ -39,4 +39,4 @@ INSERT INTO dbo.cliente VALUES ('eduardo',45,'58436399080', 10, 1000);
 INSERT INTO dbo.cliente VALUES ('patricia',18,'74592745000', 5, 2000);
 INSERT INTO dbo.cliente VALUES ('roberto',32,'33727094036', 4, 4000);
 INSERT INTO dbo.cliente VALUES ('italo',50,'90705013090', 4, 3000);
-INSERT INTO dbo.cliente VALUES ('thigo',35,'88412955030', 6, 2000);
+INSERT INTO dbo.cliente VALUES ('thiago',35,'88412955030', 6, 2000);
