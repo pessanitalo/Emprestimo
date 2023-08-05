@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   credemprestimoapi:
-    image: italopessan/credemprestimoapi
+    image: italopessan/emprestimo-api
     environment:
       ASPNETCORE_ENVIRONMENT: Development
     ports:
