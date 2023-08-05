@@ -4303,23 +4303,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\italo\\.nuget\\packages\\": {},
+    "C:\\Users\\italo pessan\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\italo\\Desktop\\git\\Emprestimo\\EmprestimoApi\\EmprestimoApi\\CredEmprestimoApi.csproj",
+      "projectUniqueName": "C:\\Users\\italo pessan\\Desktop\\git\\Emprestimo\\EmprestimoApi\\EmprestimoApi\\CredEmprestimoApi.csproj",
       "projectName": "CredEmprestimoApi",
-      "projectPath": "C:\\Users\\italo\\Desktop\\git\\Emprestimo\\EmprestimoApi\\EmprestimoApi\\CredEmprestimoApi.csproj",
-      "packagesPath": "C:\\Users\\italo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\italo\\Desktop\\git\\Emprestimo\\EmprestimoApi\\EmprestimoApi\\obj\\",
+      "projectPath": "C:\\Users\\italo pessan\\Desktop\\git\\Emprestimo\\EmprestimoApi\\EmprestimoApi\\CredEmprestimoApi.csproj",
+      "packagesPath": "C:\\Users\\italo pessan\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\italo pessan\\Desktop\\git\\Emprestimo\\EmprestimoApi\\EmprestimoApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\italo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\italo pessan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4328,14 +4328,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\italo\\Desktop\\git\\Emprestimo\\EmprestimoApi\\Emprestimo.Data\\CredEmprestimo.Data.csproj": {
-              "projectPath": "C:\\Users\\italo\\Desktop\\git\\Emprestimo\\EmprestimoApi\\Emprestimo.Data\\CredEmprestimo.Data.csproj"
+            "C:\\Users\\italo pessan\\Desktop\\git\\Emprestimo\\EmprestimoApi\\Emprestimo.Data\\CredEmprestimo.Data.csproj": {
+              "projectPath": "C:\\Users\\italo pessan\\Desktop\\git\\Emprestimo\\EmprestimoApi\\Emprestimo.Data\\CredEmprestimo.Data.csproj"
             }
           }
         }
@@ -4414,7 +4415,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
       }
     }
   }
