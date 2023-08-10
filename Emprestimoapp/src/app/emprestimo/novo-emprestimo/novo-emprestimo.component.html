@@ -6,7 +6,7 @@
                 <label class="control-label">Valor Emprestimo</label>
                 <input class="form-control" id="valorEmprestimo" type="text" formControlName="valorEmprestimo" />
                 <span class="text-danger" *ngIf="Form.get('valorEmprestimo')?.invalid">
-                    {{getErrorMessage("valorEmprestimo")}}
+                    {{ validator.getErrorMessage(Form,"valorEmprestimo") }}
                 </span>
             </div>
 
@@ -16,7 +16,7 @@
                     <input class="form-control" id="QuantidadeParcelas" type="text"
                         formControlName="QuantidadeParcelas" />
                     <span class="text-danger" *ngIf="Form.get('QuantidadeParcelas')?.invalid">
-                        {{getErrorMessage("QuantidadeParcelas")}}
+                        {{ validator.getErrorMessage(Form,"QuantidadeParcelas") }}
                     </span>
                 </div>
             </div>

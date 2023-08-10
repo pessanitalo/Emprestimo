@@ -6,7 +6,7 @@
                 <label class="control-label">Nome</label>
                 <input class="form-control" id="nome" type="text" formControlName="nome" />
                 <span class="text-danger" *ngIf="Form.get('nome')?.invalid">
-                    {{getErrorMessage("nome")}}
+                    {{ validator.getErrorMessage(Form,"nome") }}
                 </span>
             </div>
 
@@ -15,7 +15,7 @@
                 <div>
                     <input class="form-control" id="idade" type="text" formControlName="idade" />
                     <span class="text-danger" *ngIf="Form.get('idade')?.invalid">
-                        {{getErrorMessage("idade")}}
+                        {{ validator.getErrorMessage(Form,"idade") }}
                     </span>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                 <div>
                     <input class="form-control" id="cpf" type="text" formControlName="cpf" mask="000.000.000-00" />
                     <span class="text-danger" *ngIf="Form.get('cpf')?.invalid">
-                        {{getErrorMessage("cpf")}}
+                        {{ validator.getErrorMessage(Form,"cpf") }}
                     </span>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                 <div>
                     <input class="form-control" id="saldoAtual" type="text" formControlName="saldoAtual" />
                     <span class="text-danger" *ngIf="Form.get('saldoAtual')?.invalid">
-                        {{getErrorMessage("saldoAtual")}}
+                        {{ validator.getErrorMessage(Form,"saldoAtual") }}
                     </span>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                 <div>
                     <input class="form-control" id="score" type="text" formControlName="score" />
                     <span class="text-danger" *ngIf="Form.get('score')?.invalid">
-                        {{getErrorMessage("score")}}
+                        {{ validator.getErrorMessage(Form,'score') }}
                     </span>
                 </div>
             </div>
