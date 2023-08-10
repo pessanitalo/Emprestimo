@@ -6,6 +6,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Emprestimo } from '../models/emprestimo';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { pedirEmprestimo } from '../models/pedirEmprestimo';
+import { ValidatorsService } from 'src/app/Utils/validators.service';
 
 @Component({
   selector: 'app-novo-emprestimo',
@@ -33,7 +34,8 @@ export class NovoEmprestimoComponent implements OnInit {
     private toastr: ToastrService,
     private route: Router,
     private fb: UntypedFormBuilder,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    public validator: ValidatorsService
   ) { }
 
 
@@ -72,15 +74,7 @@ export class NovoEmprestimoComponent implements OnInit {
       });
     }
   }
-
-  getErrorMessage(fieldName: string) {
-    const field = this.Form.get(fieldName);
-    if (field?.touched || field?.dirty) {
-      return 'campo obrigatório';
-    }
-    return ''
-  }
-
+  
   processarFalha(fail: any) {
     this.toastr.error('Houve algum erro', 'Error!');
   }

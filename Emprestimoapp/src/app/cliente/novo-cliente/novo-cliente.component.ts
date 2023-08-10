@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Cliente } from '../models/cliente';
 import { ClienteServicesService } from '../services/cliente-services.service';
+import { ValidatorsService } from 'src/app/Utils/validators.service';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class NovoClienteComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private toastr: ToastrService,
+    public validator: ValidatorsService
   ) { }
 
   ngOnInit(): void {
@@ -53,25 +55,6 @@ export class NovoClienteComponent implements OnInit {
         this.router.navigate(['/cliente/list'])
       });
     }
-  }
-
-  getErrorMessage(fieldName: string) {
-    const field = this.Form.get(fieldName);
-
-    if (field?.hasError('minlength')) {
-      const requiredlength = field.errors ? field.errors['minlength']['requiredLength'] : null ;
-      return `Tamanho mínimo precisa ser de ${requiredlength} caracteres.`;
-    }
-
-    if (field?.hasError('maxlength')) {
-      const requiredlength = field.errors ? field.errors['maxlength']['requiredLength'] : null ;
-      return `Tamanho máximo precisa ser de ${requiredlength} caracteres.`;
-    }
-
-       if (field?.touched || field?.dirty) {
-      return 'campo obrigatório';
-    }
-    return ''
   }
 
   processarFalha(fail: any) {
