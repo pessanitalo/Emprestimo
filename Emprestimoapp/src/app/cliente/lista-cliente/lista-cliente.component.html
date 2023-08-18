@@ -2,8 +2,9 @@
     <button type="button" class="btn btn-secondary novo-cliente" [routerLink]="['/cliente/new']">Novo Cliente</button>
 
     <div class="d-flex col-8">
-        <input type="text" class="form-control" id="pesquisa" [(ngModel)]="cpf" placeholder="Pesquisar por cpf...." mask="000.000.000-00">
-        <button type="button" class="btn btn-primary spacing" (click)="filtro()">Pesquisar</button>
+        <input type="text" class="form-control" id="pesquisa" [(ngModel)]="cpf" placeholder="Pesquisar por cpf...."
+            mask="000.000.000-00">
+        <!-- <button type="button" class="btn btn-primary spacing" (click)="filtro()">Pesquisar</button> -->
     </div>
 
     <table class="table table-striped">
@@ -29,6 +30,15 @@
             </tr>
         </tbody>
     </table>
+    <div class="row">
+        <div class="col-xs-12 col-12">
+            <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems"
+                [itemsPerPage]="pagination.itemsPerPage" [(ngModel)]="pagination.currentPage"
+                (pageChanged)="pageChanged($event)" pageBtnClass="btn" previousText="&lsaquo;" nextText="&rsaquo;"
+                firstText="&laquo;" lastText="&raquo;">
+            </pagination>
+        </div>
+    </div>
 </div>
 
 

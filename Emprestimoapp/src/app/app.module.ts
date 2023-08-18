@@ -4,6 +4,7 @@ import { EmprestimoModule } from './emprestimo/emprestimo.module';
 import { ClienteModule } from './cliente/cliente.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +18,7 @@ import { ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
 import { EmprestimoResolve } from './emprestimo/services/emprestimo.resolve';
 import { BoletoResolve } from './emprestimo/services/boleto.resolve';
 
+
 // const maskConfig: Partial<IConfig> = {
 //   validation: false,
 // };
@@ -26,7 +28,7 @@ import { BoletoResolve } from './emprestimo/services/boleto.resolve';
     AppComponent,
     FooterComponent,
     HomeComponent,
-    MenuComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +39,7 @@ import { BoletoResolve } from './emprestimo/services/boleto.resolve';
     EmprestimoModule,
     NoopAnimationsModule,
     BrowserAnimationsModule,
+    PaginationModule.forRoot(),
     ModalModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 3000,
