@@ -15,33 +15,32 @@ export class ClienteServicesService {
 
   constructor(private http: HttpClient) { }
 
+  public list(cpf?: string, page?: number, itemsPerPage?: number): Observable<PaginatedResult<Cliente[]>> {
+    const paginatedResult: PaginatedResult<Cliente[]> = new PaginatedResult<Cliente[]>();
 
-//  list(cpf: string): Observable<Cliente[]> {
-//   return this.http.get<Cliente[]>(`${this.baseUrl}/list/${cpf}`);
-// }
+    let params = new HttpParams;
 
-public list(cpf: string, page?: number, itemsPerPage?: number): Observable<PaginatedResult<Cliente[]>> {
-  const paginatedResult: PaginatedResult<Cliente[]> = new PaginatedResult<Cliente[]>();
+    if (page != null && itemsPerPage != null) {
+      params = params.append('pageNumber', page.toString());
+      params = params.append('pageSize', itemsPerPage.toString());
+    }
 
-  let params = new HttpParams;
-
-  if (page != null && itemsPerPage != null) {
-    params = params.append('pageNumber', page.toString());
-    params = params.append('pageSize', itemsPerPage.toString());
+    // if (cpf != null && cpf != ''){
+    //   params = params.append('cpf', cpf);
+    // }
+  
+    return this.http
+      .get<Cliente[]>(`${this.baseUrl}/list/${cpf}`, { observe: 'response', params })
+      .pipe(
+        take(1),
+        map((response) => {
+          paginatedResult.result = response.body;
+          if (response.headers.get('Pagination')) {
+            paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+          }
+          return paginatedResult;
+        }));
   }
-
-  return this.http
-    .get<Cliente[]>(`${this.baseUrl}/list/${cpf}`, { observe: 'response', params })
-    .pipe(
-      take(1),
-      map((response) => {
-        paginatedResult.result = response.body;
-        if (response.headers.get('Pagination')) {
-          paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
-        }
-        return paginatedResult;
-      }));
-}
 
   obterPorId(id: number): Observable<Cliente> {
     return this.http.get<Cliente>(`${this.baseUrl}/getId/${id}`);

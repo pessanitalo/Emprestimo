@@ -1,10 +1,10 @@
 import { Cliente } from './../models/cliente';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { informationModel } from '../models/informationModel';
 import { ClienteServicesService } from '../services/cliente-services.service';
 import { PaginatedResult, Pagination } from '../models/pagination';
-import { PageChangedEvent } from 'ngx-bootstrap/pagination';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,12 +23,16 @@ export class ListaClienteComponent implements OnInit {
 
   cpf: string = "";
 
+  teste: string = "";
+
   public pagination = {} as Pagination;
   modalRef?: BsModalRef;
 
   constructor(
     private clienteService: ClienteServicesService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private toastr: ToastrService,
+    private route: Router,
   ) { }
 
   public ngOnInit(): void {
@@ -37,6 +41,7 @@ export class ListaClienteComponent implements OnInit {
       itemsPerPage: 10,
       totalItems: 1,
     } as Pagination;
+
     this.carregarLista();
   }
 
@@ -49,23 +54,16 @@ export class ListaClienteComponent implements OnInit {
     return this.modal
   }
 
-  // filtro() {
-  //   this.clienteService.list(this.cpf, this.pagination.currentPage, this.pagination.itemsPerPage).subscribe(
-  //     clientes => PaginatedResult <Cliente[]>> = clientes,
-  //     error => this.errorMessage
-  //   );
-  // }
-
   public carregarLista(): void {
+    //this.pagination.itemsPerPage = 10, 
     this.clienteService.list(this.cpf, this.pagination.currentPage, this.pagination.itemsPerPage).subscribe(
       (paginatedResult: PaginatedResult<Cliente[]>) => {
         this.clientes = paginatedResult.result;
-        this.pagination = paginatedResult.pagination;
+          this.pagination = paginatedResult.pagination;
       },
-      (error: any) => {
-        console.log()
-      }
-    )
+      falha => {
+        this.toastr.error(falha, 'Error!');
+      });
   }
 
   openModal(template: TemplateRef<any>, cliente: Cliente) {
@@ -74,5 +72,18 @@ export class ListaClienteComponent implements OnInit {
         this.cliente = res;
         this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
       })
+  }
+
+  processarSucesso(response: any) {
+    let toast = this.toastr.success('Emprestimo solicitado com sucesso!', 'Sucesso!');
+    if (toast) {
+      toast.onHidden.subscribe(() => {
+        this.route.navigate(['/emprestimo/list'])
+      });
+    }
+  }
+
+  processarFalha(fail: any) {
+    this.toastr.error(fail, 'Error!');
   }
 }
