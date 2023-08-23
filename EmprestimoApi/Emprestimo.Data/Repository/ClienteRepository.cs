@@ -1,8 +1,8 @@
 ﻿using CredEmprestimo.Business.Interface;
 using CredEmprestimo.Business.Models;
+using CredEmprestimo.Business.Models.Utils;
 using CredEmprestimo.Data.Context;
 using Microsoft.EntityFrameworkCore;
-using System.Collections;
 
 namespace CredEmprestimo.Data.Repository
 {
@@ -15,10 +15,18 @@ namespace CredEmprestimo.Data.Repository
             _context = context;
         }
 
-        public async Task<IEnumerable> ListaClientes()
+        public async Task<PageList<Cliente>> ListaClientes(PageParams pageParams)
         {
-            var list = await _context.Clientes.ToListAsync();
-            return list;
+            IQueryable<Cliente> query = _context.Clientes;
+
+            return await PageList<Cliente>.CreateAsync(query, pageParams.PageNumber, pageParams.pageSize);
+        }
+
+        public async Task<PageList<Cliente>> Busca(PageParams pageParams, string cpf)
+        {
+            var cliente = _context.Clientes.Where(c => c.Cpf.Contains(cpf));
+            return await PageList<Cliente>.CreateAsync(cliente, pageParams.PageNumber, pageParams.pageSize);
+
         }
         public async Task<Cliente> BuscaCpf(string cpf)
         {
@@ -55,5 +63,7 @@ namespace CredEmprestimo.Data.Repository
              .FirstOrDefault(X => X.Id == id);
             return cliente;
         }
+
+
     }
 }

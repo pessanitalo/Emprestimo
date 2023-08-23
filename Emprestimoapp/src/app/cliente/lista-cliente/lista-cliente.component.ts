@@ -55,11 +55,10 @@ export class ListaClienteComponent implements OnInit {
   }
 
   public carregarLista(): void {
-    //this.pagination.itemsPerPage = 10, 
     this.clienteService.list(this.cpf, this.pagination.currentPage, this.pagination.itemsPerPage).subscribe(
       (paginatedResult: PaginatedResult<Cliente[]>) => {
         this.clientes = paginatedResult.result;
-          this.pagination = paginatedResult.pagination;
+        this.pagination = paginatedResult.pagination;
       },
       falha => {
         this.toastr.error(falha, 'Error!');

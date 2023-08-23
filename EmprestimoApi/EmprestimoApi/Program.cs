@@ -1,5 +1,6 @@
 using AutoMapper;
 using CredEmprestimo.Business.Interface;
+using CredEmprestimo.Business.Services;
 using CredEmprestimo.Data.Context;
 using CredEmprestimo.Data.Repository;
 using CredEmprestimoApi.Configurations;
@@ -20,6 +21,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 builder.Services.AddScoped<IEmprestimoRepository, EmprestimoRepository>();
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IBoletoRepository, BoletoRepository>();
+builder.Services.AddScoped<IClienteService, ClienteServices>();
 
 var mappingConfig = new MapperConfiguration(c =>
 {

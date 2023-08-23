@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Emprestimo.Business\CredEmprestimo.Business.csproj" />
     <ProjectReference Include="..\Emprestimo.Data\CredEmprestimo.Data.csproj" />
   </ItemGroup>
 
