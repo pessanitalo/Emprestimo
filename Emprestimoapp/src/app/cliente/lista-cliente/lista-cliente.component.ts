@@ -38,7 +38,7 @@ export class ListaClienteComponent implements OnInit {
   public ngOnInit(): void {
     this.pagination = {
       currentPage: 1,
-      itemsPerPage: 10,
+      itemsPerPage: 14,
       totalItems: 1,
     } as Pagination;
 

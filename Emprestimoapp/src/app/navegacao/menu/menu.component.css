@@ -1,7 +1,14 @@
 nav {
     background-color: rebeccapurple;
+    position: relative;
 }
 
 a {
     color: white;
+}
+
+@media (max-height: 600px) {
+    nav{
+        padding-top: 0px;
+    }
 }

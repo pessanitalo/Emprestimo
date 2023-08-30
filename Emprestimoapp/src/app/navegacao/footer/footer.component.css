@@ -6,5 +6,16 @@
     background-color: rebeccapurple;
     color: rgb(255, 255, 255);
     text-align: center;
-    padding-top: 30px;
- }
+}
+
+@media (max-height: 576px) {
+    .footer {
+        padding-top: 0px;
+    }
+}
+
+@media (min-height: 769px) {
+    .footer {
+        padding-top: 15px;
+    }
+}
