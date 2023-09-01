@@ -28,11 +28,6 @@ namespace CredEmprestimo.Data.Repository
             return await PageList<Cliente>.CreateAsync(cliente, pageParams.PageNumber, pageParams.pageSize);
 
         }
-        public async Task<Cliente> BuscaCpf(string cpf)
-        {
-            var cliente = await _context.Clientes.FirstOrDefaultAsync(c => c.Cpf == cpf);
-            return cliente;
-        }
         public Cliente DetalhesCliente(int id)
         {
             var consulta = _context.Clientes.Include(c => c.Emprestimo)
@@ -42,18 +37,10 @@ namespace CredEmprestimo.Data.Repository
         }
         public Cliente Create(Cliente cliente)
         {
-            //var clientes = _context.Clientes.Where(c => c.Cpf == cliente.Cpf).ToList();
             _context.Clientes.Add(cliente);
             _context.SaveChanges();
             return cliente;
         }
-        public Cliente PesquisarCliente(int id)
-        {
-            var cliente = _context.Clientes
-             .FirstOrDefault(X => X.Id == id);
-            return cliente;
-        }
-
 
     }
 }
