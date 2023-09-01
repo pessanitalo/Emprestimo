@@ -5,7 +5,9 @@ namespace CredEmprestimo.Business.Interface
 {
     public interface IClienteService
     {
-        Task<IEnumerable<Cliente>> filtroPorNome(string cliente);
+        Task<PageList<Cliente>> Busca(PageParams pageParams, string cpf);
         Task<PageList<Cliente>> ListaClientes(PageParams pageParams);
+        Cliente Create(Cliente cliente);        
+        Cliente DetalhesCliente(int id);
     }
 }
