@@ -26,33 +26,36 @@ namespace CredEmprestimoApi.Controllers
 
                 return Ok(parcela);
             }
-            catch { return StatusCode(500, "Falha interna no servidor."); }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ResultViewModel<List<PagarParcela>>("Falha interna no servidor"));
+            }
         }
 
-        //[HttpPost("boletovencido/{id:int}")]
-        //public IActionResult gerarBoletoVencido(int id)
-        //{
-        //    try
-        //    {
-        //        var boleto = _boletoRepository.geralBoletoVencido(id);
-        //        if (boleto == false) return NotFound(new ResultViewModel<BoletoEmprestimo>("Parcela não encontrada"));
+            //[HttpPost("boletovencido/{id:int}")]
+            //public IActionResult gerarBoletoVencido(int id)
+            //{
+            //    try
+            //    {
+            //        var boleto = _boletoRepository.geralBoletoVencido(id);
+            //        if (boleto == false) return NotFound(new ResultViewModel<BoletoEmprestimo>("Parcela não encontrada"));
 
-        //        return Ok("Parcela gerada com sucesso.");
-        //    }
-        //    catch { return StatusCode(500, "Falha interna no servidor."); }
+            //        return Ok("Parcela gerada com sucesso.");
+            //    }
+            //    catch { return StatusCode(500, "Falha interna no servidor."); }
 
-        //}
+            //}
 
-        [HttpGet("detalhesparcela/{id:int}")]
-        public IActionResult detalhesParcela(int id)
-        {
-            try
+            [HttpGet("detalhesparcela/{id:int}")]
+            public IActionResult detalhesParcela(int id)
             {
-                var parcelas = _boletoRepository.DetalhesParcela(id);
-                return Ok(parcelas);
-            }
-            catch { return StatusCode(500, "Falha interna no servidor."); }
+                try
+                {
+                    var parcelas = _boletoRepository.DetalhesParcela(id);
+                    return Ok(parcelas);
+                }
+                catch { return StatusCode(500, "Falha interna no servidor."); }
 
+            }
         }
     }
-}

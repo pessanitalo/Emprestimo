@@ -1,8 +1,6 @@
 ﻿using CredEmprestimo.Business.Interface;
 using CredEmprestimo.Business.Models;
 using CredEmprestimo.Data.Context;
-using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography.X509Certificates;
 
 namespace CredEmprestimo.Data.Repository
 {
@@ -48,24 +46,6 @@ namespace CredEmprestimo.Data.Repository
             return boleto;
         }
 
-        //public bool geralBoletoVencido(int id)
-        //{
-        //    var parcela = _context.BoletoEmprestimo.Include(d => d.Emprestimo).FirstOrDefault(x => x.Id == id);
-        //    if (parcela == null) return false;
-
-        //    var vencimentoBoleto = parcela.DataDePagamento.Day;
-        //    var dataAtual = DateTime.Now.Day;
-
-        //    var diasCorridos = dataAtual - vencimentoBoleto;
-        //    var valorTotal = PagarParcelaVencida(parcela.ValorDaParcela, diasCorridos);
-
-        //    parcela.ValorDaParcela = valorTotal;
-        //    _context.Update(parcela);
-        //    _context.SaveChanges();
-        //    return true;
-
-        //}
-
         public BoletoEmprestimo PagarUmaParcela(int id, int numeroDaParcela)
         {
             var parcela = PesquisarParcela(id, numeroDaParcela);
@@ -85,21 +65,6 @@ namespace CredEmprestimo.Data.Repository
             var parcela = _context.BoletoEmprestimo.FirstOrDefault(x => x.EmprestimoId == id && x.NumeroParcela == numeroParcela);
             return parcela;
         }
-
-        //private decimal PagarParcelaVencida(decimal valorParcela, int diasEmAtraso)
-        //{
-
-        //    double jurosAposVencimento = 3.3 / 100.00;
-        //    decimal valorComJuros = (decimal)(diasEmAtraso + (jurosAposVencimento * diasEmAtraso));
-
-        //    decimal multaAposvencimento = 200 / 100.00;
-        //    decimal valorAjustado = valorParcela + multaAposvencimento;
-
-        //    decimal totalJuros = valorAjustado + valorComJuros;
-        //    return totalJuros;
-
-        //}
-
         public List<BoletoEmprestimo> DetalhesParcela(int id)
         {
             var parcela = _context.BoletoEmprestimo.ToList().Where(x => x.EmprestimoId == id).ToList();

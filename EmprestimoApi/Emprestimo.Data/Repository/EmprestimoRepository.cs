@@ -42,7 +42,7 @@ namespace CredEmprestimo.Data.Repository
         public Emprestimo NovoEmprestimo(decimal ValorEmprestimo, int QuantidadeParcelas, int id)
         {
             var emprestimo = new Emprestimo();
-            var cliente = _clienteRepository.PesquisarCliente(id);
+            var cliente = _clienteRepository.DetalhesCliente(id);
 
             emprestimo.emprestimo(ValorEmprestimo, QuantidadeParcelas, cliente);
 
@@ -57,7 +57,5 @@ namespace CredEmprestimo.Data.Repository
             var emprestimo = _context.Emprestimos.FirstOrDefault(X => X.Id == id);
             return emprestimo;
         }
-
-
     }
 }
