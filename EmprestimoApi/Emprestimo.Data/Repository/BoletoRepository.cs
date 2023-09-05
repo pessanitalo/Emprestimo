@@ -65,7 +65,7 @@ namespace CredEmprestimo.Data.Repository
             var parcela = _context.BoletoEmprestimo.FirstOrDefault(x => x.EmprestimoId == id && x.NumeroParcela == numeroParcela);
             return parcela;
         }
-        public List<BoletoEmprestimo> DetalhesParcela(int id)
+        public List<BoletoEmprestimo> VisualizarParcela(int id)
         {
             var parcela = _context.BoletoEmprestimo.ToList().Where(x => x.EmprestimoId == id).ToList();
             return parcela.ToList();
