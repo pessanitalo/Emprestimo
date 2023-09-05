@@ -58,12 +58,19 @@ export class NovoEmprestimoComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>) {
-    this.pedirEmprestimo = Object.assign({}, this.pedirEmprestimo, this.Form.value);
-    this.emprestimoService.SimularEmprestimo(this.pedirEmprestimo.valorEmprestimo, this.pedirEmprestimo.QuantidadeParcelas)
-      .subscribe((res) => {
-        this.emprestimos = res;
-        this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-      });
+    if (this.Form.get('valorEmprestimo').value >= 1 && this.Form.get('QuantidadeParcelas').value >= 1) {
+      this.pedirEmprestimo = Object.assign({}, this.pedirEmprestimo, this.Form.value);
+      this.emprestimoService.SimularEmprestimo(this.pedirEmprestimo.valorEmprestimo, this.pedirEmprestimo.QuantidadeParcelas)
+        .subscribe((res) => {
+          this.emprestimos = res;
+          this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+        });
+      return true;
+    }
+    else {
+      this.toastr.warning('Valor Inválido', 'Ops!')
+      return false;
+    }
   }
 
   processarSucesso(response: any) {
@@ -74,11 +81,11 @@ export class NovoEmprestimoComponent implements OnInit {
       });
     }
   }
-  
+
   processarFalha(fail: any) {
-    this.toastr.error('Houve algum erro', 'Error!');
+    this.toastr.error('Houve algum erro', fail);
   }
-  
+
   closeModal() {
     this.modalService.hide();
   }
