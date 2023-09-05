@@ -29,13 +29,6 @@ namespace CredEmprestimo.Business.Services
             var novoEmprestimo = _emprestimoRepository.NovoEmprestimo(ValorEmprestimo,QuantidadeParcelas,id);
             return novoEmprestimo;
         }
-
-        public Emprestimo PesquisarEmprestimo(int id)
-        {
-            var detalhes = _emprestimoRepository.PesquisarEmprestimo(id);
-            return detalhes;
-        }
-
         public Emprestimo SimularEmprestimo(decimal ValorEmprestimo, int QuantidadeParcelas)
         {
             var simular = _emprestimoRepository.SimularEmprestimo(ValorEmprestimo,QuantidadeParcelas);

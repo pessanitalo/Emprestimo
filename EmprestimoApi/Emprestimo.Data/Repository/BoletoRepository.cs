@@ -17,7 +17,7 @@ namespace CredEmprestimo.Data.Repository
 
         public BoletoEmprestimo GerarBoleto(int id)
         {
-            var emprestimo = _emprestimoRepository.PesquisarEmprestimo(id);
+            var emprestimo = _emprestimoRepository.DetalhesEmprestimo(id);
 
             var boleto = new BoletoEmprestimo();
 

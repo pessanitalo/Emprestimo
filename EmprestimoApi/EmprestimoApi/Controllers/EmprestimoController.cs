@@ -29,7 +29,8 @@ namespace EmprestimoApi.Controllers
             try
             {
                 var emprestimo = _mapper.Map<Emprestimo>(emprestimodto);
-                var result = _emprestimoService.NovoEmprestimo(emprestimo.ValorEmprestimo, emprestimo.QuantidadeParcelas, emprestimo.ClienteId);
+                var result = _emprestimoService.NovoEmprestimo(emprestimo.ValorEmprestimo, emprestimo.QuantidadeParcelas,
+                              emprestimo.ClienteId);
                 var boleto = _boletoService.GerarBoleto(result.Id);
 
                 return Ok(result);
