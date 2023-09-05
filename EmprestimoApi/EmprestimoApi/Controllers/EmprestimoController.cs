@@ -10,53 +10,17 @@ namespace EmprestimoApi.Controllers
     [ApiController]
     public class EmprestimoController : ControllerBase
     {
-
-        private readonly IEmprestimoRepository _emprestimoRepository;
-        private readonly IBoletoRepository _boletoRepository;
+        private readonly IEmprestimoService _emprestimoService;
+        private readonly IBoletoService _boletoService;
         private readonly IMapper _mapper;
 
-        public EmprestimoController(IEmprestimoRepository emprestimoRepository, IBoletoRepository boletoRepository, IMapper mapper)
+        public EmprestimoController(IEmprestimoService emprestimoService,
+                    IBoletoService boletoService, IMapper mapper)
         {
-            _emprestimoRepository = emprestimoRepository;
-            _boletoRepository = boletoRepository;
+
+            _emprestimoService = emprestimoService;
+            _boletoService = boletoService;
             _mapper = mapper;
-        }
-
-        [HttpGet("list")]
-        public async Task<IActionResult> list()
-        {
-            try
-            {
-                var list = await _emprestimoRepository.ListarEmprestimos();
-
-                return Ok(list);
-            }
-            catch { return StatusCode(500, "Falha interna no servidor."); }
-        }
-
-        [HttpGet("detalhes/{id:int}")]
-        public IActionResult Detalhes(int id)
-        {
-            try
-            {
-                var consulta = _emprestimoRepository.DetalhesEmprestimo(id);
-                if (consulta == null) return NotFound(new ResultViewModel<Emprestimo>("Emprestimo não encontrado"));
-                return Ok(consulta);
-            }
-            catch { return StatusCode(500, "Falha interna no servidor."); }
-        }
-
-        [HttpPost("simular-emprestimo")]
-        public IActionResult SimularEmprestimoDto(EmprestimoViewModel emprestimodto)
-        {
-            try
-            {
-                var emprestimo = _mapper.Map<Emprestimo>(emprestimodto);
-                var result = _emprestimoRepository.SimularEmprestimo(emprestimo.ValorEmprestimo, emprestimo.QuantidadeParcelas);
-
-                return Ok(result);
-            }
-            catch { return StatusCode(500, "Falha interna no servidor."); }
         }
 
         [HttpPost]
@@ -65,12 +29,61 @@ namespace EmprestimoApi.Controllers
             try
             {
                 var emprestimo = _mapper.Map<Emprestimo>(emprestimodto);
-                var result = _emprestimoRepository.NovoEmprestimo(emprestimo.ValorEmprestimo, emprestimo.QuantidadeParcelas, emprestimo.ClienteId);
-                var boleto = _boletoRepository.GerarBoleto(result.Id);
+                var result = _emprestimoService.NovoEmprestimo(emprestimo.ValorEmprestimo, emprestimo.QuantidadeParcelas, emprestimo.ClienteId);
+                var boleto = _boletoService.GerarBoleto(result.Id);
 
                 return Ok(result);
             }
-            catch { return StatusCode(500, "Falha interna no servidor."); }
+            catch
+            {
+                return StatusCode(500, new ResultViewModel<List<Emprestimo>>("Falha interna no servidor"));
+            }
+        }
+
+        [HttpGet("list")]
+        public async Task<IActionResult> list()
+        {
+            try
+            {
+                var list = await _emprestimoService.ListarEmprestimos();
+
+                return Ok(list);
+            }
+            catch
+            {
+                return StatusCode(500, new ResultViewModel<List<Emprestimo>>("Falha interna no servidor"));
+            }
+        }
+
+        [HttpGet("detalhes/{id:int}")]
+        public IActionResult Detalhes(int id)
+        {
+            try
+            {
+                var consulta = _emprestimoService.DetalhesEmprestimo(id);
+                if (consulta == null) return NotFound(new ResultViewModel<Emprestimo>("Emprestimo não encontrado"));
+                return Ok(consulta);
+            }
+            catch
+            {
+                return StatusCode(500, new ResultViewModel<List<Emprestimo>>("Falha interna no servidor"));
+            }
+        }
+
+        [HttpPost("simular-emprestimo")]
+        public IActionResult SimularEmprestimoDto(EmprestimoViewModel emprestimodto)
+        {
+            try
+            {
+                var emprestimo = _mapper.Map<Emprestimo>(emprestimodto);
+                var result = _emprestimoService.SimularEmprestimo(emprestimo.ValorEmprestimo, emprestimo.QuantidadeParcelas);
+
+                return Ok(result);
+            }
+            catch
+            {
+                return StatusCode(500, new ResultViewModel<List<Emprestimo>>("Falha interna no servidor"));
+            }
         }
     }
 }

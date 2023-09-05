@@ -19,9 +19,11 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IEmprestimoRepository, EmprestimoRepository>();
+builder.Services.AddScoped<IEmprestimoService, EmprestimoService>();
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IBoletoRepository, BoletoRepository>();
 builder.Services.AddScoped<IClienteService, ClienteServices>();
+builder.Services.AddScoped<IBoletoService, BoletoService>();
 
 var mappingConfig = new MapperConfiguration(c =>
 {
