@@ -13,13 +13,11 @@ namespace CredEmprestimo.Controllers
     public class ClienteController : ControllerBase
     {
 
-        private readonly IClienteRepository _ClienteRepository;
         private readonly IClienteService _ClienteService;
         private readonly IMapper _mapper;
 
-        public ClienteController(IClienteRepository clienteRepository, IClienteService clienteService, IMapper mapper)
+        public ClienteController(IClienteService clienteService, IMapper mapper)
         {
-            _ClienteRepository = clienteRepository;
             _ClienteService = clienteService;
             _mapper = mapper;
         }
@@ -32,7 +30,7 @@ namespace CredEmprestimo.Controllers
             {
                 if (!string.IsNullOrEmpty(cpf))
                 {
-                    var cliente = await _ClienteRepository.Busca(pageParams, cpf);
+                    var cliente = await _ClienteService.Busca(pageParams, cpf);
 
                     var retorno = _mapper.Map<PageList<ClienteViewModel>>(cliente);
 
@@ -43,29 +41,15 @@ namespace CredEmprestimo.Controllers
                 var clientes = await _ClienteService.ListaClientes(pageParams);
 
                 var filtro = _mapper.Map<PageList<ClienteViewModel>>(clientes);
-
                 pagination(clientes, filtro);
 
                 return Ok(clientes);
             }
-            catch { return StatusCode(500, "Falha interna no servidor."); }
-
-        }
-
-        [HttpGet]
-        [Route("filtrar/{cpf}")]
-        public async Task<IActionResult> pesquisarPorCpf(string cpf)
-        {
-            try
+            catch
             {
-                var cliente = await _ClienteRepository.BuscaCpf(cpf);
-
-                if (cliente == null) return NotFound(new ResultViewModel<Cliente>("Cliente não encontrado"));
-
-                return Ok(cliente);
-
+                return StatusCode(500, new ResultViewModel<List<Cliente>>("Falha interna no servidor"));
             }
-            catch { return StatusCode(500, "Falha interna no servidor."); }
+
         }
 
         [HttpGet]
@@ -74,26 +58,30 @@ namespace CredEmprestimo.Controllers
         {
             try
             {
-                var consulta = _ClienteRepository.DetalhesCliente(id);
+                var consulta = _ClienteService.DetalhesCliente(id);
 
                 if (consulta == null) return NotFound(new ResultViewModel<Cliente>("Cliente não encontrado"));
 
                 return Ok(consulta);
             }
-            catch { return StatusCode(500, "Falha interna no servidor."); }
+            catch
+            {
+                return StatusCode(500, new ResultViewModel<List<Cliente>>("Falha interna no servidor"));
+            }
         }
 
         [HttpPost]
-        public IActionResult create(ClienteViewModel clienteDto)
+        public async Task<IActionResult> create(ClienteViewModel clienteDto)
         {
-            try
-            {
+            
                 var cliente = _mapper.Map<Cliente>(clienteDto);
-                var result = _ClienteRepository.Create(cliente);
 
-                return Ok(result);
-            }
-            catch { return StatusCode(500, "Falha interna no servidor."); }
+                if (await _ClienteService.validar(cliente)) return BadRequest("Já existe um usuário com esse cpf!");
+
+                var retorno = _ClienteService.Create(cliente);
+                return Ok(retorno);
+            
+
         }
         private void pagination(PageList<Cliente> clientes, PageList<ClienteViewModel> filtro)
         {

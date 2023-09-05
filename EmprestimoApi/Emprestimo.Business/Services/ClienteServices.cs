@@ -32,12 +32,27 @@ namespace CredEmprestimo.Business.Services
             return novocliente;
         }
 
+        public async Task<bool> validar(Cliente cliente)
+        {
+            try
+            {
+                IList<Cliente> retorno = (IList<Cliente>)await _clienteRepository.Validar(cliente.Cpf);
+                if (retorno.Count > 0) return true;
+                return false;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao verificar se usuário existe. Erro: {ex.Message}");
+            }
+
+        }
+
         public Cliente DetalhesCliente(int id)
         {
             var detalhe = _clienteRepository.DetalhesCliente(id);
 
             return detalhe;
         }
-
     }
 }

@@ -9,5 +9,6 @@ namespace CredEmprestimo.Business.Interface
         Task<PageList<Cliente>> ListaClientes(PageParams pageParams);
         Cliente Create(Cliente cliente);        
         Cliente DetalhesCliente(int id);
+        Task<bool> validar(Cliente cliente);
     }
 }

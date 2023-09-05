@@ -3,6 +3,7 @@ using CredEmprestimo.Business.Models;
 using CredEmprestimo.Business.Models.Utils;
 using CredEmprestimo.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using System.Collections;
 
 namespace CredEmprestimo.Data.Repository
 {
@@ -40,6 +41,11 @@ namespace CredEmprestimo.Data.Repository
             _context.Clientes.Add(cliente);
             _context.SaveChanges();
             return cliente;
+        }
+        public async Task<IEnumerable> Validar(string cpf)
+        {
+            var clientes = await _context.Clientes.Where(c => c.Cpf == cpf).ToListAsync();
+            return clientes;
         }
 
     }
