@@ -15,7 +15,6 @@ namespace CredEmprestimoApi.Controllers
             _boletoRepository = boletoRepository;
         }
 
-        //assim funciona passando objeto
         [HttpPost("pagarparcela")]
         public IActionResult PagarParcela([FromBody] PagarParcela pagarParcela)
         {
@@ -32,30 +31,16 @@ namespace CredEmprestimoApi.Controllers
             }
         }
 
-            //[HttpPost("boletovencido/{id:int}")]
-            //public IActionResult gerarBoletoVencido(int id)
-            //{
-            //    try
-            //    {
-            //        var boleto = _boletoRepository.geralBoletoVencido(id);
-            //        if (boleto == false) return NotFound(new ResultViewModel<BoletoEmprestimo>("Parcela não encontrada"));
-
-            //        return Ok("Parcela gerada com sucesso.");
-            //    }
-            //    catch { return StatusCode(500, "Falha interna no servidor."); }
-
-            //}
-
-            [HttpGet("detalhesparcela/{id:int}")]
-            public IActionResult detalhesParcela(int id)
+        [HttpGet("detalhesparcela/{id:int}")]
+        public IActionResult VisualizarParcela(int id)
+        {
+            try
             {
-                try
-                {
-                    var parcelas = _boletoRepository.DetalhesParcela(id);
-                    return Ok(parcelas);
-                }
-                catch { return StatusCode(500, "Falha interna no servidor."); }
-
+                var parcelas = _boletoRepository.VisualizarParcela(id);
+                return Ok(parcelas);
             }
+            catch { return StatusCode(500, "Falha interna no servidor."); }
+
         }
     }
+}
