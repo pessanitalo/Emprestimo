@@ -25,6 +25,7 @@ export class NovoEmprestimoComponent implements OnInit {
   public quantidadeParcela!: number;
 
   public id!: number;
+  public ClienteId!: number;
 
   public emprestimos!: Emprestimo;
 

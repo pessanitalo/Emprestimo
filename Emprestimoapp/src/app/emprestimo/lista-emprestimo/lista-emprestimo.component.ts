@@ -24,8 +24,6 @@ export class ListaEmprestimoComponent implements OnInit {
 
   public emprestimo!: Emprestimo;
 
-  public id = 3;
-
   constructor(
     private emprestimoService: EmprestimoService,
     private router: ActivatedRoute,

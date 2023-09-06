@@ -14,6 +14,7 @@ export class VisualizarParcelasComponent implements OnInit {
 
   modalRef?: BsModalRef;
   id!: number;
+  public clienteId: number;
   parcelas!: parcelas[];
 
   parcela!: number;
@@ -32,12 +33,13 @@ export class VisualizarParcelasComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
+    this.clienteId = this.route.snapshot.params['clienteId'];
   }
 
   pagarParcela(numeroparcela: number) {
-    this.service.pagarParcela(numeroparcela, this.id)
+    this.service.pagarParcela(this.clienteId,numeroparcela, this.id)
       .subscribe(sucesso => { this.processarSucesso(sucesso) },
-        falha => { console.log(falha) }),
+        falha => { this.processarFalha(falha) }),
       this.closeModal();
   }
 
@@ -58,6 +60,10 @@ export class VisualizarParcelasComponent implements OnInit {
 
   closeModal() {
     this.modalService.hide();
+  }
+
+  processarFalha(fail: any) {
+    this.toastr.warning(fail.error, 'Error!');
   }
 }
 

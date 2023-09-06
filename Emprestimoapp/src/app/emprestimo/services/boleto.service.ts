@@ -18,9 +18,10 @@ export class BoletoService {
     return this.http.get<Emprestimo>(`${this.baseUrl}/detalhesparcela/${id}`);
   }
 
-  pagarParcela(numeroDaParcela: number, id: number) {
+  pagarParcela(clienteId: number,numeroDaParcela: number, id: number) {
     const pagarParcela = {
       id: id,
+      clienteId: clienteId,
       numeroParcela: numeroDaParcela
     }
     return this.http.post(`${this.baseUrl}/pagarparcela`, pagarParcela);
