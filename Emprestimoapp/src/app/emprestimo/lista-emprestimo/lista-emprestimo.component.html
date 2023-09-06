@@ -7,6 +7,7 @@
                 <th scope="col">Valor da Parcela</th>
                 <th scope="col">Total a Pagar</th>
                 <th scope="col">Ações</th>
+         
             </tr>
         </thead>
         <tbody>
@@ -16,7 +17,7 @@
                 <td> {{ emprestimos.valorDaParcela }} </td>
                 <td> {{ emprestimos.valorTotal }} </td>
                 <td>
-                    <button type="button" class="btn btn-primary details" [routerLink]="['/emprestimo/detalhesparcela/',emprestimos.id]">Visualizar Parcelas</button>
+                    <button type="button" class="btn btn-primary details" [routerLink]="['/emprestimo/detalhesparcela/',emprestimos.id,emprestimos.clienteId]">Visualizar Parcelas</button>
                 </td>
             </tr>
         </tbody>

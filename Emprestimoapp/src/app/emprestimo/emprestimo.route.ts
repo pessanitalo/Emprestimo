@@ -10,7 +10,7 @@ import { BoletoResolve } from './services/boleto.resolve';
 const routes: Routes = [
   { path: 'list', component: ListaEmprestimoComponent },
   { path: 'novoEmprestimo/:id', component: NovoEmprestimoComponent },
-  { path: 'detalhesparcela/:id', component: VisualizarParcelasComponent, resolve: { parcelas: BoletoResolve } }
+  { path: 'detalhesparcela/:id/:clienteId', component: VisualizarParcelasComponent, resolve: { parcelas: BoletoResolve } }
 ];
 
 @NgModule({

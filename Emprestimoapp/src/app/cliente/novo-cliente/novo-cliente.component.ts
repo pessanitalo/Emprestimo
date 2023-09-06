@@ -58,6 +58,6 @@ export class NovoClienteComponent implements OnInit {
   }
 
   processarFalha(fail: any) {
-    this.toastr.error( fail.error, 'Error!' );
+    this.toastr.warning( fail.error, 'Error!' );
    }
 }
