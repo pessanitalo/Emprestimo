@@ -48,5 +48,12 @@ namespace CredEmprestimo.Data.Repository
             return clientes;
         }
 
+        public decimal VerificarSaldo(int id)
+        {
+            var cliente = _context.Emprestimos.FirstOrDefault(x => x.Id == id);
+            var saldo = _context.Clientes.FirstOrDefault(x => x.Id == cliente.ClienteId);
+
+            return saldo.SaldoAtual;
+        }
     }
 }

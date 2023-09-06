@@ -21,9 +21,9 @@ namespace CredEmprestimoApi.Controllers
         {
             try
             {
+                if (_boletoService.ValidarSaldo(pagarParcela.ClienteId)) return BadRequest("Saldo Insuficiente");
+                
                 var parcela = _boletoService.PagarUmaParcela(pagarParcela.Id, pagarParcela.numeroParcela);
-                if (parcela == null) return NotFound(new ResultViewModel<BoletoEmprestimo>("Parcela não encontrada"));
-
                 return Ok(parcela);
             }
             catch

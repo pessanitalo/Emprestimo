@@ -54,5 +54,11 @@ namespace CredEmprestimo.Business.Services
 
             return detalhe;
         }
+
+        public decimal VerificarSaldo(int id)
+        {
+            var cliente =  _clienteRepository.VerificarSaldo(id);
+            return cliente;
+        }
     }
 }

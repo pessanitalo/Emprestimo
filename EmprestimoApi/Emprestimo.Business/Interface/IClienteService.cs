@@ -10,5 +10,6 @@ namespace CredEmprestimo.Business.Interface
         Cliente Create(Cliente cliente);        
         Cliente DetalhesCliente(int id);
         Task<bool> validar(Cliente cliente);
+        decimal VerificarSaldo(int id);
     }
 }
