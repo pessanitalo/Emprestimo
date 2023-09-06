@@ -1,6 +1,7 @@
 ﻿using CredEmprestimo.Business.Interface;
 using CredEmprestimo.Business.Models;
 using CredEmprestimo.Data.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace CredEmprestimo.Data.Repository
 {
@@ -65,9 +66,9 @@ namespace CredEmprestimo.Data.Repository
             var parcela = _context.BoletoEmprestimo.FirstOrDefault(x => x.EmprestimoId == id && x.NumeroParcela == numeroParcela);
             return parcela;
         }
-        public List<BoletoEmprestimo> VisualizarParcela(int id)
+        public async Task <IEnumerable<BoletoEmprestimo>> VisualizarParcela(int id)
         {
-            var parcela = _context.BoletoEmprestimo.ToList().Where(x => x.EmprestimoId == id).ToList();
+            var parcela = await _context.BoletoEmprestimo.Where(x => x.EmprestimoId == id).ToListAsync();
             return parcela.ToList();
         }
     }

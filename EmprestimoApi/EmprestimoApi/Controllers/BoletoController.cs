@@ -33,11 +33,11 @@ namespace CredEmprestimoApi.Controllers
         }
 
         [HttpGet("detalhesparcela/{id:int}")]
-        public IActionResult VisualizarParcela(int id)
+        public async Task<IActionResult> VisualizarParcela(int id)
         {
             try
             {
-                var parcelas = _boletoService.VisualizarParcela(id);
+                var parcelas = await _boletoService.VisualizarParcela(id);
                 return Ok(parcelas);
             }
             catch { return StatusCode(500, "Falha interna no servidor."); }

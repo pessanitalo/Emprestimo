@@ -37,17 +37,17 @@ namespace CredEmprestimo.Business.Services
 
         public bool ValidarSaldo(int id)
         {
-            var saldo = _clienteService.DetalhesCliente(id);
-            var sal = saldo.SaldoAtual;
-            var conta = saldo.Emprestimo.ValorDaParcela;
+            var detalhesCliente = _clienteService.DetalhesCliente(id);
+            var saldo = detalhesCliente.SaldoAtual;
+            var parcela = detalhesCliente.Emprestimo.ValorDaParcela;
 
-            if (sal < conta) return true;
+            if (saldo < parcela) return true;
             return false;
         }
 
-        public List<BoletoEmprestimo> VisualizarParcela(int id)
+        public async Task<IEnumerable<BoletoEmprestimo>> VisualizarParcela(int id)
         {
-            var parcela = _boletoRepository.VisualizarParcela(id);
+            var parcela = await _boletoRepository.VisualizarParcela(id);
             return parcela;
         }
     }
