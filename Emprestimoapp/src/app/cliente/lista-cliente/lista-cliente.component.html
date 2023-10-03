@@ -1,21 +1,21 @@
 <div class="container">
     <div class="row margin-top">
 
-        <div class="col-2 col-sm-2 btn-novo">
+        <div class="col-1 btn-novo">
             <button type="button" class="btn btn-secondary btn-sm" [routerLink]="['/cliente/new']">Novo Cliente</button>
         </div>
-        <div class=" col-3 col-sm-3">
+        <div class="col-2 btn-search">
             <input type="text" class="form-control" id="pesquisa" [(ngModel)]="cpf" placeholder="Pesquisar por cpf...."
                 mask="000.000.000-00">
         </div>
-        <div class="col-1 col-sm-1 ">
-            <button type="button" class="btn btn-primary spacing btn-sm" (click)="carregarLista()">Pesquisar</button>
+        <div class="col-1">
+            <button type="button" class="btn btn-primary btn-sm" (click)="carregarLista()">Pesquisar</button>
         </div>
 
     </div>
 
     <div class="table-responsive overflow">
-        <table class="table-sm table-striped table">
+        <table class="table table-sm table-striped table">
             <thead>
                 <tr>
                     <th scope="col">Nome</th>
@@ -31,8 +31,8 @@
                     <td>R$ {{ cliente.saldoAtual }} </td>
                     <td>
                         <button type="button" class="btn btn-success btn-sm"
-                            [routerLink]="['/emprestimo/novoEmprestimo', cliente.id]">Pedir Emprestimo</button>
-                        <button type="button" class="btn btn-primary spacing btn-sm"
+                            [routerLink]="['/emprestimo/novoEmprestimo', cliente.id]">+ Emprestimo</button>
+                        <button type="button" class="btn btn-primary btn-emprestimo btn-sm"
                             (click)="openModal(template, cliente)">Detalhes</button>
                     </td>
                 </tr>

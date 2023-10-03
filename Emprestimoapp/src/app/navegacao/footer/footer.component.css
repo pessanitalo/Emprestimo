@@ -12,10 +12,10 @@
     .footer {
         padding-top: 0px;
     }
-}
+} 
 
 @media (min-height: 769px) {
     .footer {
         padding-top: 15px;
     }
-}
+} 

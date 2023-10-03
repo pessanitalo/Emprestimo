@@ -4,4 +4,16 @@
 
 table{
     margin-top: 30px;
+    font-size: 12px;
+}
+
+@media  (max-height: 892px) {
+
+    .container {
+        scale: 0.9;
+    }
+
+    .table{
+        margin-top: -35px;
+    }
 }
