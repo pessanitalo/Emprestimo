@@ -22,4 +22,10 @@
             </tr>
         </tbody>
     </table>
+    <div class="pagination">
+        <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage"
+            [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" pageBtnClass="btn"
+            previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+        </pagination>
+    </div>
 </div>

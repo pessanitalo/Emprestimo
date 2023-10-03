@@ -1,11 +1,11 @@
 import { parcelas } from './../models/parcelas';
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Emprestimo } from '../models/emprestimo';
 import { EmprestimoService } from '../services/emprestimo.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { VisualizarParcelasComponent } from '../visualizar-parcelas/visualizar-parcelas.component';
+import { PaginatedResult, Pagination } from 'src/app/cliente/models/pagination';
 
 @Component({
   selector: 'app-lista-emprestimo',
@@ -18,6 +18,7 @@ export class ListaEmprestimoComponent implements OnInit {
   public parcelas!: parcelas[];
 
   public parcela!: parcelas;
+  public pagination = {} as Pagination;
 
   errorMessage!: string;
   modalRef?: BsModalRef;
@@ -31,15 +32,28 @@ export class ListaEmprestimoComponent implements OnInit {
     private route: Router,
     private modalService: BsModalService) { }
 
-  ngOnInit(): void {
-    this.getList();
+  public ngOnInit(): void {
+    this.pagination = {
+      currentPage: 1,
+      itemsPerPage: 12,
+      totalItems: 1,
+    } as Pagination;
+    this.carregarLista();
   }
 
-  getList() {
-    this.emprestimoService.list().subscribe(
-      emprestimos => this.emprestimos = emprestimos,
-      error => this.errorMessage
-    );
+  public pageChanged(event): void {
+    this.pagination.currentPage = event.page;
+    this.carregarLista();
+  }
+
+  public carregarLista(): void {
+    this.emprestimoService.pagination(this.pagination.currentPage, this.pagination.itemsPerPage).subscribe(
+      (paginatedResult: PaginatedResult<Emprestimo[]>) => {
+        this.emprestimos = paginatedResult.result;
+        this.pagination = paginatedResult.pagination;
+      },
+      falha => { console.log(falha) }
+    )
   }
 
   processarSucesso(response: any) {
