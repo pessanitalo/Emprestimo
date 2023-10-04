@@ -60,10 +60,8 @@ export class ListaClienteComponent implements OnInit {
         this.clientes = paginatedResult.result;
         this.pagination = paginatedResult.pagination;
       },
-      falha => {
-        this.toastr.error(falha, 'Error!');
-      });
-  }
+      falha => { this.processarFalha(falha) }
+  )}
 
   openModal(template: TemplateRef<any>, cliente: Cliente) {
     this.clienteService.obterPorId(cliente.id)
@@ -83,6 +81,6 @@ export class ListaClienteComponent implements OnInit {
   }
 
   processarFalha(fail: any) {
-    this.toastr.error(fail, 'Error!');
+    this.toastr.error(fail.statusText, 'Error!');
   }
 }
