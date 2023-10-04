@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListaEmprestimoComponent } from './lista-emprestimo/lista-emprestimo.component';
 import { NovoEmprestimoComponent } from './novo-emprestimo/novo-emprestimo.component';
 import { VisualizarParcelasComponent } from './visualizar-parcelas/visualizar-parcelas.component';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 
 
@@ -23,7 +24,7 @@ import { VisualizarParcelasComponent } from './visualizar-parcelas/visualizar-pa
     EmprestimoRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-
+    PaginationModule.forRoot(),
   ],
   providers:[
     EmprestimoService,

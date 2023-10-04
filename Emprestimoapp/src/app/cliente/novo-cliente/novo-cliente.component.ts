@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-
-import { ActivatedRoute, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Cliente } from '../models/cliente';
 import { ClienteServicesService } from '../services/cliente-services.service';
@@ -24,7 +23,6 @@ export class NovoClienteComponent implements OnInit {
     private clienteService: ClienteServicesService,
     private fb: UntypedFormBuilder,
     private router: Router,
-    private route: ActivatedRoute,
     private toastr: ToastrService,
     public validator: ValidatorsService
   ) { }

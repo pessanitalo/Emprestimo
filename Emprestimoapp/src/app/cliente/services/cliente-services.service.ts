@@ -25,10 +25,10 @@ export class ClienteServicesService {
       params = params.append('pageSize', itemsPerPage.toString());
     }
 
-    if (cpf != null && cpf != ''){
+    if (cpf != null && cpf != '') {
       params = params.append('cpf', cpf);
     }
-  
+
     return this.http
       .get<Cliente[]>(`${this.baseUrl}/list/${cpf}`, { observe: 'response', params })
       .pipe(
