@@ -19,9 +19,9 @@ namespace CredEmprestimo.Business.Services
             return clientes;
 
         }
-        public Task<PageList<Cliente>> Busca(PageParams pageParams, string cpf)
+        public async Task<PageList<Cliente>> Busca(PageParams pageParams, string cpf)
         {
-            var busca = _clienteRepository.Busca(pageParams, cpf);
+            var busca = await _clienteRepository.Busca(pageParams, cpf);
             return busca;
         }
 

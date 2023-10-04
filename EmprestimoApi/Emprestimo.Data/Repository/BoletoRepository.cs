@@ -1,5 +1,6 @@
 ﻿using CredEmprestimo.Business.Interface;
 using CredEmprestimo.Business.Models;
+using CredEmprestimo.Business.Models.Utils;
 using CredEmprestimo.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -45,6 +46,13 @@ namespace CredEmprestimo.Data.Repository
 
             _context.SaveChanges();
             return boleto;
+        }
+
+        public async Task<PageList<BoletoEmprestimo>> ListaBoletos(int id,PageParams pageParams)
+        {
+            var parcelas =  _context.BoletoEmprestimo.Where(x => x.EmprestimoId == id);
+
+            return await PageList<BoletoEmprestimo>.CreateAsync(parcelas, pageParams.PageNumber, pageParams.pageSize);
         }
 
         public BoletoEmprestimo PagarUmaParcela(int id, int numeroDaParcela)

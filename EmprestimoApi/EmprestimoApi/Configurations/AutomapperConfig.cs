@@ -10,7 +10,7 @@ namespace CredEmprestimoApi.Configurations
         {
             CreateMap<Cliente, ClienteViewModel>().ReverseMap();
             CreateMap<Emprestimo, EmprestimoViewModel>().ReverseMap();
-     
+            CreateMap<BoletoEmprestimo, BoletoViewModel>().ReverseMap();
         }
     }
 }

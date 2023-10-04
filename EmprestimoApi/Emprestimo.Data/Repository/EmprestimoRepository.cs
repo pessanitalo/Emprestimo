@@ -1,5 +1,6 @@
 ﻿using CredEmprestimo.Business.Interface;
 using CredEmprestimo.Business.Models;
+using CredEmprestimo.Business.Models.Utils;
 using CredEmprestimo.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -49,6 +50,13 @@ namespace CredEmprestimo.Data.Repository
             _context.SaveChanges();
 
             return emprestimo;
-        }    
+        }
+
+        public async Task<PageList<Emprestimo>> ListaEmprestimo(PageParams pageParams)
+        {
+            IQueryable<Emprestimo> query = _context.Emprestimos;
+
+            return await PageList<Emprestimo>.CreateAsync(query, pageParams.PageNumber, pageParams.pageSize);
+        }
     }
 }

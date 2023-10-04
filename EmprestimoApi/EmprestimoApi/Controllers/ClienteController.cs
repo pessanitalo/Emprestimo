@@ -31,7 +31,6 @@ namespace CredEmprestimo.Controllers
                 if (!string.IsNullOrEmpty(cpf))
                 {
                     var cliente = await _ClienteService.Busca(pageParams, cpf);
-
                     var retorno = _mapper.Map<PageList<ClienteViewModel>>(cliente);
 
                     pagination(cliente, retorno);
@@ -83,7 +82,7 @@ namespace CredEmprestimo.Controllers
             
 
         }
-        private void pagination(PageList<Cliente> clientes, PageList<ClienteViewModel> filtro)
+        private void pagination<T,U>(PageList<T> clientes, PageList<U> filtro)
         {
             filtro.CurrentPage = clientes.CurrentPage;
             filtro.TotalPages = clientes.TotalPages;

@@ -1,5 +1,6 @@
 ﻿using CredEmprestimo.Business.Interface;
 using CredEmprestimo.Business.Models;
+using CredEmprestimo.Business.Models.Utils;
 
 namespace CredEmprestimo.Business.Services
 {
@@ -17,6 +18,13 @@ namespace CredEmprestimo.Business.Services
         public BoletoEmprestimo GerarBoleto(int id)
         {
             var boletos = _boletoRepository.GerarBoleto(id);
+            return boletos;
+        }
+
+        public async Task<PageList<BoletoEmprestimo>> ListaBoletos(int id, PageParams pageParams)
+        {
+            var boletos = await _boletoRepository.ListaBoletos(id, pageParams);
+
             return boletos;
         }
 
@@ -50,5 +58,6 @@ namespace CredEmprestimo.Business.Services
             var parcela = await _boletoRepository.VisualizarParcela(id);
             return parcela;
         }
+
     }
 }
