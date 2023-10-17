@@ -10,7 +10,7 @@ namespace CredEmprestimo.Business.Interface
         Task<PageList<Cliente>> ListaClientes(PageParams pageParams);
         Task<PageList<Cliente>> Busca(PageParams pageParams, string cpf);
         Cliente DetalhesCliente(int id);
-        Task <IEnumerable> Validar(string cpf);
+        Task<IEnumerable> Validar(string cpf);
         decimal VerificarSaldo(int id);
     }
 }

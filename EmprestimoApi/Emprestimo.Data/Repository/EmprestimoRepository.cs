@@ -33,7 +33,7 @@ namespace CredEmprestimo.Data.Repository
         }
         public Emprestimo SimularEmprestimo(decimal ValorEmprestimo, int QuantidadeParcelas)
         {
-            var emprestimo = new Emprestimo();
+            var emprestimo = new Emprestimo(ValorEmprestimo, QuantidadeParcelas);
             emprestimo.SimularEmprestimo(ValorEmprestimo, QuantidadeParcelas);
             return emprestimo;
         }
@@ -41,7 +41,7 @@ namespace CredEmprestimo.Data.Repository
 
         public Emprestimo NovoEmprestimo(decimal ValorEmprestimo, int QuantidadeParcelas, int id)
         {
-            var emprestimo = new Emprestimo();
+            var emprestimo = new Emprestimo(ValorEmprestimo, QuantidadeParcelas);
             var cliente = _clienteRepository.DetalhesCliente(id);
 
             emprestimo.emprestimo(ValorEmprestimo, QuantidadeParcelas, cliente);

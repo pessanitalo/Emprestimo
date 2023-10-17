@@ -1,4 +1,6 @@
-﻿namespace CredEmprestimo.Business.Models
+﻿using CredEmprestimo.Business.Validation;
+
+namespace CredEmprestimo.Business.Models
 {
     public class Emprestimo
     {
@@ -19,6 +21,21 @@
         public int ClienteId { get; set; }
         public Cliente Cliente { get; set; }
 
+        public Emprestimo(decimal valorEmprestimo, int quantidadeParcelas)
+        {
+            ValorEmprestimo = valorEmprestimo;
+            QuantidadeParcelas = quantidadeParcelas;
+            ValidateDomain(valorEmprestimo, quantidadeParcelas);
+        }
+        private void ValidateDomain(decimal valorEmprestimo,int quantidadeParcelas)
+        {
+            DomainExceptionValidation.When(valorEmprestimo < 100, "O valor do emprestimo deve ser maior que cem reais");
+            DomainExceptionValidation.When(quantidadeParcelas < 2, "A quantidade de parcelas deve ser maior que duas vezes.");
+
+
+            ValorEmprestimo = valorEmprestimo;
+            QuantidadeParcelas = QuantidadeParcelas;
+        }
         public decimal valorTotalComJuros(decimal valorEmprestimo)
         {
             decimal juros = 0.39m;
