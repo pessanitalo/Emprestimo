@@ -4,11 +4,11 @@
         <div class="col-1 btn-novo">
             <button type="button" class="btn btn-secondary btn-sm" [routerLink]="['/cliente/new']">Novo Cliente</button>
         </div>
-        <div class="col-2 btn-search">
+        <div class="col-4 btn-search">
             <input type="text" class="form-control" id="pesquisa" [(ngModel)]="cpf" placeholder="Pesquisar por cpf...."
                 mask="000.000.000-00">
         </div>
-        <div class="col-1">
+        <div class="col-1 btn-pesquisa">
             <button type="button" class="btn btn-primary btn-sm" (click)="carregarLista()">Pesquisar</button>
         </div>
 
