@@ -12,3 +12,16 @@ a {
         padding-top: 0px;
     }
 }
+
+.margin-top, .top{
+    margin-top: 20px;
+}
+.btn-menu{
+    background-color: rgb(189, 34, 176) ;
+}
+
+.card-body{
+    background-color: blanchedalmond;
+}
+
+/* opção 1 rgb(74, 7, 141) */
