@@ -1,3 +1,11 @@
 .background{
-    background-color: rgb(202, 165, 240);
+    background-color: rgb(185, 177, 177);
+}
+
+tr{
+    text-align: center;
+}
+
+.footer, .header {
+    background-color: rgb(99, 99, 99);
 }

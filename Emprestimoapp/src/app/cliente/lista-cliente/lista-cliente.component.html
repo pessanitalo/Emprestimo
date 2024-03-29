@@ -13,9 +13,8 @@
         </div>
 
     </div>
-
-    <div class="table-responsive overflow table">
-        <table class="table table-sm table-striped">
+    <div class="table">
+        <table class="table table-sm table-responsive">
             <thead>
                 <tr>
                     <th scope="col">Nome</th>
@@ -39,12 +38,12 @@
             </tbody>
         </table>
     </div>
-    <div class="pagination">
-        <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage"
-            [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" pageBtnClass="btn"
-            previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
-        </pagination>
-    </div>
+
+    <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage"
+        [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" pageBtnClass="btn"
+        previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+    </pagination>
+
 </div>
 
 <ng-template #template>
