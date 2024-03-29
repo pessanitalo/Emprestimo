@@ -17,6 +17,8 @@ import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform
 import { ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
 import { EmprestimoResolve } from './emprestimo/services/emprestimo.resolve';
 import { BoletoResolve } from './emprestimo/services/boleto.resolve';
+import { HeaderComponent } from './navegacao/header/header.component';
+
 
 
 // const maskConfig: Partial<IConfig> = {
@@ -28,7 +30,9 @@ import { BoletoResolve } from './emprestimo/services/boleto.resolve';
     AppComponent,
     FooterComponent,
     HomeComponent,
-    MenuComponent
+    MenuComponent,
+    HeaderComponent,
+
   ],
   imports: [
     BrowserModule,
