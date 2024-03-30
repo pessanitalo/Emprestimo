@@ -9,3 +9,14 @@
 form{
     margin-top: 30px;
 }
+
+.fundo{
+    padding: 25px 25px 40px 25px;
+    background-color: rgb(54, 50, 48);
+    border-radius: 25px;
+    color: white;
+}
+
+.top{
+    margin-top: 120px;
+}

@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container top">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4 fundo">
             <form novalidate (ngSubmit)="novoCliente()" [formGroup]="Form">
     
                 <div class="form-group">
@@ -52,7 +52,7 @@
                 </div>
     
                 <div class="form-group margin-top">
-                    <button type="submit" class="btn btn-primary save" [disabled]="!Form.valid">Salvar</button>
+                    <button type="submit" class="btn btn-light save" [disabled]="!Form.valid">Salvar</button>
                     <button type="button" class="btn btn-success" [routerLink]="['/cliente/list']">Voltar</button>
                 </div>
             </form>

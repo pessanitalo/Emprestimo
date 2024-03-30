@@ -1,23 +1,31 @@
-.goBack{
+.goBack {
     margin-left: 5px;
 }
 
-.margin-top{
+.margin-top {
     margin-top: 10px;
 }
 
-.margin-top-btn{
+.margin-top-btn {
     margin-top: 10px;
 }
 
-.spacing{
+.spacing {
     margin-right: 580px;
 }
 
-.btn-simular{
+.btn-simular {
     margin-right: 10px;
 }
 
-form{
-margin-top: 30px;
+form {
+    margin-top: 30px;
+}
+
+.fundo {
+    padding: 20px 20px 30px 25px;
+    background-color: rgb(54, 50, 48);
+    border-radius: 25px;
+    color: white;
+    margin-top: 150px;
 }
