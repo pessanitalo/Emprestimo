@@ -29,13 +29,13 @@
 
 
 <ng-template #template>
-    <div class="modal-header">
+    <div class="modal-header header-parcela">
         <h4 class="modal-title pull-left">Deseja pagar parcela de valor: R$ {{ this.valor }}</h4>
         <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="closeModal()">
             <span aria-hidden="true" class="visually-hidden">&times;</span>
         </button>
     </div>
-    <div class="modal-header">
+    <div class="modal-header card-parcela">
         <button type="button" class="btn btn-primary" (click)="pagarParcela(parcela)">Pagar</button>
         <button type="button" class="btn btn-danger spacing" (click)="closeModal()">Cancelar</button>
     </div>

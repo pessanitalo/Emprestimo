@@ -34,18 +34,18 @@
 
 
 <ng-template #template>
-    <div class="modal-header">
+    <div class="modal-header header-card">
         <h4 class="modal-title pull-left">Simular</h4>
         <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
             <span aria-hidden="true" class="visually-hidden">&times;</span>
         </button>
     </div>
-    <div class="modal-body">
+    <div class="modal-body body-card">
         <p>Valor do Emprestimo: R$ {{ emprestimos.valorEmprestimo }}</p>
         <p>Valor da Parcela: R$ {{ emprestimos.valorDaParcela }}</p>
         <p>Valor Total do Emprestimo: R$ {{ emprestimos.valorTotal }}</p>
     </div>
-    <div class="modal-header">
+    <div class="modal-header header-card">
         <button type="submit" class="btn btn-primary" (click)="novoEmprestimo()">Confirmar</button>
         <button type="button" class="btn btn-danger spacing" (click)="modalRef?.hide()">Cancelar</button>
     </div>

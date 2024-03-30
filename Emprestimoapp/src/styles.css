@@ -1,4 +1,4 @@
-.background{
+.background, .body-card, .body-card-cliente, .card-parcela{
     background-color: rgb(185, 177, 177);
 }
 
@@ -6,6 +6,10 @@ tr{
     text-align: center;
 }
 
-.footer, .header {
+.footer, .header, .header-card, .header-card-cliente, .header-parcela {
     background-color: rgb(99, 99, 99);
+}
+
+.header-card-cliente, .header-parcela{
+    color: white;
 }
