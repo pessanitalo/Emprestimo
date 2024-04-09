@@ -1,9 +1,11 @@
 pipeline{
     agent any
 
-    stages{
+    stages {
         stage('Inicial'){
-          
+          steps{
+              echo 'Teste Pipeline'
+          }
         }
     }    
 }
