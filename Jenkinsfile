@@ -13,7 +13,7 @@ pipeline{
          stage('Docker Build'){
             steps{
                  script{
-                    dockerapp = docker.build("italopessan/testeApi:${env.BUILD_ID}", "-f ./app/Emprestimoapp/Dockerfile .")
+                    dockerapp = docker.build("italopessan/testeApi:${env.BUILD_ID}", "-f Emprestimoapp/Dockerfile .")
                 }
             }
         }
