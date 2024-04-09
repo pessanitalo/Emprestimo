@@ -14,7 +14,7 @@ pipeline{
             steps{
                  script{
                     dockerapp = docker.build("italopessan/testeApi:${env.BUILD_ID}",
-                    '-f ./src/Emprestimoapp/Dockerfile .')
+                    '-f ./Emprestimoapp/Dockerfile .')
                 }
             }
         }
