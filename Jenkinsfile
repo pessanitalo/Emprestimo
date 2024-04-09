@@ -14,11 +14,10 @@ pipeline{
             steps{
                  script{
                     dockerapp = docker.build("italopessan/testeApi:${env.BUILD_ID}",
-                    '-f ./Emprestimoapp/Dockerfile .')
+                    '-f /Emprestimoapp/Dockerfile .')
                 }
             }
         }
-
 
          stage('Docker Push Image'){
             steps{
