@@ -2,7 +2,6 @@
 using CredEmprestimo.Business.Interface;
 using CredEmprestimo.Business.Models;
 using CredEmprestimo.Business.Models.Utils;
-using CredEmprestimo.Business.Services;
 using CredEmprestimoApi.Extensions;
 using CredEmprestimoApi.ViewlModews;
 using Microsoft.AspNetCore.Mvc;
@@ -27,20 +26,20 @@ namespace EmprestimoApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult EmprestimoDto(EmprestimoViewModel emprestimodto)
+        public IActionResult EmprestimoDto([FromBody]EmprestimoViewModel emprestimodto)
         {
             try
             {
                 var emprestimo = _mapper.Map<Emprestimo>(emprestimodto);
                 var result = _emprestimoService.NovoEmprestimo(emprestimo.ValorEmprestimo, emprestimo.QuantidadeParcelas,
                               emprestimo.ClienteId);
-                var boleto = _boletoService.GerarBoleto(result.Id);
+                var boleto = _boletoService.GerarBoleto(result.EmprestimoId);
 
                 return Ok(result);
             }
-            catch
+            catch(Exception ex) 
             {
-                return StatusCode(500, new ResultViewModel<List<Emprestimo>>("Falha interna no servidor"));
+                return BadRequest(ex.Message);
             }
         }
 
@@ -51,10 +50,8 @@ namespace EmprestimoApi.Controllers
             try
             {            
                 var clientes = await _emprestimoService.ListaEmprestimo(pageParams);
-
                 var filtro = _mapper.Map<PageList<EmprestimoViewModel>>(clientes);
                 pagination(clientes, filtro);
-
                 return Ok(clientes);
             }
             catch
@@ -70,12 +67,11 @@ namespace EmprestimoApi.Controllers
             try
             {
                 var list = await _emprestimoService.ListarEmprestimos();
-
                 return Ok(list);
             }
-            catch
+            catch (Exception ex)
             {
-                return StatusCode(500, new ResultViewModel<List<Emprestimo>>("Falha interna no servidor"));
+                return BadRequest(ex.Message);
             }
         }
 

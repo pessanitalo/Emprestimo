@@ -1,8 +1,11 @@
-﻿namespace CredEmprestimo.Business.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CredEmprestimo.Business.Models
 {
     public class BoletoEmprestimo
     {
-        public int Id { get; set; }
+        [Key]
+        public int BoletoId { get; set; }
         public int NumeroParcela { get; set; }
         public decimal ValorDaParcela { get; set; }
         public DateTime DataDePagamento { get; set; }

@@ -31,8 +31,8 @@ namespace CredEmprestimo.Data.Repository
         }
         public Cliente DetalhesCliente(int id)
         {
-            var consulta = _context.Clientes.Include(c => c.Emprestimo)
-               .Where(x => x.Id == id).FirstOrDefault(X => X.Id == id);
+            var consulta = _context.Clientes.
+               FirstOrDefault(X => X.ClienteId == id);
 
             return consulta;
         }
@@ -50,8 +50,8 @@ namespace CredEmprestimo.Data.Repository
 
         public decimal VerificarSaldo(int id)
         {
-            var cliente = _context.Emprestimos.FirstOrDefault(x => x.Id == id);
-            var saldo = _context.Clientes.FirstOrDefault(x => x.Id == cliente.ClienteId);
+            var cliente = _context.Emprestimos.FirstOrDefault(x => x.EmprestimoId == id);
+            var saldo = _context.Clientes.FirstOrDefault(x => x.ClienteId == cliente.ClienteId);
 
             return saldo.SaldoAtual;
         }

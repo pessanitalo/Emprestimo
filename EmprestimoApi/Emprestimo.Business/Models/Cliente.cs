@@ -1,20 +1,26 @@
 ﻿using CredEmprestimo.Business.Validation;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CredEmprestimo.Business.Models
 {
+    [Table("Cliente")]
     public class Cliente
     {
-        public int Id { get; set; }
+        [Key]
+        public int ClienteId { get; set; }
         public string Nome { get; set; }
         public int Idade { get; set; }
         public string Cpf { get; set; }
         public double Score { get; set; }
         public decimal SaldoAtual { get; set; }
+        public Emprestimo Emprestimo { get; set; }
 
-
+        public Cliente() { }
+      
         public Cliente(int id, string nome, int idade, string cpf, double score, decimal saldoAtual)
         {
-            Id = id;
+            ClienteId = id;
             Nome = nome;
             Idade = idade;
             Score = score;
@@ -36,7 +42,5 @@ namespace CredEmprestimo.Business.Models
             Score = score;
             SaldoAtual = saldoAtual;
         }
-
-        public Emprestimo Emprestimo { get; set; }
     }
 }

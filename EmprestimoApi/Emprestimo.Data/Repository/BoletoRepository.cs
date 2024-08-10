@@ -33,9 +33,9 @@ namespace CredEmprestimo.Data.Repository
 
                 boleto = new BoletoEmprestimo
                 {
-                    Id = 0,
+                    BoletoId = 0,
                     NumeroParcela = numeroParcela + i,
-                    EmprestimoId = emprestimo.Id,
+                    EmprestimoId = emprestimo.EmprestimoId,
                     ValorDaParcela = emprestimo.ValorDaParcela,
                     DataDePagamento = dataVencimentoParcela.AddDays(30)
                 };

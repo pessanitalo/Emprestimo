@@ -1,10 +1,14 @@
 ﻿using CredEmprestimo.Business.Validation;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CredEmprestimo.Business.Models
 {
+    [Table("Emprestimo")]
     public class Emprestimo
     {
-        public int Id { get; set; }
+        [Key]
+        public int EmprestimoId { get; set; }
 
         public decimal ValorEmprestimo { get; set; }
 
@@ -17,7 +21,7 @@ namespace CredEmprestimo.Business.Models
         public DateTime DataAquisicaoEmprestimo { get; set; }
 
         public IList<BoletoEmprestimo> BoletoEmprestimo { get; set; }
-
+        [ForeignKey(nameof(EmprestimoId))]
         public int ClienteId { get; set; }
         public Cliente Cliente { get; set; }
 
@@ -27,7 +31,7 @@ namespace CredEmprestimo.Business.Models
             QuantidadeParcelas = quantidadeParcelas;
             ValidateDomain(valorEmprestimo, quantidadeParcelas);
         }
-        private void ValidateDomain(decimal valorEmprestimo,int quantidadeParcelas)
+        private void ValidateDomain(decimal valorEmprestimo, int quantidadeParcelas)
         {
             DomainExceptionValidation.When(valorEmprestimo < 100, "O valor do emprestimo deve ser maior que cem reais");
             DomainExceptionValidation.When(quantidadeParcelas < 2, "A quantidade de parcelas deve ser maior que duas vezes.");

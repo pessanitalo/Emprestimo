@@ -27,7 +27,7 @@ namespace CredEmprestimo.Data.Repository
         public Emprestimo DetalhesEmprestimo(int id)
         {
             var emprestimo = _context.Emprestimos.Include(c => c.Cliente)
-            .Where(x => x.Id == id).FirstOrDefault(X => X.Id == id);
+            .Where(x => x.EmprestimoId == id).FirstOrDefault(X => X.EmprestimoId == id);
 
             return emprestimo;
         }

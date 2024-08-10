@@ -2,9 +2,11 @@
 using CredEmprestimo.Business.Interface;
 using CredEmprestimo.Business.Models;
 using CredEmprestimo.Business.Models.Utils;
+using CredEmprestimo.Data.Context;
 using CredEmprestimoApi.Extensions;
 using CredEmprestimoApi.ViewlModews;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CredEmprestimo.Controllers
 {
@@ -14,41 +16,22 @@ namespace CredEmprestimo.Controllers
     {
 
         private readonly IClienteService _ClienteService;
+        private readonly DataContext _contex;
         private readonly IMapper _mapper;
 
-        public ClienteController(IClienteService clienteService, IMapper mapper)
+        public ClienteController(IClienteService clienteService, IMapper mapper, DataContext contex)
         {
             _ClienteService = clienteService;
+            _contex = contex;
             _mapper = mapper;
         }
 
         [HttpGet]
-        [Route("list/{cpf?}")]
-        public async Task<IActionResult> filtro(string cpf, [FromQuery] PageParams pageParams)
+        [Route("list")]
+        public async Task<IActionResult> filtro()
         {
-            try
-            {
-                if (!string.IsNullOrEmpty(cpf))
-                {
-                    var cliente = await _ClienteService.Busca(pageParams, cpf);
-                    var retorno = _mapper.Map<PageList<ClienteViewModel>>(cliente);
-
-                    pagination(cliente, retorno);
-                    return Ok(cliente);
-                }
-
-                var clientes = await _ClienteService.ListaClientes(pageParams);
-
-                var filtro = _mapper.Map<PageList<ClienteViewModel>>(clientes);
-                pagination(clientes, filtro);
-
-                return Ok(clientes);
-            }
-            catch
-            {
-                return StatusCode(500, new ResultViewModel<List<Cliente>>("Falha interna no servidor"));
-            }
-
+            var list = await _contex.Clientes.ToListAsync();
+            return Ok(list);
         }
 
         [HttpGet]
@@ -58,9 +41,7 @@ namespace CredEmprestimo.Controllers
             try
             {
                 var consulta = _ClienteService.DetalhesCliente(id);
-
                 if (consulta == null) return NotFound(new ResultViewModel<Cliente>("Cliente não encontrado"));
-
                 return Ok(consulta);
             }
             catch
@@ -72,17 +53,12 @@ namespace CredEmprestimo.Controllers
         [HttpPost]
         public async Task<IActionResult> create(ClienteViewModel clienteDto)
         {
-            
-                var cliente = _mapper.Map<Cliente>(clienteDto);
-
-                if (await _ClienteService.validar(cliente)) return BadRequest("Já existe um usuário com esse cpf!");
-
-                var retorno = _ClienteService.Create(cliente);
-                return Ok(retorno);
-            
-
+            var cliente = _mapper.Map<Cliente>(clienteDto);
+            if (await _ClienteService.validar(cliente)) return BadRequest("Já existe um usuário com esse cpf!");
+            var retorno = _ClienteService.Create(cliente);
+            return Ok(retorno);
         }
-        private void pagination<T,U>(PageList<T> clientes, PageList<U> filtro)
+        private void pagination<T, U>(PageList<T> clientes, PageList<U> filtro)
         {
             filtro.CurrentPage = clientes.CurrentPage;
             filtro.TotalPages = clientes.TotalPages;
