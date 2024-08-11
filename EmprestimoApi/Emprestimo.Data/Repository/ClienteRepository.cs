@@ -2,8 +2,10 @@
 using CredEmprestimo.Business.Models;
 using CredEmprestimo.Business.Models.Utils;
 using CredEmprestimo.Data.Context;
+using CredEmprestimo.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
+
 
 namespace CredEmprestimo.Data.Repository
 {
@@ -14,13 +16,6 @@ namespace CredEmprestimo.Data.Repository
         public ClienteRepository(DataContext context)
         {
             _context = context;
-        }
-
-        public async Task<PageList<Cliente>> ListaClientes(PageParams pageParams)
-        {
-            IQueryable<Cliente> query = _context.Clientes;
-
-            return await PageList<Cliente>.CreateAsync(query, pageParams.PageNumber, pageParams.pageSize);
         }
 
         public async Task<PageList<Cliente>> Busca(PageParams pageParams, string cpf)
@@ -54,6 +49,25 @@ namespace CredEmprestimo.Data.Repository
             var saldo = _context.Clientes.FirstOrDefault(x => x.ClienteId == cliente.ClienteId);
 
             return saldo.SaldoAtual;
+        }
+
+        public async Task<PagedResult<Cliente>> ListaCliente(int pageSize, int pageIndex, string cpf)
+        {
+            var cclientesQuery = _context.Clientes.AsQueryable();
+
+            cclientesQuery = cclientesQuery
+                    .WhereIf(!string.IsNullOrEmpty(cpf), p => p.Cpf == cpf);
+
+            var catalog = await cclientesQuery.AsNoTrackingWithIdentityResolution()
+                                      .Skip(pageSize * (pageIndex - 1))
+                                      .Take(pageSize).ToListAsync();
+
+            return new PagedResult<Cliente>()
+            {
+                List = catalog,
+                PageIndex = pageIndex,
+                PageSize = pageSize,
+            };
         }
     }
 }
