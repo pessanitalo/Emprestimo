@@ -20,9 +20,7 @@ namespace CredEmprestimo.Data.Repository
         public BoletoEmprestimo GerarBoleto(int id)
         {
             var emprestimo = _emprestimoRepository.DetalhesEmprestimo(id);
-
             var boleto = new BoletoEmprestimo();
-
             var dataVencimentoParcela = emprestimo.DataAquisicaoEmprestimo;
             var dataParcela = DateTime.Now;
             var numeroParcela = 1;
@@ -54,6 +52,23 @@ namespace CredEmprestimo.Data.Repository
 
             return await PageList<BoletoEmprestimo>.CreateAsync(parcelas, pageParams.PageNumber, pageParams.pageSize);
         }
+
+        //public async Task<PagedResult<BoletoEmprestimo>> ListaBoletos(int pageSize, int pageIndex)
+        //{
+        //    var boletosQuery = _context.BoletoEmprestimo.AsQueryable();
+
+
+        //    var boletos = await boletosQuery.AsNoTrackingWithIdentityResolution()
+        //                              .Skip(pageSize * (pageIndex - 1))
+        //                              .Take(pageSize).ToListAsync();
+
+        //    return new PagedResult<BoletoEmprestimo>()
+        //    {
+        //        List = boletos,
+        //        PageIndex = pageIndex,
+        //        PageSize = pageSize,
+        //    };
+        //}
 
         public BoletoEmprestimo PagarUmaParcela(int id, int numeroDaParcela)
         {

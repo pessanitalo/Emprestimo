@@ -1,6 +1,5 @@
 ﻿using CredEmprestimo.Business.Interface;
 using CredEmprestimo.Business.Models;
-using CredEmprestimo.Business.Models.Utils;
 
 namespace CredEmprestimo.Business.Services
 {
@@ -18,17 +17,9 @@ namespace CredEmprestimo.Business.Services
             var detalhes = _emprestimoRepository.DetalhesEmprestimo(id);
             return detalhes;
         }
-
-        public async Task<PageList<Emprestimo>> ListaEmprestimo(PageParams pageParams)
+        public async Task<PagedResult<Emprestimo>> ListarEmprestimos(int pageSize, int pageIndex)
         {
-            var emprestimos = await _emprestimoRepository.ListaEmprestimo(pageParams);
-            return emprestimos;
-        }
-
-        public Task<IEnumerable<Emprestimo>> ListarEmprestimos()
-        {
-            var lista = _emprestimoRepository.ListarEmprestimos();
-            return lista;
+            return await _emprestimoRepository.ListarEmprestimos(pageSize, pageIndex);
         }
 
         public Emprestimo NovoEmprestimo(decimal ValorEmprestimo, int QuantidadeParcelas, int id)

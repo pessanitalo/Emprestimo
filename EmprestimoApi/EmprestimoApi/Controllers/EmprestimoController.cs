@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using CredEmprestimo.Business.Interface;
 using CredEmprestimo.Business.Models;
-using CredEmprestimo.Business.Models.Utils;
-using CredEmprestimoApi.Extensions;
 using CredEmprestimoApi.ViewlModews;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,36 +42,14 @@ namespace EmprestimoApi.Controllers
         }
 
         [HttpGet]
-        [Route("pagination")]
-        public async Task<IActionResult> filtro([FromQuery] PageParams pageParams)
+        [Route("listaEmprestimos")]
+        public async Task<IActionResult> listarEmprestimos(int pageSize, int pageIndex)
         {
-            try
-            {            
-                var clientes = await _emprestimoService.ListaEmprestimo(pageParams);
-                var filtro = _mapper.Map<PageList<EmprestimoViewModel>>(clientes);
-                pagination(clientes, filtro);
-                return Ok(clientes);
-            }
-            catch
-            {
-                return StatusCode(500, new ResultViewModel<List<Cliente>>("Falha interna no servidor"));
-            }
 
+            var lista = await _emprestimoService.ListarEmprestimos(pageSize, pageIndex);
+            return Ok(lista);
         }
 
-        [HttpGet("list")]
-        public async Task<IActionResult> list()
-        {
-            try
-            {
-                var list = await _emprestimoService.ListarEmprestimos();
-                return Ok(list);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
 
         [HttpGet("detalhes/{id:int}")]
         public IActionResult Detalhes(int id)
@@ -106,14 +82,5 @@ namespace EmprestimoApi.Controllers
             }
         }
 
-        private void pagination<T, U>(PageList<T> clientes, PageList<U> filtro)
-        {
-            filtro.CurrentPage = clientes.CurrentPage;
-            filtro.TotalPages = clientes.TotalPages;
-            filtro.PageSize = clientes.PageSize;
-            filtro.TotalCount = clientes.TotalCount;
-
-            Response.AddPagination(filtro.CurrentPage, filtro.PageSize, filtro.TotalCount, filtro.TotalPages);
-        }
     }
 }
