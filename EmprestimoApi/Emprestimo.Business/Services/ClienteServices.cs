@@ -1,6 +1,5 @@
 ﻿using CredEmprestimo.Business.Interface;
 using CredEmprestimo.Business.Models;
-using CredEmprestimo.Business.Models.Utils;
 
 namespace CredEmprestimo.Business.Services
 {
@@ -12,23 +11,9 @@ namespace CredEmprestimo.Business.Services
             _clienteRepository = clienteRepository;
         }
 
-        public async Task<PageList<Cliente>> ListaClientes(PageParams pageParams)
-        {
-            var clientes = await _clienteRepository.ListaClientes(pageParams);
-
-            return clientes;
-
-        }
-        public async Task<PageList<Cliente>> Busca(PageParams pageParams, string cpf)
-        {
-            var busca = await _clienteRepository.Busca(pageParams, cpf);
-            return busca;
-        }
-
         public Cliente Create(Cliente cliente)
         {
             var novocliente = _clienteRepository.Create(cliente);
-
             return novocliente;
         }
 
@@ -51,7 +36,6 @@ namespace CredEmprestimo.Business.Services
         public Cliente DetalhesCliente(int id)
         {
             var detalhe = _clienteRepository.DetalhesCliente(id);
-
             return detalhe;
         }
 
@@ -59,6 +43,11 @@ namespace CredEmprestimo.Business.Services
         {
             var cliente =  _clienteRepository.VerificarSaldo(id);
             return cliente;
+        }
+
+        public async Task<PagedResult<Cliente>> ListaCliente(int pageSize, int pageIndex, string cpf)
+        {
+            return await _clienteRepository.ListaCliente(pageSize, pageIndex, cpf);
         }
     }
 }
