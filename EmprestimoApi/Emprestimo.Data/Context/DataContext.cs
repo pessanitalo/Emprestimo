@@ -9,6 +9,7 @@ namespace CredEmprestimo.Data.Context
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Emprestimo> Emprestimos { get; set; }
         public DbSet<BoletoEmprestimo> BoletoEmprestimo { get; set; }
+        public DbSet<Saque> Saque { get; set; }
 
     }
 }

@@ -15,6 +15,7 @@ namespace CredEmprestimo.Business.Models
         public double Score { get; set; }
         public decimal SaldoAtual { get; set; }
         public Emprestimo Emprestimo { get; set; }
+        public Saque Saque { get; set; }
 
         public Cliente() { }
       

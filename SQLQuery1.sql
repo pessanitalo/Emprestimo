@@ -1,4 +1,4 @@
-
+use  emprestimodb
 
 select * from Cliente
 select * from Emprestimo
@@ -40,5 +40,15 @@ create table BoletoEmprestimo
 	DataDePagamento Date not null,
 	constraint fk_EmprestimoId_cliente foreign key (EmprestimoId)
 	references Emprestimo
+);
+
+create table Saque
+(
+	SaqueId int primary key identity,
+	ClienteId int not null,
+	ValorSaque decimal not null,
+	DataSaque datetime not null,
+	constraint fk_SaqueId_cliente foreign key (ClienteId)
+	references Cliente
 );
 
