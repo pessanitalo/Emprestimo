@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CredEmprestimo.Business.Models
+﻿namespace CredEmprestimo.Business.Models
 {
     public class PagedResult<T> where T : class
     {

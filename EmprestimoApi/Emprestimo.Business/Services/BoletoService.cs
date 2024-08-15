@@ -28,6 +28,11 @@ namespace CredEmprestimo.Business.Services
             return boletos;
         }
 
+        //public async Task<PagedResult<BoletoEmprestimo>> ListaBoletos(int pageSize, int pageIndex)
+        //{
+        //    return await _boletoRepository.ListaBoletos(pageSize, pageIndex);
+        //}
+
         public BoletoEmprestimo PagarUmaParcela(int id, int numeroDaParcela)
         {
             try

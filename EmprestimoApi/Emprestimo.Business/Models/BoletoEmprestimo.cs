@@ -9,7 +9,6 @@ namespace CredEmprestimo.Business.Models
         public int NumeroParcela { get; set; }
         public decimal ValorDaParcela { get; set; }
         public DateTime DataDePagamento { get; set; }
-
         public int EmprestimoId { get; set; }
         public Emprestimo Emprestimo { get; set; }
     }

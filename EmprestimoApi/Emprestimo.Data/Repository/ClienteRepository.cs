@@ -53,12 +53,12 @@ namespace CredEmprestimo.Data.Repository
 
         public async Task<PagedResult<Cliente>> ListaCliente(int pageSize, int pageIndex, string cpf)
         {
-            var cclientesQuery = _context.Clientes.AsQueryable();
+            var clientesQuery = _context.Clientes.AsQueryable();
 
-            cclientesQuery = cclientesQuery
+            clientesQuery = clientesQuery
                     .WhereIf(!string.IsNullOrEmpty(cpf), p => p.Cpf == cpf);
 
-            var catalog = await cclientesQuery.AsNoTrackingWithIdentityResolution()
+            var catalog = await clientesQuery.AsNoTrackingWithIdentityResolution()
                                       .Skip(pageSize * (pageIndex - 1))
                                       .Take(pageSize).ToListAsync();
 
