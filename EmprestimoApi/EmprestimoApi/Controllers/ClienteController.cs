@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CredEmprestimo.Business.Interface;
 using CredEmprestimo.Business.Models;
+using CredEmprestimo.Data.Repository;
 using CredEmprestimoApi.ViewlModews;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,16 +16,17 @@ namespace CredEmprestimo.Controllers
         private readonly IClienteRepository _clienteRepository;
         private readonly IMapper _mapper;
 
-        public ClienteController(IClienteService clienteService, IMapper mapper)
+        public ClienteController(IClienteService clienteService, IMapper mapper, IClienteRepository clienteRepository)
         {
             _ClienteService = clienteService;
+            _clienteRepository = clienteRepository;
             _mapper = mapper;
         }
 
 
         [HttpGet]
         [Route("listagem")]
-        public async Task<IActionResult> listagem([FromQuery]int pageSize, [FromQuery] int pageIndex, [FromQuery] string? cpf)
+        public async Task<IActionResult> listagem([FromQuery] int pageSize, [FromQuery] int pageIndex, [FromQuery] string? cpf)
         {
             var list = await _ClienteService.ListaCliente(pageSize, pageIndex, cpf);
             return Ok(list);
@@ -53,6 +55,13 @@ namespace CredEmprestimo.Controllers
             if (await _ClienteService.validar(cliente)) return BadRequest("Já existe um usuário com esse cpf!");
             var retorno = _ClienteService.Create(cliente);
             return Ok(retorno);
+        }
+
+        [HttpGet("testesp")]
+        public async Task<IActionResult> GetAllSP()
+        {
+            var clientes = await _clienteRepository.GetSpClientes();
+            return Ok(clientes);
         }
     }
 }

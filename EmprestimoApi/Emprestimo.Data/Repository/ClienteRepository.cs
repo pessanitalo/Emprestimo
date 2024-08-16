@@ -3,8 +3,11 @@ using CredEmprestimo.Business.Models;
 using CredEmprestimo.Business.Models.Utils;
 using CredEmprestimo.Data.Context;
 using CredEmprestimo.Data.Extensions;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System.Collections;
+using System.Data;
 
 
 namespace CredEmprestimo.Data.Repository
@@ -12,10 +15,12 @@ namespace CredEmprestimo.Data.Repository
     public class ClienteRepository : IClienteRepository
     {
         private readonly DataContext _context;
+        private readonly string _connectionString;
 
-        public ClienteRepository(DataContext context)
+        public ClienteRepository(DataContext context, IConfiguration configuration)
         {
             _context = context;
+            _connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
         public async Task<PageList<Cliente>> Busca(PageParams pageParams, string cpf)
@@ -68,6 +73,40 @@ namespace CredEmprestimo.Data.Repository
                 PageIndex = pageIndex,
                 PageSize = pageSize,
             };
+        }
+
+        public async Task<ICollection<Cliente>> GetSpClientes()
+        {
+            var clientes = new List<Cliente>();
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                using (var command = new SqlCommand("sp_ListaClientes", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    await connection.OpenAsync();
+
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            var cliente = new Cliente
+                            {
+                                ClienteId = reader.GetInt32(reader.GetOrdinal("ClienteID")),
+                                Nome = reader.GetString(reader.GetOrdinal("Nome")),
+                                Idade = reader.GetInt32(reader.GetOrdinal("Idade")),
+                                Cpf = reader.GetString(reader.GetOrdinal("Cpf")),
+                                Score = reader.GetDouble(reader.GetOrdinal("Score")),
+                                SaldoAtual = reader.GetDecimal(reader.GetOrdinal("SaldoAtual")),
+                            };
+                            clientes.Add(cliente);
+                        }
+                    }
+                }
+            }
+
+            return clientes;
         }
     }
 }
