@@ -11,7 +11,7 @@ namespace CredEmprestimo.Controllers
     [ApiController]
     public class ClienteController : ControllerBase
     {
-
+        //docker http://localhost:8080/swagger/index.html
         private readonly IClienteService _ClienteService;
         private readonly IClienteRepository _clienteRepository;
         private readonly IMapper _mapper;
@@ -21,6 +21,13 @@ namespace CredEmprestimo.Controllers
             _ClienteService = clienteService;
             _clienteRepository = clienteRepository;
             _mapper = mapper;
+        }
+
+        [HttpGet]
+        [Route("ok")]
+        public async Task<IActionResult> ok()
+        {    
+            return Ok("OK");
         }
 
 
