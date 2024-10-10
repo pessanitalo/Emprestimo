@@ -1,5 +1,6 @@
 ﻿using CredEmprestimo.Business.Interface;
 using CredEmprestimo.Business.Models;
+using CredEmprestimo.Business.Models.Utils;
 
 namespace CredEmprestimo.Business.Services
 {
@@ -48,6 +49,12 @@ namespace CredEmprestimo.Business.Services
         public async Task<PagedResult<Cliente>> ListaCliente(int pageSize, int pageIndex, string cpf)
         {
             return await _clienteRepository.ListaCliente(pageSize, pageIndex, cpf);
+        }
+
+        public Task<PageList<Cliente>> Paginacao(PageParams pageParams, string cpf)
+        {
+            var cliente = _clienteRepository.Paginacao(pageParams,cpf);
+            return cliente;
         }
     }
 }

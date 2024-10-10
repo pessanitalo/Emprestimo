@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using CredEmprestimo.Business.Interface;
 using CredEmprestimo.Business.Models;
+using CredEmprestimo.Business.Models.Utils;
 using CredEmprestimo.Data.Repository;
+using CredEmprestimoApi.Extensions;
 using CredEmprestimoApi.ViewlModews;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,6 +38,15 @@ namespace CredEmprestimo.Controllers
         public async Task<IActionResult> listagem([FromQuery] int pageSize, [FromQuery] int pageIndex, [FromQuery] string? cpf)
         {
             var list = await _ClienteService.ListaCliente(pageSize, pageIndex, cpf);
+            return Ok(list);
+        }
+
+        [HttpGet]
+        [Route("paginacao")]
+        public async Task<IActionResult> Pagicacao([FromQuery] PageParams pageParams,  [FromQuery] string? cpf)
+        {
+            var list = await _ClienteService.Paginacao(pageParams, cpf);
+            Response.AddPagination(list.CurrentPage,list.PageSize,list.TotalCount,list.TotalPages);
             return Ok(list);
         }
 

@@ -30,7 +30,7 @@ export class ClienteServicesService {
     }
 
     return this.http
-      .get<Cliente[]>(`${this.baseUrl}/list/${cpf}`, { observe: 'response', params })
+      .get<Cliente[]>(`${this.baseUrl}/paginacao/${cpf}`, { observe: 'response', params })
       .pipe(
         take(1),
         map((response) => {

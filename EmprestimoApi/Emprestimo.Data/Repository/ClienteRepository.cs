@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Collections;
 using System.Data;
+using System.Diagnostics;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 
 namespace CredEmprestimo.Data.Repository
@@ -107,6 +109,13 @@ namespace CredEmprestimo.Data.Repository
             }
 
             return clientes;
+        }
+
+        public async Task<PageList<Cliente>> Paginacao(PageParams pageParams, string cpf)
+        {
+            IQueryable<Cliente> cliente = _context.Clientes;
+            return await PageList<Cliente>.CreateAsync(cliente, pageParams.PageNumber, pageParams.pageSize);
+
         }
     }
 }
