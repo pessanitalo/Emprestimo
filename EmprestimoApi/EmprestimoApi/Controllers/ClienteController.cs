@@ -32,7 +32,7 @@ namespace CredEmprestimo.Controllers
 
 
         [HttpGet]
-        [Route("listagem")]
+        [Route("list")]
         public async Task<IActionResult> listagem([FromQuery] int pageSize, [FromQuery] int pageIndex, [FromQuery] string? cpf)
         {
             var list = await _ClienteService.ListaCliente(pageSize, pageIndex, cpf);
