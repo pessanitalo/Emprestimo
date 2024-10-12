@@ -4,12 +4,12 @@ Projeto em desenvolvimento, objetivo é criar um sistema de empréstimos. Onde o
 ## Tecnologias Utilizada
 ## Backend
 - C#
-- .Net 7
+- .Net 8
 - ASP.NET WebApi   
 - Arquitetura três camadas.
 ## Frontend
 - Html-Css
-- Angular V13
+- Angular V17
 - Ngx-Mask
 - Ngx-Bootstrap
 - Ngx-Toastr
@@ -24,8 +24,8 @@ Projeto em desenvolvimento, objetivo é criar um sistema de empréstimos. Onde o
 
 ## Para você rodar na sua máquina local, precisa ter instalado os seguintes recursos:
 - https://visualstudio.microsoft.com/pt-br/vs/community
-- https://dotnet.microsoft.com/pt-br/download/dotnet/7.0
-- https://www.npmjs.com/package/@angular/cli/v/13.3.11
+- https://dotnet.microsoft.com/pt-br/download/dotnet/8.0
+- https://www.npmjs.com/package/@angular/cli/v/17.3.10
 - https://nodejs.org/en
 - https://azure.microsoft.com/pt-br/products/data-studio
 
