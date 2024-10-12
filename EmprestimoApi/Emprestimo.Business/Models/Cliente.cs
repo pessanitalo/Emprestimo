@@ -1,6 +1,7 @@
 ﻿using CredEmprestimo.Business.Validation;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace CredEmprestimo.Business.Models
 {
@@ -14,6 +15,7 @@ namespace CredEmprestimo.Business.Models
         public string Cpf { get; set; }
         public double Score { get; set; }
         public decimal SaldoAtual { get; set; }
+        [JsonIgnore]
         public Emprestimo Emprestimo { get; set; }
         public Saque Saque { get; set; }
 

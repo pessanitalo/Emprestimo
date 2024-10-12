@@ -27,7 +27,7 @@ export class EmprestimoService {
       params = params.append('pageSize', itemsPerPage.toString());
     }
     return this.http
-      .get<Emprestimo[]>(`${this.baseUrl}/pagination`, { observe: 'response', params })
+      .get<Emprestimo[]>(`${this.baseUrl}/listaEmprestimos`, { observe: 'response', params })
       .pipe(
         take(1),
         map((response) => {

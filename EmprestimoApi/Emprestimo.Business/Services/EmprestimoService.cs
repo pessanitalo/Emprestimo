@@ -1,5 +1,6 @@
 ﻿using CredEmprestimo.Business.Interface;
 using CredEmprestimo.Business.Models;
+using CredEmprestimo.Business.Models.Utils;
 
 namespace CredEmprestimo.Business.Services
 {
@@ -27,6 +28,13 @@ namespace CredEmprestimo.Business.Services
             var novoEmprestimo = _emprestimoRepository.NovoEmprestimo(ValorEmprestimo,QuantidadeParcelas,id);
             return novoEmprestimo;
         }
+
+        public Task<PageList<Emprestimo>> Paginacao(PageParams pageParams)
+        {
+            var emprestimo = _emprestimoRepository.Paginacao(pageParams);
+            return emprestimo;
+        }
+
         public Emprestimo SimularEmprestimo(decimal ValorEmprestimo, int QuantidadeParcelas)
         {
             var simular = _emprestimoRepository.SimularEmprestimo(ValorEmprestimo,QuantidadeParcelas);

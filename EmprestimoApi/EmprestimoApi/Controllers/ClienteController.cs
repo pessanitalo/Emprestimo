@@ -2,7 +2,6 @@
 using CredEmprestimo.Business.Interface;
 using CredEmprestimo.Business.Models;
 using CredEmprestimo.Business.Models.Utils;
-using CredEmprestimo.Data.Repository;
 using CredEmprestimoApi.Extensions;
 using CredEmprestimoApi.ViewlModews;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +27,7 @@ namespace CredEmprestimo.Controllers
         [HttpGet]
         [Route("ok")]
         public async Task<IActionResult> ok()
-        {    
+        {
             return Ok("OK");
         }
 
@@ -43,10 +42,10 @@ namespace CredEmprestimo.Controllers
 
         [HttpGet]
         [Route("paginacao")]
-        public async Task<IActionResult> Pagicacao([FromQuery] PageParams pageParams,  [FromQuery] string? cpf)
+        public async Task<IActionResult> Pagicacao([FromQuery] PageParams pageParams, [FromQuery] string? cpf)
         {
             var list = await _ClienteService.Paginacao(pageParams, cpf);
-            Response.AddPagination(list.CurrentPage,list.PageSize,list.TotalCount,list.TotalPages);
+            Response.AddPagination(list.CurrentPage, list.PageSize, list.TotalCount, list.TotalPages);
             return Ok(list);
         }
 
@@ -72,7 +71,12 @@ namespace CredEmprestimo.Controllers
             var cliente = _mapper.Map<Cliente>(clienteDto);
             if (await _ClienteService.validar(cliente)) return BadRequest("Já existe um usuário com esse cpf!");
             var retorno = _ClienteService.Create(cliente);
-            return Ok(retorno);
+            var response = new
+            {
+                mensagem = "Cliente cadastrado com sucesso."
+            };
+
+            return Ok(response);
         }
 
         [HttpGet("testesp")]

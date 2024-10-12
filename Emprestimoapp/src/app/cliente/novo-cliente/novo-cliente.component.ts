@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Cliente } from '../models/cliente';
 import { ClienteServicesService } from '../services/cliente-services.service';
@@ -40,14 +40,14 @@ export class NovoClienteComponent implements OnInit {
   novoCliente() {
     this.cliente = Object.assign({}, this.cliente, this.Form.value);
     this.clienteService.addCliente(this.cliente)
-      .subscribe(sucesso => { this.processarSucesso(sucesso) },
+      .subscribe(sucesso => { this.processarSucesso(sucesso), console.log(sucesso) },
         falha => { this.processarFalha(falha) }
       )
   }
 
   processarSucesso(response: any) {
     this.Form.reset();
-    let toast = this.toastr.success('Cliente cadastrado', 'Sucesso!');
+    let toast = this.toastr.success('Cliente cadastrado com sucesso', 'Sucesso!');
     if (toast) {
       toast.onHidden.subscribe(() => {
         this.router.navigate(['/cliente/list'])
@@ -56,6 +56,6 @@ export class NovoClienteComponent implements OnInit {
   }
 
   processarFalha(fail: any) {
-    this.toastr.warning( fail.error, 'Error!' );
-   }
+    this.toastr.warning(fail.error, 'Error!');
+  }
 }

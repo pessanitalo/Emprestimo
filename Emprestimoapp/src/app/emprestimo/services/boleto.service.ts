@@ -42,9 +42,9 @@ export class BoletoService {
         }));
   }
 
-  pagarParcela(clienteId: number,numeroDaParcela: number, id: number) {
+  pagarParcela(clienteId: number,numeroDaParcela: number, EmprestimoId: number) {
     const pagarParcela = {
-      id: id,
+      EmprestimoId: EmprestimoId,
       clienteId: clienteId,
       numeroParcela: numeroDaParcela
     }

@@ -1,6 +1,6 @@
 import { Emprestimo } from './../../emprestimo/models/emprestimo';
 export interface Cliente{
-    id: number;
+    clienteId: number;
     nome:string;
     idade:number;
     score:number;

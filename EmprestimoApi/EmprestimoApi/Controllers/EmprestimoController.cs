@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
 using CredEmprestimo.Business.Interface;
 using CredEmprestimo.Business.Models;
+using CredEmprestimo.Business.Models.Utils;
+using CredEmprestimo.Business.Services;
+using CredEmprestimoApi.Extensions;
 using CredEmprestimoApi.ViewlModews;
 using Microsoft.AspNetCore.Mvc;
 
@@ -43,11 +46,12 @@ namespace EmprestimoApi.Controllers
 
         [HttpGet]
         [Route("listaEmprestimos")]
-        public async Task<IActionResult> listarEmprestimos(int pageSize, int pageIndex)
+        public async Task<IActionResult> listarEmprestimos([FromQuery] PageParams pageParams)
         {
 
-            var lista = await _emprestimoService.ListarEmprestimos(pageSize, pageIndex);
-            return Ok(lista);
+            var list = await _emprestimoService.Paginacao(pageParams);
+            Response.AddPagination(list.CurrentPage, list.PageSize, list.TotalCount, list.TotalPages);
+            return Ok(list);
         }
 
 

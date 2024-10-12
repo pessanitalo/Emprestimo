@@ -65,5 +65,11 @@ namespace CredEmprestimo.Data.Repository
                 PageSize = pageSize,
             };
         }
+
+        public async Task<PageList<Emprestimo>> Paginacao(PageParams pageParams)
+        {
+            IQueryable<Emprestimo> emprestimo = _context.Emprestimos;
+            return await PageList<Emprestimo>.CreateAsync(emprestimo, pageParams.PageNumber, pageParams.pageSize);
+        }
     }
 }

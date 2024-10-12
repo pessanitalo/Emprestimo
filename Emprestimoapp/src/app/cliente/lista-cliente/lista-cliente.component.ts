@@ -64,7 +64,8 @@ export class ListaClienteComponent implements OnInit {
   )}
 
   openModal(template: TemplateRef<any>, cliente: Cliente) {
-    this.clienteService.obterPorId(cliente.id)
+    console.log(cliente);
+    this.clienteService.obterPorId(cliente.clienteId)
       .subscribe((res) => {
         this.cliente = res;
         this.modalRef = this.modalService.show(template, { class: 'modal-lg' });

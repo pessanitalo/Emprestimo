@@ -27,10 +27,15 @@ namespace CredEmprestimoApi.Controllers
         {
             try
             {
-                if (_boletoService.ValidarSaldo(pagarParcela.ClienteId)) return BadRequest("Saldo Insuficiente");
-                
-                _boletoService.PagarUmaParcela(pagarParcela.Id, pagarParcela.numeroParcela);
-                return Ok("Parcela para com sucesso.");
+                if (_boletoService.ValidarSaldo(pagarParcela)) return BadRequest("Saldo Insuficiente");
+
+                _boletoService.PagarUmaParcela(pagarParcela.EmprestimoId, pagarParcela.numeroParcela);
+                var response = new
+                {
+                    mensagem = "Parcela paga com sucesso."
+                };
+
+                return Ok(response);
             }
             catch
             {
@@ -52,11 +57,11 @@ namespace CredEmprestimoApi.Controllers
 
         [HttpGet]
         [Route("pagination/{id:int}")]
-        public async Task<IActionResult> pagination(int id,[FromQuery] PageParams pageParams)
+        public async Task<IActionResult> pagination(int id, [FromQuery] PageParams pageParams)
         {
             try
             {
-                var clientes = await _boletoService.ListaBoletos(id,pageParams);
+                var clientes = await _boletoService.ListaBoletos(id, pageParams);
 
                 var filtro = _mapper.Map<PageList<BoletoViewModel>>(clientes);
                 pagination(clientes, filtro);

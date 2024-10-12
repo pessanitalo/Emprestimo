@@ -1,7 +1,7 @@
 import { Cliente } from "src/app/cliente/models/cliente";
 
 export interface Emprestimo{
-    id:number,
+    emprestimoId:number,
     clienteId:number,
     valorEmprestimo:number,
     quantidadeParcelas:number,

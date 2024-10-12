@@ -29,7 +29,7 @@ export class VisualizarParcelasComponent implements OnInit {
     private router: Router,
     private modalService: BsModalService
 
-  ) {}
+  ) { }
 
   public ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
@@ -58,14 +58,14 @@ export class VisualizarParcelasComponent implements OnInit {
   }
 
   pagarParcela(numeroparcela: number) {
+    console.log(numeroparcela);
     this.service.pagarParcela(this.clienteId, numeroparcela, this.id)
-      .subscribe(sucesso => { this.processarSucesso(sucesso) },
-        falha => { this.processarFalha(falha) }),
-      this.closeModal();
+      .subscribe({ next: () => this.processarSucesso(), error: () => this.processarFalha(), });
+    this.closeModal();
   }
 
-  processarSucesso(response: any) {
-    let toast = this.toastr.success('Parcela Paga com sucesso!', 'Sucesso!');
+  processarSucesso() {
+    let toast = this.toastr.success("Parcela paga com sucesso.", 'Sucesso!');
     if (toast) {
       toast.onHidden.subscribe(() => {
         this.router.navigate(['/emprestimo/list'])
@@ -83,8 +83,8 @@ export class VisualizarParcelasComponent implements OnInit {
     this.modalService.hide();
   }
 
-  processarFalha(fail: any) {
-    this.toastr.warning(fail.error, 'Error!');
+  processarFalha() {
+    this.toastr.warning("Não foi possível pagar essa parcela.", 'Error!');
   }
 }
 

@@ -42,19 +42,17 @@ namespace CredEmprestimo.Business.Services
             }
             catch (Exception ex)
             {
-
                 throw new Exception($"Erro ao verificar se usuário existe. Erro: {ex.Message}");
             }
 
         }
 
-        public bool ValidarSaldo(int id)
+        public bool ValidarSaldo(PagarParcela pagarParcela)
         {
-            var detalhesCliente = _clienteService.DetalhesCliente(id);
+            var detalhesCliente = _clienteService.DetalhesCliente(pagarParcela.ClienteId);
             var saldo = detalhesCliente.SaldoAtual;
-            var parcela = detalhesCliente.Emprestimo.ValorDaParcela;
-
-            if (saldo < parcela) return true;
+            var boletoParcela = _boletoRepository.PesquisarParcela(pagarParcela.EmprestimoId, pagarParcela.numeroParcela);
+            if (saldo < boletoParcela.ValorDaParcela) return true;
             return false;
         }
 

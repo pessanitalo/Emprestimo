@@ -4,13 +4,13 @@
         <div class="col-1 btn-novo">
             <button type="button" class="btn btn-dark btn-sm" [routerLink]="['/cliente/new']">Novo Cliente</button>
         </div>
-        <div class="col-4 btn-search">
+        <!-- <div class="col-4 btn-search">
             <input type="text" class="form-control" id="pesquisa" [(ngModel)]="cpf" placeholder="Pesquisar por cpf...."
                 mask="000.000.000-00">
         </div>
         <div class="col-1 btn-pesquisa">
             <button type="button" class="btn btn-warning btn-sm" (click)="carregarLista()">Pesquisar</button>
-        </div>
+        </div> -->
 
     </div>
     <div class="table">
@@ -30,7 +30,7 @@
                     <td>R$ {{ cliente.saldoAtual }} </td>
                     <td>
                         <button type="button" class="btn btn-success btn-sm"
-                            [routerLink]="['/emprestimo/novoEmprestimo', cliente.id]">+ Emprestimo</button>
+                            [routerLink]="['/emprestimo/novoEmprestimo', cliente.clienteId]">+ Emprestimo</button>
                         <button type="button" class="btn btn-primary btn-emprestimo btn-sm"
                             (click)="openModal(template, cliente)">Detalhes</button>
                     </td>
@@ -38,12 +38,10 @@
             </tbody>
         </table>
     </div>
-
     <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage"
         [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" pageBtnClass="btn"
         previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
     </pagination>
-
 </div>
 
 <ng-template #template>
@@ -54,7 +52,7 @@
         </button>
     </div>
     <div class="modal-body body-card-cliente">
-        Id: {{ cliente.id }}<br>
+        Id: {{ cliente.clienteId }}<br>
         Cliente: {{ cliente.nome }}<br>
         Idade: {{ cliente.idade }}<br>
         Escore: {{ cliente.score }}<br>

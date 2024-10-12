@@ -42,6 +42,7 @@ export class NovoEmprestimoComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.router.snapshot.params['id'];
+    console.log('id ', this.id);
     this.Form = this.fb.group({
       ClienteId: this.id,
       valorEmprestimo: ['', [Validators.required]],

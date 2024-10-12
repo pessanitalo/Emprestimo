@@ -84,9 +84,9 @@ namespace CredEmprestimo.Data.Repository
             return parcela;
         }
 
-        public BoletoEmprestimo PesquisarParcela(int id, int numeroParcela)
+        public BoletoEmprestimo PesquisarParcela(int emprestimoid, int numeroParcela)
         {
-            var parcela = _context.BoletoEmprestimo.FirstOrDefault(x => x.EmprestimoId == id && x.NumeroParcela == numeroParcela);
+            var parcela = _context.BoletoEmprestimo.FirstOrDefault(x => x.EmprestimoId == emprestimoid && x.NumeroParcela == numeroParcela);
             return parcela;
         }
         public async Task <IEnumerable<BoletoEmprestimo>> VisualizarParcela(int id)

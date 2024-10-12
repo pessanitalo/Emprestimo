@@ -1,6 +1,7 @@
 ﻿using CredEmprestimo.Business.Validation;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace CredEmprestimo.Business.Models
 {
@@ -19,7 +20,7 @@ namespace CredEmprestimo.Business.Models
         public decimal valorTotal { get; set; }
 
         public DateTime DataAquisicaoEmprestimo { get; set; }
-
+        [JsonIgnore]
         public IList<BoletoEmprestimo> BoletoEmprestimo { get; set; }
         [ForeignKey(nameof(EmprestimoId))]
         public int ClienteId { get; set; }

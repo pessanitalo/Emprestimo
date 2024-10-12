@@ -9,6 +9,7 @@ namespace CredEmprestimo.Business.Interface
         BoletoEmprestimo PagarUmaParcela(int id, int numeroDaParcela);
         Task<IEnumerable<BoletoEmprestimo>> VisualizarParcela(int id);
         Task<PageList<BoletoEmprestimo>> ListaBoletos(int id,PageParams pageParams);
+        BoletoEmprestimo PesquisarParcela(int id, int numeroParcela);
         //Task<PagedResult<BoletoEmprestimo>> ListaCliente(int pageSize, int pageIndex);
 
     }
