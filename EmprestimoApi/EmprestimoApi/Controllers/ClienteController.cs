@@ -78,12 +78,5 @@ namespace CredEmprestimo.Controllers
 
             return Ok(response);
         }
-
-        [HttpGet("testesp")]
-        public async Task<IActionResult> GetAllSP()
-        {
-            var clientes = await _clienteRepository.GetSpClientes();
-            return Ok(clientes);
-        }
     }
 }
