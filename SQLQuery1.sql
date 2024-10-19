@@ -1,9 +1,6 @@
-use  emprestimodb
+create database emprestimodb;
+use  emprestimodb;
 
-select * from Cliente
-select * from Emprestimo
-
-DELETE FROM Emprestimo where EmprestimoId = 7
 
 create table Cliente
 (
@@ -27,8 +24,7 @@ create table Emprestimo
 	valorTotal decimal not null,
 	DataAquisicaoEmprestimo date
 	constraint fk_clienteid_cliente foreign key (ClienteId)
-	references Cliente
-	
+	references Cliente	
 ); 
 
 create table BoletoEmprestimo
