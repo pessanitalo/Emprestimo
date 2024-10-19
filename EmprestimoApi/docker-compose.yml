@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.9'
 
 services:
   credemprestimoapi:
@@ -9,14 +9,14 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
     ports:
-       - "5000:80" 
+       - "5000:8080" 
     depends_on:
       - sqlserver
     networks:
       - emprestimo-api
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2017-latest
-    container_name: emprestimo-database
+    container_name: emprestimodb
     environment:
       ACCEPT_EULA: 'Y'
       SA_PASSWORD: "Numsey#2021"
