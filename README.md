@@ -41,8 +41,5 @@ Projeto em desenvolvimento, objetivo é criar um sistema de empréstimos. Onde o
 Rode o comando (apontando a pasta local do arquivo): 
 - `docker-compose up -d`
 
-### Criar o banco de dados
-[script DB](https://github.com/pessanitalo/Emprestimo/blob/main/Docker%20BackEnd/script%20banco%20de%20dados.txt)
-
 ### Autor
 [Italo Pessan](https://www.linkedin.com/in/italopessan/)
