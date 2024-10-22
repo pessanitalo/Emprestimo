@@ -32,14 +32,18 @@ Projeto em desenvolvimento, objetivo é criar um sistema de empréstimos. Onde o
 ## Para criar rapidamente o ambiente disponibilizamos as imagens Docker da aplicação:
 - É necessário ter o docker instalado em seu sistema operacional (Linux, Windows ou Mac).
 
-### Executar o projeto completo
-[Fullstack](https://github.com/pessanitalo/Emprestimo/tree/main/Docker%20Fullstack)
+### Baixar a imagem do backend
+docker pull italopessan/emprestimo-api
+ou
+https://hub.docker.com/r/italopessan/emprestimo-api
 
-### Executar apenas o backend
-[Backend](https://github.com/pessanitalo/Emprestimo/tree/main/Docker%20BackEnd)
+### Baixar a imagem do front end
+docker pull italopessan/emprestimoapp
+ou
+https://hub.docker.com/r/italopessan/emprestimoapp
 
 Rode o comando (apontando a pasta local do arquivo): 
-- `docker-compose up -d`
+- `docker-compose up -d --build`
 
 ### Autor
 [Italo Pessan](https://www.linkedin.com/in/italopessan/)
