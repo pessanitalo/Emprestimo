@@ -42,8 +42,10 @@ docker pull italopessan/emprestimoapp
 ou
 https://hub.docker.com/r/italopessan/emprestimoapp
 
-Rode o comando (apontando a pasta local do arquivo): 
+### Rode o comando (apontando a pasta local do arquivo): 
 - `docker-compose up -d --build`
+### executar o script para a criação das tabelas
+- Arquivo se encontra na raiz do projeto 'emprestimodb.txt'
 
 ### Autor
 [Italo Pessan](https://www.linkedin.com/in/italopessan/)
