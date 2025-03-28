@@ -24,6 +24,3 @@ jobs:
        run: |
          docker tag italopessan/emprestimo-api:latest ${{ secrets.DOCKER_USERNAME }}/italopessan/emprestimo-api:latest
          docker tag italopessan/emprestimo-api:latest ${{ secrets.DOCKER_USERNAME }}/italopessan/emprestimo-api:${{ github.run_id }}
-
-         docker push ${{ secrets.DOCKER_USERNAME }}/italopessan/emprestimo-api:latest
-         docker push ${{ secrets.DOCKER_USERNAME }}/italopessan/emprestimo-api:${{ github.run_id }}
