@@ -19,8 +19,3 @@ jobs:
      - name: Docker Compose Build
        working-directory: ./EmprestimoApi
        run: docker compose build
-
-     - name: Push to Docker Hub Container Registry
-       run: |
-         docker tag italopessan/emprestimo-api:latest ${{ secrets.DOCKER_USERNAME }}/italopessan/emprestimo-api:latest
-         docker tag italopessan/emprestimo-api:latest ${{ secrets.DOCKER_USERNAME }}/italopessan/emprestimo-api:${{ github.run_id }}
