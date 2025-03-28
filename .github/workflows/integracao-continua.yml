@@ -22,8 +22,8 @@ jobs:
 
      - name: Push to Docker Hub Container Registry
        run: |
-         docker tag italopessan/emprestimo-api:latest ${{ secrets.DOCKER_USERNAME }}/italopessan/emprestimo-api:latest
-         docker tag italopessan/emprestimo-api:latest ${{ secrets.DOCKER_USERNAME }}/italopessan/emprestimo-api:${{ github.run_id }}
+         docker tag emprestimo-api:latest ${{ secrets.DOCKER_USERNAME }}/emprestimo-api:latest
+         docker tag emprestimo-api:latest ${{ secrets.DOCKER_USERNAME }}/emprestimo-api:${{ github.run_id }}
 
          docker push ${{ secrets.DOCKER_USERNAME }}/emprestimo-api:latest
          docker push ${{ secrets.DOCKER_USERNAME }}/emprestimo-api:${{ github.run_id }}
