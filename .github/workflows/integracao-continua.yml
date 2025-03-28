@@ -31,11 +31,3 @@ jobs:
      - name: Docker Compose App
        working-directory: ./Emprestimoapp
        run: docker compose build
-
-     - name: Push image App
-       run: |
-         docker tag front-end:latest ${{ secrets.DOCKER_USERNAME }}/front-end:latest
-         docker tag front-end:latest ${{ secrets.DOCKER_USERNAME }}/front-end:${{ github.run_id }}
-
-         docker push ${{ secrets.DOCKER_USERNAME }}/front-end:latest
-         docker push ${{ secrets.DOCKER_USERNAME }}/front-end:${{ github.run_id }}
