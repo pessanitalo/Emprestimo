@@ -16,18 +16,6 @@ jobs:
          username: ${{ secrets.DOCKER_USERNAME }}
          password: ${{ secrets.DOCKER_PASSWORD }}
 
-     - name: Docker Compose Api
-       working-directory: ./EmprestimoApi
-       run: docker compose build
-
-     - name: Push image Api
-       run: |
-         docker tag emprestimo-api:latest ${{ secrets.DOCKER_USERNAME }}/emprestimo-api:latest
-         docker tag emprestimo-api:latest ${{ secrets.DOCKER_USERNAME }}/emprestimo-api:${{ github.run_id }}
-
-         docker push ${{ secrets.DOCKER_USERNAME }}/emprestimo-api:latest
-         docker push ${{ secrets.DOCKER_USERNAME }}/emprestimo-api:${{ github.run_id }}
-
      - name: Docker Compose App
        working-directory: ./Emprestimoapp
        run: docker compose build
