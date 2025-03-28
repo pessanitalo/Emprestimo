@@ -30,7 +30,7 @@ services:
     ports:
       - '4200:80'
     depends_on:
-      - credemprestimoapi
+      - emprestimo-api
     networks:
       - emprestimo-api
 networks:
