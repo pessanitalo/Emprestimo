@@ -17,5 +17,5 @@ jobs:
          password: ${{ secrets.DOCKER_PASSWORD }}
 
      - name: Docker Compose App
-       working-directory: ./Emprestimo/Emprestimoapp
+       working-directory: ./Emprestimoapp
        run: docker compose build

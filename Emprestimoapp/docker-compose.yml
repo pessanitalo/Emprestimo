@@ -1,0 +1,10 @@
+services:
+  emprestimoapp:
+    image: front-end
+    build:
+      context: .
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+       - "4200:80" 
+
