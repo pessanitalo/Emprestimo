@@ -1,6 +1,6 @@
 services:
   credemprestimoapi:
-    image: italopessan/emprestimo-api
+    image: emprestimo-api
     build:
       context: .
       dockerfile: Dockerfile
