@@ -4,8 +4,8 @@ using CredEmprestimo.Business.Services;
 using CredEmprestimo.Data.Context;
 using CredEmprestimo.Data.Repository;
 using CredEmprestimoApi.Configurations;
+using CredEmprestimoApi.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +17,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.Configure<ActiveMqSettingsConfig>(
+    builder.Configuration.GetSection("ActiveMq"));
 
 
 builder.Services.AddScoped<IEmprestimoRepository, EmprestimoRepository>();
@@ -35,7 +38,20 @@ var mappingConfig = new MapperConfiguration(c =>
 IMapper mapper = mappingConfig.CreateMapper();
 builder.Services.AddSingleton(mapper);
 
+//builder.Services.AddHostedService<JobAeach10Minutos>();
+
 var app = builder.Build();
+
+builder.Configuration
+    .AddJsonFile("appsettings.json", optional: false)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
+    .AddEnvironmentVariables();
+
+//using (var scope = app.Services.CreateScope())
+//{
+//    var db = scope.ServiceProvider.GetRequiredService<DataContext>();
+//    db.Database.Migrate();
+//}
 
 if (app.Environment.IsDevelopment())
 {
