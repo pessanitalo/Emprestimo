@@ -8,5 +8,15 @@ jobs:
      - name: Checkout
        uses: actions/checkout@v4
 
-     - name: Install dependencias
-       run: npm install
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+     - name: Checkout
+       uses: actions/checkout@v4
+
+     - name: Build app
+       run: echo "Building app"
+
+     - name: Deploy to stage
+       run: echo "Deploy to stage" 
