@@ -8,8 +8,8 @@ jobs:
      - name: Checkout
        uses: actions/checkout@v4
 
-     - name: Instalando dependencias
-       uses: npm install
+     - name: Install dependencias
+       run: npm install
 
   deploy:
     needs: [run-tests] ## só inicia o deploy se run-tests der sucesso
