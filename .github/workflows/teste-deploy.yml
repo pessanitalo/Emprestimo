@@ -1,5 +1,8 @@
 name: Deploy CI/CD
-on: push
+on:
+  push:
+    branches:
+      - main
 jobs:
   run-tests:
     runs-on: ubuntu-latest
@@ -12,16 +15,16 @@ jobs:
     #  - name: Install dependencias
     #    run: npm install
 
-  deploy:
-    needs: [run-tests] ## só inicia o deploy se run-tests der sucesso
-    runs-on: ubuntu-latest
+  # deploy:
+  #   needs: [run-tests] ## só inicia o deploy se run-tests der sucesso
+  #   runs-on: ubuntu-latest
 
-    steps:
-     - name: Checkout
-       uses: actions/checkout@v4
+  #   steps:
+  #    - name: Checkout
+  #      uses: actions/checkout@v4
 
-     - name: Build app
-       run: echo "Building app"
+  #    - name: Build app
+  #      run: echo "Building app"
 
-     - name: Deploy to stage
-       run: echo "Deploy to stage" 
+  #    - name: Deploy to stage
+  #      run: echo "Deploy to stage" 
