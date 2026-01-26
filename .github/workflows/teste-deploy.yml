@@ -8,8 +8,11 @@ jobs:
      - name: Checkout
        uses: actions/checkout@v4
 
+     - name: Instalando dependencias
+       uses: npm install
+
   deploy:
-    needs: [run-tests]
+    needs: [run-tests] ## só inicia o deploy se run-tests der sucesso
     runs-on: ubuntu-latest
 
     steps:
