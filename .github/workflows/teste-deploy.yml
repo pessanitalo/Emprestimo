@@ -5,7 +5,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-     - uses: actions/checkout@v4
+     - name: Checkout
+       uses: actions/checkout@v4
 
      - name: Install dependencias
        run: npm install
