@@ -2,7 +2,7 @@ name: Deploy CI/CD
 on:
   push:
     branches:
-      - main
+      - main # executa os testes na branch main
 jobs:
   run-tests:
     runs-on: ubuntu-latest
@@ -15,16 +15,25 @@ jobs:
     #  - name: Install dependencias
     #    run: npm install
 
-  # deploy:
-  #   needs: [run-tests] ## só inicia o deploy se run-tests der sucesso
-  #   runs-on: ubuntu-latest
+     - name: Build app
+       run: npm run build
 
-  #   steps:
-  #    - name: Checkout
-  #      uses: actions/checkout@v4
+     - name: Upload artifacts
+       uses: actions/upload-artifact@v4
+       with:
+        name: build-site
+        path: dist/
 
-  #    - name: Build app
-  #      run: echo "Building app"
+  deploy:
+    needs: [run-tests] ## só inicia o deploy se run-tests der sucesso
+    runs-on: ubuntu-latest
 
-  #    - name: Deploy to stage
-  #      run: echo "Deploy to stage" 
+    steps:
+     - name: Checkout
+       uses: actions/checkout@v4
+
+     - name: Build app
+       run: echo "Building app"
+
+     - name: Deploy to stage
+       run: echo "Deploy to stage" 
