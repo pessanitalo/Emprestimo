@@ -42,7 +42,7 @@ jobs:
         path: download-data/ ## salva o download
 
      - name: Display structure of downloaded files
-       run: ls -R donwload-data
+       run: ls -R download-data
 
      - name: Deploy to Server
        run: echo "Deploy to server"
