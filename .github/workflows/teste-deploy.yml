@@ -18,7 +18,7 @@ jobs:
 
      - name: Install dependencias
        run: npm ci
-       working-directory: Emprestimoapp
+       working-directory: Emprestimoapp  ## busca o nome onde esta as dependencias
 
      - name: Build app
        run: npm run build
@@ -28,18 +28,21 @@ jobs:
        uses: actions/upload-artifact@v4
        with:
         name: build-site
-        path: Emprestimoapp/dist/
+        path: Emprestimoapp/dist/ ## caminho referente ao github
 
   deploy:
     needs: [run-tests] ## só inicia o deploy se run-tests der sucesso
     runs-on: ubuntu-latest
 
     steps:
-     - name: Checkout
-       uses: actions/checkout@v4
+     - name: Download artifacts
+       uses: actions/download-artifact@v4
+       with:
+        name: build-site ## deve ser o mesmo nome da linha 30
+        path: download-data/ ## salva o download
 
-     - name: Build app
-       run: echo "Building app"
+     - name: Display structure of downloaded files
+       run: ls -R donwload-data
 
-     - name: Deploy to stage
-       run: echo "Deploy to stage" 
+     - name: Deploy to Server
+       run: echo "Deploy to server"
