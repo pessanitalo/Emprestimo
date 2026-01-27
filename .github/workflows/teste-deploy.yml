@@ -7,7 +7,7 @@ jobs:
   run-tests:
     runs-on: ubuntu-latest
     outputs:
-      versão: ${{ steps.docker_build.outputs.tag}}
+      versao: ${{ steps.docker_build.outputs.tag}}
 
     steps:
      - name: Checkout
@@ -53,4 +53,4 @@ jobs:
     #     path: download-data/ ## salva o download
 
      - name: Deploy to Server
-       run: echo "Deploy to server"
+       run: echo "Deploy ${{ needs.run-tests.outputs.versao}} to server"
