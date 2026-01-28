@@ -49,17 +49,18 @@ jobs:
      - name: Build and push
        uses: docker/build-push-action@v6
        with:
-         context: EmprestimoApi/Dockerfile
+         context: EmprestimoApi
+         file: EmprestimoApi/Dockerfile
          push: true
          tags: italopessan/api-emprestimo-githubaction:${{steps.docker_build.outputs.tag}}
          
 
 
-  deploy:
-    needs: [run-tests] ## só inicia o deploy se run-tests der sucesso
-    runs-on: ubuntu-latest
+  # deploy:
+  #   needs: [run-tests] ## só inicia o deploy se run-tests der sucesso
+  #   runs-on: ubuntu-latest
 
-    steps:
+  #   steps:
 
-     - name: Deploy to Server
-       run: echo "Deploy ${{ needs.run-tests.outputs.versao}} to server"
+  #    - name: Deploy to Server
+  #      run: echo "Deploy ${{ needs.run-tests.outputs.versao}} to server"
