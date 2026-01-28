@@ -21,13 +21,14 @@ jobs:
         restore-keys: |
          nuget-${{ runner.os }}-
 
-    #  - name: Install dependencias
-    #    run: npm ci
-    #    working-directory: Emprestimoapp  ## busca o nome onde esta as dependencias
 
-    #  - name: Build app
-    #    run: npm run build
-    #    working-directory: Emprestimoapp
+     - name: Restore
+       run: dotnet restore
+       working-directory: EmprestimoApi
+
+     - name: Build
+       run: dotnet build --no-restore
+       working-directory: EmprestimoApi
 
     #   ## gera o build da imagem
     #  - name: Build docker image
