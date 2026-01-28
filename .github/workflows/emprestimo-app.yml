@@ -1,4 +1,4 @@
-name: Deploy CI/CD
+name: Emprestimo-App
 on:
   push:
     branches:
@@ -52,15 +52,5 @@ jobs:
          context: Emprestimoapp
          file: Emprestimoapp/Dockerfile
          push: true
-         tags: italopessan/api-emprestimo-githubaction:${{steps.docker_build.outputs.tag}}
+         tags: italopessan/emprestimo-app-githubaction:${{steps.docker_build.outputs.tag}}
          
-
-
-  # deploy:
-  #   needs: [run-tests] ## só inicia o deploy se run-tests der sucesso
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-
-  #    - name: Deploy to Server
-  #      run: echo "Deploy ${{ needs.run-tests.outputs.versao}} to server"
