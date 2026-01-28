@@ -34,7 +34,7 @@ jobs:
 
       ## gera o build da imagem
      - name: Build docker image
-       working-directory: EmprestimoApi
+       working-directory: Emprestimoapp
        id: docker_build
        run: |
           TAG=$(date +'%Y-%m-%d-%H-%M-%S')
@@ -49,8 +49,8 @@ jobs:
      - name: Build and push
        uses: docker/build-push-action@v6
        with:
-         context: EmprestimoApi
-         file: EmprestimoApi/Dockerfile
+         context: Emprestimoapp
+         file: Emprestimoapp/Dockerfile
          push: true
          tags: italopessan/api-emprestimo-githubaction:${{steps.docker_build.outputs.tag}}
          
