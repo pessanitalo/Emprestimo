@@ -23,12 +23,12 @@ jobs:
 
 
      - name: Restore
-       run: dotnet restore
+       run: dotnet restore EmprestimoApi.sln
        working-directory: EmprestimoApi
 
      - name: Build
        run: dotnet build --no-restore
-       working-directory: Emprestimo/EmprestimoApi
+       working-directory: EmprestimoApi
 
     #   ## gera o build da imagem
     #  - name: Build docker image
