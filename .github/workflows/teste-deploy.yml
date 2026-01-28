@@ -46,6 +46,14 @@ jobs:
          username: ${{ secrets.DOCKER_USERNAME }}
          password: ${{ secrets.DOCKERHUB_PAT }}
 
+     - name: Build and push
+       uses: docker/build-push-action@v6
+       with:
+         context: EmprestimoApi/Dockerfile
+         push: true
+         tags: italopessan/api-emprestimo-githubaction:${{steps.docker_build.outputs.tag}}
+         
+
 
   deploy:
     needs: [run-tests] ## só inicia o deploy se run-tests der sucesso
