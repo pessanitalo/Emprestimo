@@ -52,5 +52,5 @@ jobs:
          context: Emprestimoapp
          file: Emprestimoapp/Dockerfile
          push: true
-         tags: italopessan/emprestimo-app-githubaction:${{steps.docker_build.outputs.tag}}
+         tags: italopessan/emprestimo-app:${{steps.docker_build.outputs.tag}}
          
