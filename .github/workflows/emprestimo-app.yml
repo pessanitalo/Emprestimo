@@ -24,6 +24,11 @@ jobs:
         path: ${{ steps.npm-cache-dir.outputs.dir}}
         key: npm-cache-dir-${{ hashFiles('**/package-lock.json')}}
 
+     - name: Setup Node.js
+       uses: actions/setup-node@v4
+       with:
+         node-version: '24'
+
      - name: Install dependencias
        run: npm ci
        working-directory: Emprestimoapp  ## busca o nome onde esta as dependencias
